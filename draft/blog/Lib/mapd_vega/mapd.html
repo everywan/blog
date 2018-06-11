@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MapD TEST</title>
+    <meta charset="UTF-8">
+    <script src="./js/browser-connector.js"></script>
+    <script src="./js/mapdVega.js"></script>
+</head>
+
+<body id="body">
+    <script>
+        var vegaOptions = {}
+        var result = ""
+        var connector = new MapdCon()
+            .protocol("http")
+            .host("223.223.200.50")
+            .port("19092")
+            .dbName("test")
+            .user("xskj")
+            .password("xskj");
+        var vega_item = testVega;
+        connector.logging(true);
+        connector.connect(function (error, con) {
+            // 第三个参数 压缩级别
+            con.renderVega(1, JSON.stringify(vega_item), 1, function (error, result) {
+                if (error) {
+                    console.log(error.message);
+                }
+                else {
+                    var blobUrl = `data:image/png;base64,${result.image}`
+                    var body = document.querySelector('body')
+                    var vegaImg = new Image()
+                    vegaImg.src = blobUrl
+                    body.append(vegaImg)
+                }
+            }, this);
+        });
+    </script>
+
+</body>
+
+</html>
