@@ -3,7 +3,7 @@
 ### 编程语言
 - Golang
     - 入门 
-        - [安装&包管理器](/basics/language/golang/start/start.md)
+        - [安装&包管理器](/basics/language/golang/start/start.md)
         - [项目管理&项目结构](/basics/language/golang/start/temple.md)
     - [基础知识点](/basics/language/golang/base.md)
     - [进阶知识点](/basics/language/golang/advanced.md)
