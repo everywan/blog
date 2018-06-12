@@ -2,6 +2,7 @@
 ## 基础
 ### 编程语言
 - Golang
+<<<<<<< HEAD
     - 入门 
         - [安装&包管理器](/basics/language/golang/start/start.md)
         - [项目管理&项目结构](/basics/language/golang/start/temple.md)
@@ -10,6 +11,17 @@
     - [数组&切片](/basics/language/golang/array_slice.md)
     - [结构体](/basics/language/golang/struct.md)
     - [单元测试](/basics/language/golang/utilTest.md)
+=======
+    - 入门
+        - [安装&包管理器](/basics/language/golang/start.md)
+        - [项目管理&项目结构](/basics/language/golang/temple.md)
+    - 学习
+        - [基础知识点](/basics/language/golang/base.md)
+        - [进阶知识点](/basics/language/golang/advanced.md)
+        - [数组&切片](/basics/language/golang/array-slice.md)
+        - [结构体](/basics/language/golang/struct.md)
+        - [单元测试](/basics/language/golang/utilTest.md)
+>>>>>>> 85708c51ce3c9330ff31db4f0692f0ebc3a71167
 
 ### 数据结构
 - [Map](/basics/dataStructure/Map.md)
