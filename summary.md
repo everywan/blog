@@ -1,6 +1,5 @@
 # 学习笔记
 ## 基础
----
 ### 编程语言
 - Golang
     - 入门
@@ -16,7 +15,6 @@
 ### 数据结构
 - [Map](/basics/dataStructure/Map.md)
 ## 应用
----
 ### 数据库
 - [数据库简介](/application/database/readme.md)
 - [Mapd](/application/database/mapd/Mapd.md)
