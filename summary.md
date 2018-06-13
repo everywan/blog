@@ -1,3 +1,17 @@
+<!-- TOC -->
+
+- [学习笔记](#学习笔记)
+    - [基础](#基础)
+        - [编程语言](#编程语言)
+        - [数据结构](#数据结构)
+    - [应用](#应用)
+        - [数据库](#数据库)
+        - [计算机网络](#计算机网络)
+        - [操作系统](#操作系统)
+    - [其他](#其他)
+
+<!-- /TOC -->
+
 # 学习笔记
 ## 基础
 ### 编程语言
@@ -13,6 +27,7 @@
 
 ### 数据结构
 - [Map](/basics/dataStructure/Map.md)
+
 ## 应用
 ### 数据库
 - [数据库简介](/application/database/readme.md)
@@ -24,3 +39,6 @@
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 
+## 其他
+- [收藏夹列表](/collect/summary.md)
+- [待办列表](/todo.md)
