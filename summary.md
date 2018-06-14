@@ -4,6 +4,7 @@
     - [基础](#基础)
         - [编程语言](#编程语言)
         - [数据结构](#数据结构)
+        - [计算机组成](#计算机组成)
     - [应用](#应用)
         - [数据库](#数据库)
         - [计算机网络](#计算机网络)
@@ -26,7 +27,11 @@
     - [单元测试](/basics/language/golang/utilTest.md)
 
 ### 数据结构
-- [Map](/basics/dataStructure/Map.md)
+- [数组](/basics/dataStructure/Array.md)
+- [字典](/basics/dataStructure/Map.md)
+
+### 计算机组成
+- [编码](/basics/computer_org/encode/Encode_0.md)
 
 ## 应用
 ### 数据库
