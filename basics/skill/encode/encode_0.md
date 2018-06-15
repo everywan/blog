@@ -83,5 +83,5 @@
     - 字符集和编码集区别
     - Why 1B==8bit
 - [UTF-8 GBK UTF8 GB2312 之间的区别和关系](http://kb.cnblogs.com/page/82642/)
-- [base64相关](/Program/TechArticle/base64.md)
+- [base64相关](base64.md)
 - [WHY IS A BYTE 8 BITS? OR IS IT?](http://www.bobbemer.com/BYTE.HTM)

@@ -34,7 +34,7 @@ sudo apt install tlp -y
 # thinkpad 高级电池管理函数
 sudo apt install acpi-call -y
 
-# ------------------------------------- 变成换环境 ---------------------------------------------
+# ------------------------------------- 编程环境 ---------------------------------------------
 echo "安装Go"
 wget -c https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
 tar -xzf go1.10.3.linux-amd64.tar.gz && mv go /opt/ && ln -s /opt/go/bin/go /usr/local/bin/go
@@ -43,6 +43,8 @@ echo "安装jdk"
 
 echo "安装pip && 配置豆瓣源"
 install_pip
+
+sudo apt install mysql-client -y
 
 # ------------------------------------- 安装函数 ------------------------------------------------
 

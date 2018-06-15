@@ -2,7 +2,6 @@
 
 - [Python入门](#python入门)
     - [基础知识](#基础知识)
-        - [pip使用](#pip使用)
         - [new/init区别](#newinit区别)
         - [单例模式](#单例模式)
         - [实践操作](#实践操作)
@@ -106,13 +105,6 @@
 9. `r'string'` 效果等同于C#中的 `@'string'`, 作用是使string中转移字符失效.(Java中无此原生实现)
 9. python2 无法输入中文：python默认将代码文件内容当作asci编码处理, 但asci编码中不存在中文, 因此抛出异常. 常用的方法为：
     a. 将源编码转换为utf-8形式：首行添加  `# coding:utf-8`
-### pip使用
-```Bash
-# pip 从指定源安装库
-pip install web.py -i https://pypi.douban.com/simple
-# pip 设定下载延迟
-pip install web.py -timeout 6000
-```
 
 ### new/init区别
 1. `__new__(cls)` 方法用于创建实例对象,分配空间

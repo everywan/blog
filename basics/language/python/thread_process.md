@@ -23,7 +23,7 @@
 ### 线程颠簸
 > 参考: http://www.dabeaz.com/python/UnderstandingGIL.pdf
 1. Python 在多核多线程下执行效率不如单核多线程. 原因参考如下:
-    - ![python_thread_thrashing](/attach/python_thread_thrashing.JPG)
+    - ![python_thread_thrashing](attach/python_thread_thrashing.JPG)
     - 多核情况下, CPU1上的thread1运行完之后释放GIL, 而后引起操作系统调度(按照Python社区的想法, 操作系统本身的线程调度已经非常成熟稳定了, 没有必要自己搞一套, 所以可以粗略看成python的调度是依靠操作系统), 此时唤醒CPU2上的thread2, 但GIL可能会马上又被CPU1拿到, 导致CPU2上被唤醒后的线程thread2醒着等待到切换时间后因为没有GIL又进入待调度状态, 这就是线程颠簸(thrashing), 每次释放GIL锁, 线程进行锁竞争,切换线程, 上下文切换都会消耗资源, 所以说CPU密集型多核CPU下thread效率很差.
 
 ## GIL介绍

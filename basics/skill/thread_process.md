@@ -19,8 +19,8 @@
 <!-- /TOC -->
 
 - 本文讲解以 Java 为例, 各种语言使用方法都类似,可以互相参考
-- [Python多线程/多进程](/Program/Language/Python/ThreadAndProcess.md)
-- [Python协程](/blog/Program/Language/Python/Coroutines.md)
+- [Python多线程/多进程](/basics/language/python/thread_process.md)
+- [Python协程](/basics/language/python/coroutines.md)
     - 协程: 执行过程中可以中断并且返回到主线程执行
 
 # 线程和进程
