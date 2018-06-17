@@ -9,11 +9,17 @@
         - [数据库](#数据库)
         - [计算机网络](#计算机网络)
         - [操作系统](#操作系统)
-    - [其他](#其他)
+    - [收藏夹列表](#收藏夹列表)
+        - [软件](#软件)
+        - [摘抄本](#摘抄本)
+        - [思考](#思考)
 
 <!-- /TOC -->
 
 # 学习笔记
+
+- [待办列表](/todo.md)
+
 ## 基础
 ### 编程语言
 - Golang
@@ -54,6 +60,24 @@
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 
-## 其他
-- [收藏夹列表](/collect/summary.md)
-- [待办列表](/todo.md)
+## 收藏夹列表
+### 软件
+- [初始化安装脚本](/collect/aweone_soft/init_soft.sh)
+- [科学上网](/collect/aweone_soft/shadowsocks.md)
+### 摘抄本
+- [词句](/collect/litera/COPY/Word.md)
+- [收藏-链接](/collect/litera/COPY/Movie.md)
+- 段子/瞎扯
+    - [没文化就吃亏](/collect/litera/FUN/MustStudy.md)
+    - [程序员才是天生段子手](/collect/litera/FUN/Programmer.md)
+    - [污段子](/collect/litera/FUN/DirtyJoke.md)
+    - [瞎扯: 什么是生物](/collect/litera/FUN/WhatsIt.md)
+    - [瞎扯: 最伟大的翻译是音译](/collect/litera/FUN/LessIsMore.md)
+- 文章
+    - [赶走脑海里的驴](/collect/litera/ARTICLE/StayClam.md)
+    - [张小龙公开解读小程序](/collect/litera/ARTICLE/WhatsApp.md)
+- 攻略
+    - [海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
+    - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
+### 思考
+- [IT强迫症](/collect/litera/Think/IT_Obsessive.md)
