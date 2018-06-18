@@ -38,7 +38,7 @@
 
 ## Mapd安装
 ---
-[Mapd安装教程](/OS/Install/InstallMapd.md)
+[Mapd安装教程](InstallMapd.md)
 
 ## Mapd使用
 ---
@@ -103,7 +103,7 @@ order by count(mmsi) desc
 
 1. Vega: Mapd使用 JSON Vega规范描述数据源和数据的可视化属性
     - 使用`connector.js`， `renderVega()` API发送 Vega文档 到后端，然后mapd返回一个PNG图像
-    - [Vega html 示例](/Lib/mapd_vega/mapd.html). 由于官网更新比较频繁, 这里贴出官方笛子[官方 Vega](https://www.mapd.com/docs/latest/mapd-core-guide/vegaAtaGlance/)
+    - [Vega html 示例](mapd_vega/mapd.html). 由于官网更新比较频繁, 这里贴出官方笛子[官方 Vega](https://www.mapd.com/docs/latest/mapd-core-guide/vegaAtaGlance/)
     - 渲染/前端 输出性能信息 `connector.logging(true)`
 2. 可以在 浏览器界面直接生成图表
 
