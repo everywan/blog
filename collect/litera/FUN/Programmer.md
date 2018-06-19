@@ -1,6 +1,6 @@
 # 程序员才是天生段子手
 
-![Paste_Image.png](/attach/Programmer_1.png)
+![Paste_Image.png](attach/Programmer_1.png)
 > 杀一个程序员不需要用枪，
 改三次需求就可以了！
 

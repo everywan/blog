@@ -21,7 +21,7 @@ GET到的新技能
     - 数据段: 堆, BSS(未初始化的静态/全局数据),非零数据(初始化的静态/全局数据)
 2. 栈从高位开始, 向下增长; 堆则是向上增长
 
-![内存分配](/attach/memory_allocation.jpg)
+![内存分配](attach/memory_allocation.jpg)
 
 示例代码：
 ````

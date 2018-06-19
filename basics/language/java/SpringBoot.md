@@ -141,7 +141,7 @@
     - `@Transactional` 注解标注的方法中不要出现网络调用、比较耗时的处理程序, 因为事务中数据库连接是不会释放的, 如果每个事务的处理时间都非常长, 那么数据库连接资源将很快被耗尽.
 #### 自我调用的问题
 > *目前还不太了解这个是什么意思,等以后遇到了再看吧, 详细看开头的参考文档*
-1. Spring事务使用AOP代理后的方法调用执行流程如下图: ![Transactional_1](/attach/Transactional_1.png)
+1. Spring事务使用AOP代理后的方法调用执行流程如下图: ![Transactional_1](attach/Transactional_1.png)
 2. 从图中可以看出, 调用事务时首先调用的是AOP代理对象而不是目标对象, 首先执行事务切面, 事务切面内部通过TransactionInterceptor环绕增强进行事务的增强.即进入目标方法之前开启事务, 退出目标方法时提交/回滚事务.
 
 ## SpringBoot引用外部配置文件

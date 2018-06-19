@@ -9,6 +9,7 @@
         - [数据库](#数据库)
         - [计算机网络](#计算机网络)
         - [操作系统](#操作系统)
+        - [规范](#规范)
     - [收藏夹列表](#收藏夹列表)
         - [软件](#软件)
         - [摘抄本](#摘抄本)
@@ -40,6 +41,11 @@
     - [多进程和多线程](/basics/language/python/thread_process.md)
     - [协程](/basics/language/python/coroutines.md)
     - [单元测试](/basics/language/python/sec4_unitTest.md)
+- [Markdown](/basics/language/markdown/markdown.md)
+- [其他](/basics/language/markdown/markdown.md)
+    - [Java](/basics/language/java/)
+    - [Bash](/basics/language/bash/)
+    - [前端](/basics/language/html/)
 
 ### 数据结构
 - [数组](/basics/dataStructure/Array.md)
@@ -50,20 +56,27 @@
 - [编码](/basics/skill/encode/Encode_0.md)
 
 ## 应用
+
 ### 数据库
 - [数据库简介](/application/database/readme.md)
 - [Mapd](/application/database/mapd/Mapd.md)
     - [Mapd安装](/application/database/mapd/InstallMapd.md)
+
 ### 计算机网络
 - [特殊IP](/application/network/special_ip.md)
+
 ### 操作系统
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
+
+### 规范
+- [restful](/application/standard/restful.md)
 
 ## 收藏夹列表
 ### 软件
 - [初始化安装脚本](/collect/aweone_soft/init_soft.sh)
 - [科学上网](/collect/aweone_soft/shadowsocks.md)
+
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
 - [收藏-链接](/collect/litera/COPY/Movie.md)
@@ -79,5 +92,5 @@
 - 攻略
     - [海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
     - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
+
 ### 思考
-- [IT强迫症](/collect/litera/Think/IT_Obsessive.md)
