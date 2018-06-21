@@ -39,21 +39,22 @@
         uintgo    len;        // number of elements,            表示从指针指向位置 向后取多少个元素
         uintgo    cap;        // allocated number of elements,  表示该数组的最大长度
     };
-1. 切片定义: **切片是数组某个部分的引用**
-    - 所以: 切片是引用类型
-    - 切片的长度不能超过数组长度 或 cap
     ```
-2. 切片声明
-    - 通过make: 函数签名: `func make([]T, len, cap) []T`, T表示类型, length表示初始长度, cap表示切片最大容量
-        - 当不指明 cap 时, cap与len相同.
+1. 切片是什么: **切片是数组某个部分的引用**, 是引用类型
+    - 切片的长度不能超过数组长度 或者说 cap
+2. 切片定义
+    - 通过make: 函数签名: `func make([]T, len, cap) []T`, T表示类型, length表示初始长度, cap表示切片最大容量, 不指明 cap 时, cap=len.
     - 通过数组: `var array [10]int; slice := array[0:10]`, 类似Python的切片/步长
-    - 声明&初始化: `slice := []int{1,2,3}` 
-3. 切片的零值是nil
-3. 切片内声明后, 切片内元素初始化为默认值, 即切片声明后, 在其len内, 元素是有值的. 即如果使用append追加数据, 是在len之后即这些初始值后, 而不是从 index0 开始
-3. slice拷贝: slice拷贝不影响真实数据, 只创建一个新的slice, 且值与被复制的slice相同(即结构体拷贝的规则)
-4. 对于切片s, `fmt.Printf("%p\n", &s)` 和 `fmt.Printf("%p\n", &s[0])` 的区别
+    - 声明&初始化: `slice := []int{1,2,3}`
+3. 切片默认值
+    - 只声明切片, 不分配内存时, 切片的零值是nil. 长度为0的切片是 `make([]T,0)`, 不是 nil(分配了空间).
+    - 切片定义后, 在**len**内, 切片元素初始化为其类型的默认值. 如 int 初始化为0, string 初始化为 `""`
+4. 切片拷贝: slice拷贝只是拷贝slice结构体本身, 不影响真实数据, 即新slice与原slice中的元素地址相同.
+    - 因为切片是一个结构体, 在结构体中定义了指针指向数组. 所以不管是slice的深复制或者浅复制, slice中的指针指向的地址都不变, 即数组中的真实数据也就不变.
+5. 对于切片s, `fmt.Printf("%p\n", &s)` 和 `fmt.Printf("%p\n", &s[0])` 的区别
     - `fmt.Printf("%p\n", &s[0])`: 切片中第一个元素的地址
     - `fmt.Printf("%p\n", &s)`: 该切片的地址(即切片结构体的地址, 而非其中元素), 因为切片本身也是一个结构体.
+    
 #### 练习题一:切片默认值
 1. 练习: 预测以下函数输出, 解释原因
     ```Go
@@ -65,6 +66,16 @@
     ```
     - _输出[0 0 1 2 3]_
     - 切片声明后, 切片元素都是其初始化值. 因为append是在len之后追加数据, 所以append追加元素不会覆盖初始值.
+2. 切片默认值与nil
+    ```Go
+    func main() {
+        var aa []int
+        var bb = make([]int, 0)
+        fmt.Println(aa == nil)
+        fmt.Println(bb == nil)
+    }
+    ```
+    - _未初始化的slice是nil, 但是 长度为0的slice不是nil_
 
 ### append
 > 此小节可以通过习题例子学习/验证
