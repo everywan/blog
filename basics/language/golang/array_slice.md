@@ -76,6 +76,20 @@
     }
     ```
     - _未初始化的slice是nil, 但是 长度为0的slice不是nil_
+3. json库如何处理 slice零值(nil) 和 空值(长度为0)
+    ```Go
+    func main() {
+        var aa []int
+        test(aa)
+        var bb = make([]int, 0)
+        test(bb)
+    }
+    func test(aa []int) {
+        json, _ := json.Marshal(aa)
+        fmt.Println(string(json))
+    }
+    ```
+    - _nil slice被序列化为`null`, 空值被序列化为 `[]`_
 
 ### append
 > 此小节可以通过习题例子学习/验证
