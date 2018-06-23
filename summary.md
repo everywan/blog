@@ -30,6 +30,7 @@
     - 基础知识
         - [基础知识点](/basics/language/golang/base.md)
         - [进阶知识点](/basics/language/golang/advanced.md)
+    - [range](/basics/language/golang/range.md)
     - [数组&切片](/basics/language/golang/array_slice.md)
     - [结构体](/basics/language/golang/struct.md)
     - [单元测试](/basics/language/golang/utilTest.md)
