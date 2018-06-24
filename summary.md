@@ -55,6 +55,7 @@
 ### 技能
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
+- [一致性](/basics/skill/consistency.md)
 
 ## 应用
 
