@@ -10,6 +10,7 @@
         - [技能](#技能)
     - [应用](#应用)
         - [数据库](#数据库)
+        - [分布式系统](#分布式系统)
         - [计算机网络](#计算机网络)
         - [操作系统](#操作系统)
         - [规范](#规范)
@@ -69,6 +70,9 @@
 - [Mapd](/application/database/mapd/Mapd.md)
     - [Mapd安装](/application/database/mapd/InstallMapd.md)
 
+### 分布式系统
+- [cap定律和base理论](/application/distributed_system/cap_base.md)
+- [一致性](/application/distributed_system/consistency.md)
 ### 计算机网络
 - [特殊IP](/application/network/special_ip.md)
 
