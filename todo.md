@@ -7,3 +7,6 @@
 
 ## 等大神
 1. 验证对 [事务的一致性](/application/database/basics/transaction.md#一致性) 的理解是否正确.
+
+1. 索引
+2. go接口与java接口区别

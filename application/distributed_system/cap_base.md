@@ -9,9 +9,12 @@ CAP定律是指, 在设计一个分布式系统时, 只能满足完全的 一致
 但是, 网络分区很少发生, 所以此时牺牲一致性或可用性没什么意义. 其次, 一致性/可用性/分区容错性 不是非黑即白的, 而是可以互相妥协, 互相取舍. 一致性有不同的级别, 可用性也可以分为不同的级别, 分区也可以细分为不同的含义, 所以, 设计一个分布式系统没有必要保证完美的 PA 或者 PC, 可以有一定的妥协, 设计自己需要的系统. 其中, BASE理论就是对CAP理论中一致性和可用性权衡的结果.
 
 ## BASE理论
-BASE = Basically Available + Soft state + Eventually consistent, 即 基本可用性 + 软状态 + 最终一致性.
+BASE理论是对CAP中一致性和可用性权衡的结果. BASE理论核心思想是, 即使无法做到强一致性, 但是可以采用合适的方法做到最终一致性.
 
-### 引用
+BASE 是指 Basically Available + Soft state + Eventually consistent, 即 基本可用性 + 软状态 + 最终一致性.
+- 基本可用性: 当分布式系统出现故障时, 允许损失部分可用性, 保证核心可用. 如电商促销时, 为了应对访问量激增, 部分用户被引导到降级页面, 服务层也只提供降级服务, 这就是损失部分可用性, 保证核心可用
+
+## 引用
 - [浅谈数据一致性](http://www.importnew.com/20633.html)
 - [CAP理论十二年回顾："规则"变了](http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed)
 - [CAP迷思：关于分区容忍性](https://zzyongx.github.io/blogs/cap-confusion-problems-with-partition-tolerance.html)
