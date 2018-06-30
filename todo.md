@@ -12,3 +12,5 @@
 2. go接口与java接口区别
 3. 如何优化sql
     - desc/..
+4. mongo/mysql 区别, 为什么快, 对比
+5. rabbitmq/kafka 区别
