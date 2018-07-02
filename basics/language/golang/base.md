@@ -7,6 +7,8 @@
         - [指针](#指针)
             - [指针运算符](#指针运算符)
             - [指针输出](#指针输出)
+        - [interface](#interface)
+            - [go/java-interface对比](#gojava-interface对比)
     - [常用模块](#常用模块)
 
 <!-- /TOC -->
@@ -93,6 +95,10 @@
     * &n = 0xc420012360, &[1 2 3]
     */
     ```
+### interface
+go 语言中的
+#### go/java-interface对比
+> [interface-java](/basics/language/base/interface.md)
 
 ## 常用模块
 1. strcov: 字符串->其他类型

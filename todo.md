@@ -14,3 +14,7 @@
     - desc/..
 4. mongo/mysql 区别, 为什么快, 对比
 5. rabbitmq/kafka 区别
+
+
+- [性能测试-pppof](/basics/language/golang/tools/pppof.md)
+- [性能测试-trace](/basics/language/golang/tools/pppof.md)
