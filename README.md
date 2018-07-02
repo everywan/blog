@@ -60,7 +60,6 @@
 ### 技能
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
-- [一致性](/basics/skill/consistency.md)
 
 ## 应用
 ### 数据库
@@ -72,7 +71,7 @@
 
 ### 分布式系统
 - [cap定律和base理论](/application/distributed_system/cap_base.md)
-- [一致性](/application/distributed_system/consistency.md)
+    - [一致性](/application/distributed_system/consistency.md)
 ### 计算机网络
 - [特殊IP](/application/network/special_ip.md)
 
