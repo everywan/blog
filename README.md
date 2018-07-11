@@ -78,6 +78,8 @@
 - [特殊IP](/application/network/special_ip.md)
 
 ### 操作系统
+- Linux
+    - [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 
