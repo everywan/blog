@@ -61,8 +61,7 @@
     - 将直接依赖包写入 Gopkg.toml 文件(直接依赖指main中显示import的包)
     - 将所有的第三方包的最新 `version/branch/revision 信息` 写入 Gopkg.lock
     - 创建`root/vendor`目录, 并且以Gopkg.lock为输入, 将其中的包(精确checkout/revision)下载到项目`root/vendor`下
-
-
+2. `dep init -gopath -v`: 优先从本地寻找依赖包
 
 
 ## 引用

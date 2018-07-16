@@ -61,7 +61,7 @@
 ### 搭建HTTP代理服务
 > 使用 privoxy 程序实现
 
-1. 下载privoxy, 并安装
+1. 下载privoxy, 并安装(阿里源有此软件, 可以直接 `apt install`)
 2. 配置 config 文件,添加以下行,实现socket代理转http代理
     ````
     # 监听socket服务的端口

@@ -90,8 +90,8 @@
 
 ## 收藏夹列表
 ### 软件
-- [初始化安装脚本](/collect/aweone_soft/init_soft.sh)
-- [科学上网](/collect/aweone_soft/shadowsocks.md)
+- [初始化安装脚本](/collect/aweone/soft/init_soft.sh)
+- [科学上网](/collect/aweone/soft/shadowsocks.md)
 
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)

@@ -121,7 +121,7 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
         return ch
     }
     ```
-2. _对于无缓冲区的chan, 只有写入的元素直到被读取后才能继续写入, 否则就一直阻塞_
+2. _对于无缓冲区的chan, 只有写入的元素直到被读取后才能继续写入, 否则就一直阻塞. 对于有缓冲的chan,只有当缓冲满了, 才会阻塞_
 3. `ch := make(chan interface{}) 和 ch := make(chan interface{},1)` 区别
     - 无缓冲的 不仅仅是只能向 ch 通道放 一个值 而是一直要有人接收, 那么`ch <- elem`才会继续下去, 要不然就一直阻塞着. 也就是说有接收者才去放, 没有接收者就阻塞
     - 而缓冲为1则即使没有接收者也不会阻塞, 因为缓冲大小是1. 只有当 放第二个值的时候 第一个还没被人拿走, 才会阻塞 
