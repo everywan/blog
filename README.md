@@ -85,6 +85,8 @@
 
 ### 规范
 - [restful](/application/standard/restful.md)
+    - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
+    - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
 - 服务开发
     - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 
