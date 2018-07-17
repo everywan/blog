@@ -10,6 +10,7 @@
     - [JS基础知识](#js基础知识)
         - [MarkDown-JS渲染插件](#markdown-js渲染插件)
     - [npm](#npm)
+    - [无刷新修改url](#无刷新修改url)
     - [jquery 基本用法](#jquery-基本用法)
     - [Ajax 基本用法](#ajax-基本用法)
         - [AJAX 读取本地文件](#ajax-读取本地文件)
@@ -152,6 +153,26 @@
     - `-g`: 将安装包放置在如下位置 `/usr/local`
 3. `npm ls [-g]`: 以目录树的形式查看安装包
 4. `npm search <module>`: 搜索模块
+
+### 无刷新修改url
+HTML5-history 之 `pushstate 和 popstate`
+
+window.history表示window对象的历史记录, 是由用户主动产生, 并且接受javascript脚本控制的全局对象.
+
+语法格式: `window.history.pushState(data:any,title:string,url:string)`, 表示将 data数据和url入栈, 然后通过监听 popState 事件, 在浏览器点击后退按钮时, 取出url和data. (title暂时没有用)
+
+监听事件
+```JavaScript
+$(function(){
+    window.onpopstate=function()
+    {
+        // 获得存储在该历史记录点的json对象
+        var json=window.history.state;
+    }
+})
+````
+
+如, 在 pageA 页面调用 `history.pushState(data,null,"pageB")` 修改url为pageB, 然后从pageB后退到pageA, 然后从 pageA 再前进到 pageB 时, 才会将data取出. 因为 data 是和 url指定的 pageB 绑定的, 而不是单独入栈, popState 发生时取出.
 
 ### jquery 基本用法
 > [w3cshool](http://www.w3school.com.cn/jquery/jquery_syntax.asp)
