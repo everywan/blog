@@ -84,10 +84,12 @@
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 
 ### 规范
-- [restful](/application/standard/restful.md)
+- Rest
+    - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
 - 服务开发
+    - [项目结构](/application/standard/service/project_structure.md)
     - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 
 ## 收藏夹列表
