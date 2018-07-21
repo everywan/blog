@@ -13,6 +13,8 @@
 
 <!-- /TOC -->
 # Go基础知识
+> [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)
+
 ## 基础知识点
 1. `=`: 赋值， `:=`: 声明变量并赋值(不能在函数外使用)
 2. 类型转换: `k:=float(64)` (对比Java:`(Float)64`)

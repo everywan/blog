@@ -1,4 +1,7 @@
 ## 项目结构
+### 安全
+1. 不要直接明文传输私密信息, 如密码.
+
 ### 接口风格
 [RESTFUL](/application/standard/rest/)
 
