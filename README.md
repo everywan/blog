@@ -24,8 +24,8 @@
 # 学习笔记
 
 - [待办列表](/todo.md)
-
 ## 基础
+----
 ### 编程语言
 - Golang
     - 入门
@@ -54,35 +54,33 @@
     - [Java](/basics/language/java/)
     - [Bash](/basics/language/bash/)
     - [前端](/basics/language/html/)
-
 ### 数据结构
 - [数组](/basics/dataStructure/Array.md)
 - [字典](/basics/dataStructure/Map.md)
-
 ### 技能
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
-
 ## 应用
+----
 ### 数据库
 - [数据库简介](/application/database/readme.md)
 - 基础
     - [事务](/application/database/basics/transaction.md)
 - [Mapd](/application/database/mapd/Mapd.md)
     - [Mapd安装](/application/database/mapd/InstallMapd.md)
-
 ### 分布式系统
 - [cap定律和base理论](/application/distributed_system/cap_base.md)
     - [一致性](/application/distributed_system/consistency.md)
 ### 计算机网络
 - [特殊IP](/application/network/special_ip.md)
-
 ### 操作系统
+- git: 文件寻址系统 与 版本控制系统
+    - [Git官方手册](https://git-scm.com/book/zh/v2)
+    - [git 使用](/application/os/git/use.md)
 - Linux
     - [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
-
 ### 规范
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)
@@ -94,12 +92,11 @@
 - Web开发
     - [浏览器缓存-Cookie](/application/standard/web-app/local-cache/Cookie.md)
     - [Session/Cookie](/application/standard/web-app/Session-Cookie.md)
-
 ## 收藏夹列表
+----
 ### 软件
 - [初始化安装脚本](/collect/aweone/soft/init_soft.sh)
 - [科学上网](/collect/aweone/soft/shadowsocks.md)
-
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
 - [收藏-链接](/collect/litera/COPY/Movie.md)
@@ -115,5 +112,4 @@
 - 攻略
     - [海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
     - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
-
 ### 思考
