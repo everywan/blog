@@ -91,6 +91,18 @@ build:
 ```
 
 ### DockerfileDemo
+满足两项
+1. 构建可执行程序
+2. 修改时区
+    ```Dockerfile
+    RUN apk add --no-cache --virtual .build-deps \
+            tzdata \
+            && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+            && echo "Asia/Shanghai" > /etc/timezone \
+            && apk del .build-deps
+
+    ENV TZ "Asia/Shanghai"
+    ```
 ```Dockerfile
 FROM golang:latest
 
