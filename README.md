@@ -1,31 +1,7 @@
-不积跬步, 无以至千里. 不积小流, 无以成江河.
-
----
-<!-- TOC -->
-
-- [学习笔记](#学习笔记)
-    - [基础](#基础)
-        - [编程语言](#编程语言)
-        - [数据结构](#数据结构)
-        - [技能](#技能)
-    - [应用](#应用)
-        - [数据库](#数据库)
-        - [分布式系统](#分布式系统)
-        - [计算机网络](#计算机网络)
-        - [操作系统](#操作系统)
-        - [规范](#规范)
-    - [收藏夹列表](#收藏夹列表)
-        - [软件](#软件)
-        - [摘抄本](#摘抄本)
-        - [思考](#思考)
-
-<!-- /TOC -->
-
-# 学习笔记
-
+# 知识记录
+**不积跬步, 无以至千里. 不积小流, 无以成江河.**
 - [待办列表](/todo.md)
 ## 基础
-----
 ### 编程语言
 - Golang
     - 入门
@@ -61,7 +37,6 @@
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
 ## 应用
-----
 ### 数据库
 - [数据库简介](/application/database/readme.md)
 - 基础
@@ -93,7 +68,6 @@
     - [浏览器缓存-Cookie](/application/standard/web-app/local-cache/Cookie.md)
     - [Session/Cookie](/application/standard/web-app/Session-Cookie.md)
 ## 收藏夹列表
-----
 ### 软件
 - [初始化安装脚本](/collect/aweone/soft/init_soft.sh)
 - [科学上网](/collect/aweone/soft/shadowsocks.md)
@@ -112,4 +86,5 @@
 - 攻略
     - [海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
     - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
+    - [如何挑选鞋子](/collect/litera/RESEARCH/HowChooseShow.md)
 ### 思考
