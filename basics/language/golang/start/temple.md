@@ -39,38 +39,39 @@
 ### 项目架构
 ````
 // 通用基础结构
-- view          // 视图层, 前后端分离时不需要
-- controllers   // [控制层](控制层), 一般情况下只负责 参数收集/验证, 以及返回结果的封装
-- business      // 业务逻辑层, 实现具体的业务逻辑. 当业务不复杂时, 可以合并到 controller 层
-- services      // 服务层, 对非原始数据的操作, 为 business 层提供服务. 比如用于插入数据前填充ID字段, 返回数据前隐藏Password字段.
-- dao           // 数据访问层, 封装数据操作, 连接池, 保活等. 如 封装数据库读写数据的方法. 使用 gorm 或其他插件时, 可以合并到 service 层
+- view                      // 视图层, 前后端分离时不需要
+- controllers               // [控制层](控制层), 一般情况下只负责 参数收集/验证, 以及返回结果的封装
+- business                  // 业务逻辑层, 实现具体的业务逻辑. 当业务不复杂时, 可以合并到 controller 层
+- services                  // 服务层, 对非原始数据的操作, 为 business 层提供服务. 比如用于插入数据前填充ID字段, 返回数据前隐藏Password字段.
+- dao                       // 数据访问层, 封装数据操作, 连接池, 保活等. 如 封装数据库读写数据的方法. 使用 gorm 或其他插件时, 可以合并到 service 层
 
 // 推荐结构 - GO: Go程序可以直接生成二进制文件, 使用可执行程序的方式修改项目结构
-- cmd           // 构建 CLI-APP 程序.
+- cmd                       // 构建 CLI-APP 程序.
     - root.go
-- entry         // 载入点, 因为外层项目是用来构建 CLI-APP 的, 所以载入点不能放置到外层, 外层程序的包名应该是该项目的名称.
+- entry                     // 载入点, 因为外层项目是用来构建 CLI-APP 的, 所以载入点不能放置到外层, 外层程序的包名应该是该项目的名称.
     - main.go
-- user.go       // 类似Model层, 定义数据库表的字段, 以及接口方法
-- docker.sh     // Docker构建脚本
+- user.go                   // 类似Model层, 定义数据库表的字段, 以及接口方法
+- .demo.yml                 // 配置文件
+- docker.sh                 // Docker构建脚本
 - Dockerfile
-- Makefile      // 生成可执行程序, 为Docker提供载入点
+- Makefile                  // 生成可执行程序, 为Docker提供载入点
 
 // 可选层
-- util          // 工具包. 与helper区别: util通常被理解为只有静态方法并且是无状态的, 既你不会创建这样一个类的实例.
-                // helper 可以是实用程序类, 也可以是有状态的或需要创建实例.
-- middlewares   // 中间件
-- proto         // grpc 远程调用组价
-- doc           // 文档
-- script        // 脚本
-    - shell     // Bash脚本
-    - sql       // sql脚本
+- util                      // 工具包. 与helper区别: util通常被理解为只有静态方法并且是无状态的, 既你不会创建这样一个类的实例.
+                            // helper 可以是实用程序类, 也可以是有状态的或需要创建实例.
+- middlewares               // 中间件
+- proto                     // grpc 远程调用组价
+- doc                       // 文档
+- script                    // 脚本
+    - shell                 // Bash脚本
+    - sql                   // sql脚本
 ````
 
 1. 推荐第三方组件
     - [Cobra: 构建CLI-APP(命令行程序)](https://github.com/spf13/viper)
     - [GORM: 对象关系映射, 解决数据库访问的问题](https://github.com/jinzhu/gorm)
     - [GRPC: 远程调用](https://github.com/grpc/grpc)
-    - [viper: 解决配置文件](https://github.com/spf13/viper)
+    - [viper: 配置文件读取方案](https://github.com/spf13/viper)
 3. 相关文件示例
     - [MakefileDemo](#makefiledemo)
     - [DockerfileDemo](#dockerfiledemo)
