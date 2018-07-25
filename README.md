@@ -7,7 +7,7 @@
     - 入门
         - [go创作历史-Go语言之父谈Go](/basics/language/golang/start/why_go.md)
         - [安装&包管理器](/basics/language/golang/start/start.md)
-        - [项目管理&项目结构](/basics/language/golang/start/temple.md)
+        - [项目结构](/basics/language/golang/start/temple.md)
     - 基础知识
         - [基础知识点](/basics/language/golang/base.md)
         - [进阶知识点](/basics/language/golang/advanced.md)
@@ -57,16 +57,15 @@
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 规范
+- 架构设计
+    - [构建高可用系统](/application/standard/framework/hasystem.md)
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
-- 服务开发
-    - [项目结构](/application/standard/service/project_structure.md)
-    - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 - Web开发
-    - [浏览器缓存-Cookie](/application/standard/web-app/local-cache/Cookie.md)
     - [Session/Cookie](/application/standard/web-app/Session-Cookie.md)
+    - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 ## 收藏夹列表
 ### 软件
 - [初始化安装脚本](/collect/aweone/soft/init_soft.sh)
