@@ -8,7 +8,8 @@
             - [指针运算符](#指针运算符)
             - [指针输出](#指针输出)
         - [interface](#interface)
-            - [go/java-interface对比](#gojava-interface对比)
+            - [泛型](#泛型)
+            - [接口](#接口)
     - [常用模块](#常用模块)
 
 <!-- /TOC -->
@@ -100,9 +101,32 @@
     */
     ```
 ### interface
-go 语言中的
-#### go/java-interface对比
-> [interface-java](/basics/language/base/interface.md)
+[参考: 深入理解 Go Interface](http://legendtkl.com/2017/06/12/understanding-golang-interface/)
+
+Go/interface 源码暂未阅读, 先不写
+
+在Golang中
+- 泛型编程: interface是一种抽象类型(相对而言, int/string 等都是具体类型).
+- 接口编程: interface是一组抽象方法的组合, 不关心属性, 只关心行为(方法).
+    - [鸭子类型: 当看到一只鸟走起来像鸭子,游泳起来像鸭子,叫起来也像鸭子, 那么这只鸟就可以被称为鸭子. 既注对象的行为, 而不关注对象所属的类型](https://zh.wikipedia.org/wiki/鸭子类型)
+
+#### 泛型
+判断 interface 类型
+```Go
+func do(v interface{}) {
+    n, ok := v.(int)
+    if !ok {
+        // 断言失败处理
+    }
+}
+```
+
+#### 接口
+[interface 简介](/basics/language/base/interface.md)
+
+- **实现interface接口时, 必须保持方法接收者与接口定义的类型相同**. [详细参见: Go-结构体](/basics/language/golang/struct.md#接口继承)
+- **接口类型无法被实例化, 但是接口可以使用接口声明一个空指针, 然后被绑定到实现该接口的类上**
+- go语言的接口是非侵入式的
 
 ## 常用模块
 1. strcov: 字符串->其他类型
