@@ -1,4 +1,4 @@
-# 推荐软件
+# 推荐软件, 该脚本并不能完全自动化执行, 因为没有异常处理. 且各系统之间差异太大, 建议作为库函数使用
 #!/bin/bash
 
 echo "开启色温自适应"
@@ -20,19 +20,19 @@ sudo apt install vscode
 echo "下载github项目"
 mkdir ~/git && git clone https://github.com/everywan/blog.git ~/git/blog
 
-echo "docker 安装"
-install_docker
+echo "安装pip && 配置豆瓣源"
+install_pip
 
 echo "安装终端翻译程序"
 sudo pip install dict-cli
-
-echo "安装ss"
-install_shadowsock
 
 echo "安装tlp(电池管理工具)"
 sudo apt install tlp -y
 # thinkpad 高级电池管理函数
 sudo apt install acpi-call -y
+
+echo "安装ss"
+install_shadowsock
 
 # ------------------------------------- 编程环境 ---------------------------------------------
 echo "安装Go"
@@ -41,10 +41,11 @@ tar -xzf go1.10.3.linux-amd64.tar.gz && mv go /opt/ && ln -s /opt/go/bin/go /usr
 
 echo "安装jdk"
 
-echo "安装pip && 配置豆瓣源"
-install_pip
-
 sudo apt install mysql-client -y
+
+# ------------------------------------- 缺少异常处理 ---------------------------------------------
+echo "docker 安装"
+install_docker
 
 # ------------------------------------- 安装函数 ------------------------------------------------
 
@@ -87,8 +88,4 @@ index-url = https://pypi.doubanio.com/simple/
 use-mirrors = true  
 mirrors = https://pypi.doubanio.com/simple/ 
 EOF
-
-    # rabbitmq 启动
-    # docker pull rabbitmq:management
-    # docker run -d --name rabbitmq --publish 5671:5671 --publish 5672:5672 --publish 4369:4369 --publish 25672:25672 --publish 15671:15671 --publish 15672:15672 rabbitmq:management
 }

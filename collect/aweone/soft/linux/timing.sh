@@ -12,5 +12,5 @@ function timing_fun(){
 timing_fun $1 $2 &
 
 # 在.bashrc 下添加如下别名, 别忘了修改路径
-alias timing='/home/wzs/.bin/timing.sh $1 $2 >/dev/null 2>&1'
-alias timing1='/home/wzs/.bin/timing.sh 1800 时间到啦 >/dev/null 2>&1'
+# alias timing='/home/wzs/.bin/timing.sh $1 $2 >/dev/null 2>&1'
+# alias timing1='/home/wzs/.bin/timing.sh 1800 时间到啦 >/dev/null 2>&1'

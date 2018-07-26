@@ -68,7 +68,9 @@
     - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 ## 收藏夹列表
 ### 软件
-- [初始化安装脚本](/collect/aweone/soft/init_soft.sh)
+- Linux
+    - [初始化安装脚本](/collect/aweone/soft/linux/init_soft.sh)
+    - [CLI-定时弹窗提醒](/collect/aweone/soft/linux/timing.sh)
 - [科学上网](/collect/aweone/soft/shadowsocks.md)
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
