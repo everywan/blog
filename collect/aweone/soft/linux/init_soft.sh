@@ -18,7 +18,7 @@ echo "安装vscode"
 sudo apt install vscode
 
 echo "下载github项目"
-mkdir ~/git && git clone https://github.com/everywan/blog.git ~/git/blog
+mkdir ~/git && git clone https://github.com/everywan/note.git ~/git/note
 
 echo "安装pip && 配置豆瓣源"
 install_pip
