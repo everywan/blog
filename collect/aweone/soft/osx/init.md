@@ -23,6 +23,7 @@
 
 ### 终端安装
 - [终端安装参见脚本](./install-init.sh)
+    - `curl -sSL xx.sh | sh -` 可以下载并执行脚本, 也可以先 wget 下来 然后执行.
 
 #### iTerm2
 [iTerm2配置-参考文章](:http://huang-jerryc.com/2016/08/11/%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E4%B8%AA%E6%80%A7Terminal%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8B%20iTerm/)

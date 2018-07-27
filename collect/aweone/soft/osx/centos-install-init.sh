@@ -41,7 +41,7 @@ EOF
 }
 
 function install_docker(){
-    # curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+    curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
     # 如果安装不成功可以尝试手动安装
     # wget -c http://mirrors.aliyun.com/docker-engine/apt/repo/pool/main/d/docker-engine/docker-engine_17.03.1~ce-0~debian-jessie_amd64.deb -O docker_e.deb && sudo dpkg -i docker_e.deb
     echo "配置docker加速器"
