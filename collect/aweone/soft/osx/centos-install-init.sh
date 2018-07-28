@@ -3,12 +3,12 @@
 mkdir -p /tmp/install_aaa && cd /tmp/install_aaa
 sudo rm -rf /tmp/install_aaa/*
 
-sudo apt update
-sudo apt install git -y
-sudo apt install tree -y
-sudo apt install nmap -y
-sudo apt install wget -y
-sudo apt install curl -y
+sudo yum update
+sudo yum install git -y
+sudo yum install tree -y
+sudo yum install nmap -y
+sudo yum install wget -y
+sudo yum install curl -y
 
 # ------------------------------------- 编程环境 ---------------------------------------------
 echo "安装pip && 配置豆瓣源"
