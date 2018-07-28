@@ -1,0 +1,31 @@
+# wzs's config
+# base
+alias ll='ls -l'
+
+# PATH
+export GOPATH='~/go'
+export GOROOT='/usr/local/Cellar/go'
+export PATH=$PATH:$GOROOT/bin:$PATH:$GOPATH/bin
+
+# world net
+## use ssl start/stop 开启/关闭 服务
+alias ssl='sudo sslocal -c /etc/shadowsocks/shadowsocks.json -d $1'
+alias proxystart='export http_proxy="http://127.0.0.1:5235";https_proxy="https://127.0.0.1:5235";git config --global http.proxy "http://127.0.0.1:5235";git config --global https.proxy "https://127.0.0.1:5235"'
+alias proxyend='unset http_proxy;unset https_proxy;git config --global --unset http.proxy;git config --global --unset https.proxy'
+
+# vscode
+alias code='/Applications/Code.app/Contents/Resources/app/bin/code $1'
+alias work='code -n ~/Documents/work'
+alias note='code -n ~/Documents/learn'
+
+# chrome
+alias chrome_stdout='google-chrome --headless --disable-gpu --dump-dom $1'
+
+# mongo
+#alias cli_mongo='mongo -u "root" -p -authenticationDatabase "admin" --host ip --port 27017'
+
+# remote server
+alias rserver="ssh wzs@127.0.0.1"
+
+# ETC
+alias lookip="curl http://ip.chinaz.com/getip.aspx"
