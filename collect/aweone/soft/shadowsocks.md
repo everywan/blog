@@ -63,12 +63,12 @@
 
 1. 下载privoxy, 并安装(阿里源有此软件, 可以直接 `apt install`)
 2. 配置 config 文件,添加以下行,实现socket代理转http代理
-    ````
-    # 监听socket服务的端口
+    ```Bash
+    # 监听socket服务的端口, 如果要对外提供服务, 127.0.0.1 改为 0.0.0.0
     forward-socks5t / 127.0.0.1:1080    .
     # http服务的监听端口,建议取一个随机的五位数值
     listen-address  0.0.0.0:8118
-    ````
+    ```
 3. 启动privoxy服务 `systemctl restart privoxy`
 4. 注意防火墙不要禁用相关端口
 5. privoxy 本身不支持用户功能.
