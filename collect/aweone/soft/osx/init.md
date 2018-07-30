@@ -16,6 +16,8 @@
         - [备份到iCloud](#备份到icloud)
         - [从iCloud恢复](#从icloud恢复)
     - [其他](#其他)
+        - [虚拟机配置](#虚拟机配置)
+            - [配置privoxy](#配置privoxy)
 
 <!-- /TOC -->
 ### 下载安装
@@ -28,15 +30,8 @@
 - [chrome-下载地址](https://www.google.com/chrome/)
 #### vmware
 - [vmware-下载地址](https://www.vmware.com/go/getfusion)
-- centos最小版iso 下载: 
-    ```Bash
-    wget -c https://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
-    ```
-- 修改vmware网卡配置:
-    - `vim /Library/Preferences/VMware\ Fusion/networking`
-    - 修改 `answer VNET_8_HOSTONLY_SUBNET 172.16.120.0` 为与宿主机同网段, 加快访问速度.
-- 拷贝公钥, 免密访问: `ssh-copy-id wzs@192.168.165.100`
-- [centos-初始化安装脚本](./centos-install-init.sh)
+- [虚拟机配置](#虚拟机配置)
+
 #### vanilla
 - [vanilla-下载地址](https://matthewpalmer.net/vanilla/)
     - vanilla 用来隐藏状态栏图标
@@ -119,3 +114,39 @@ EOF
 
 ### 其他
 - [科学上网-教程](/collect/aweone/soft/shadowsocks.md)
+#### 虚拟机配置
+1. 下载镜像: centos-Minimal.iso
+    ```Bash
+    wget -c https://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
+    ```
+2. 修改vmware网卡配置:
+    - `vim /Library/Preferences/VMware\ Fusion/networking`
+    - 修改 `answer VNET_8_HOSTONLY_SUBNET 172.16.120.0` 为与宿主机同网段, 加快访问速度.
+3. 拷贝公钥, 免密访问: `ssh-copy-id wzs@192.168.165.100`
+4. [初始化安装脚本](./centos-install-init.sh)
+5. 配置静态IP
+    ```Bash
+    sudo vim /etc/sysconfig/network-scripts/ifcfg-ens33
+    // 修改
+    BOOTPROTO="static"
+    // 添加, 可以 通过 ifconfig/`ip addr` 查看自己现在的ip
+    IPADDR=192.168.165.129  // 想要的静态地址, 192.168.165 是我的虚拟机的网段, 根据自身要求修改.
+    NETMASK=192.168.165.255
+    GATEWAY=192.168.165.1
+    ```
+##### 配置privoxy
+下载源码-安装教程参见 [centos-install-init.sh - install_privoxy](./centos-install-init.sh)
+
+[privoxy 配置教程](/collect/aweone/soft/shadowsocks.md#搭建HTTP代理服务)
+
+添加到 systemd, 使用 systemctl 管理服务
+1. 添加到 systemd:
+    - 编写脚本: [privoxy.service-脚本参考](./privoxy.service)
+    - 添加服务脚本到 `/etc/systemd/system/multi-user.target.wants/` 下
+    - 重启systemd守护进程: `sudo systemctl daemon-reload`
+2. 使用以下命令检测是否成功
+    ```Bash
+    sudo systemctl start privoxy.service
+    sudo systemctl status privoxy.service
+    ```
+3. 添加自定义配置
