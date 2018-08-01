@@ -114,14 +114,22 @@ EOF
 
 ### 其他
 - [科学上网-教程](/collect/aweone/soft/shadowsocks.md)
+
+- 关于 Alfred: OSX 下常用的, 替代聚焦搜索的软件. 在聚焦搜索之上, 添加 `[直接执行Bash命令, workflow, 直接google等搜索引擎搜索]`, 可能还有其他的, 我没有体验到. 但是对于我而言, 更习惯 shell+chrome+vscode 三件套. (对于程序员, 命令行才是真的为所欲为啊...)
+    - 常年 shell+chrome+vscode 挂载后台, 第二屏shell, 第一屏vscode+chrome, 偶尔切其他软件.
+    - 直接执行Bash命令: iTerm2 下拉终端搞定
+    - workflow: 别名+脚本, 好用还好写
+    - 直接google等搜索引擎搜索: chrome都没关过..切过去搜索没多大差别吧..
+
+- [Navicat Premium](http://xclient.info/s/navicat-premium.html?t=c0321e621d18b21e2ba8791a627b3f9bc45dd6a9): 数据库管理软件. (本来想支持正版的, 然后 价格 3999...)
+    - 下载完打开时, 会报错, 执行以下命令 `xattr -cr /Applications/Navicat\ Premium.app/`, 然后就可以正常打开了.
+
 #### 虚拟机配置
 1. 下载镜像: centos-Minimal.iso
     ```Bash
     wget -c https://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
     ```
-2. 修改vmware网卡配置:
-    - `vim /Library/Preferences/VMware\ Fusion/networking`
-    - 修改 `answer VNET_8_HOSTONLY_SUBNET 172.16.120.0` 为与宿主机同网段, 加快访问速度.
+2. ssh 链接虚拟机特别慢: 在 `/etc/ssh/sshd_config` 中启用 `UseDNS:no`
 3. 拷贝公钥, 免密访问: `ssh-copy-id wzs@192.168.165.100`
 4. [初始化安装脚本](./centos-install-init.sh)
 5. 配置静态IP
@@ -133,7 +141,15 @@ EOF
     IPADDR=192.168.165.129  // 想要的静态地址, 192.168.165 是我的虚拟机的网段, 根据自身要求修改.
     NETMASK=192.168.165.255
     GATEWAY=192.168.165.1
+    DNS1=...
+    DNS2=8.8.8.8
     ```
+6. 修改vmware网卡配置:
+    - `vim /Library/Preferences/VMware\ Fusion/networking`
+    - 修改 `answer VNET_8_HOSTONLY_SUBNET 172.16.120.0` 为与宿主机同网段 `192.168.165.0`
+    - 注意, 如果修改 VMnetworking, VNET_8 的网关地址可能已经更改. 所以在虚拟机中设置静态IP时, 应该重新设置网关为 `192.168.165.2`
+    - vmnet8配置文件位置 `/Library/Preferences/VMware Fusion/vmnet8/nat.conf`
+
 ##### 配置privoxy
 下载源码-安装教程参见 [centos-install-init.sh - install_privoxy](./centos-install-init.sh)
 
