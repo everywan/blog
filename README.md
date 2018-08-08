@@ -36,6 +36,7 @@
 ### 技能
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
+- [内存对齐](/basics/skill/Memory-Alignment.md)
 ## 应用
 ### 数据库
 - [数据库简介](/application/database/readme.md)
@@ -59,6 +60,7 @@
 ### 规范
 - 架构设计
     - [构建高可用系统](/application/standard/framework/hasystem.md)
+    - [命名规范](/application/standard/framework/variable-name.md)
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
@@ -74,6 +76,8 @@
     - [初始化安装脚本](/collect/aweone/soft/linux/init_soft.sh)
     - [CLI-定时弹窗提醒](/collect/aweone/soft/linux/timing.sh)
 - [科学上网](/collect/aweone/soft/shadowsocks.md)
+### 硬件
+- [总结](/collect/aweone/product/summary.md)
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
 - [收藏-链接](/collect/litera/COPY/Movie.md)
