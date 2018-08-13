@@ -6,7 +6,11 @@
 - [包管理器](#包管理器)
     - [go get](#go-get)
     - [dep](#dep)
-        - [使用](#使用)
+        - [文件介绍](#文件介绍)
+        - [命令介绍](#命令介绍)
+            - [DEP-INIT](#dep-init)
+            - [DEP-ENSURE](#dep-ensure)
+        - [问题](#问题)
 - [引用](#引用)
     - [环境变量](#环境变量)
 
@@ -53,15 +57,46 @@
     4. 切换到指定版本: `git checkout tags/v10.0.0`
 
 ### dep
-> [dep教程](https://tonybai.com/2017/06/08/first-glimpse-of-dep/)
+> [dep教程](https://tonybai.com/2017/06/08/first-glimpse-of-dep/)   
+> [dep官方文档](https://golang.github.io/dep/docs/introduction.html)
+
 1. 安装: `go get -u github.com/golang/dep/cmd/dep`
-#### 使用
+
+#### 文件介绍
+1. Dep主要使用两个配置文件: toml格式的清单文件, lock格式的锁定文件. 清单描述用户意图, 锁定描述dep输出.
+    - 另一方面讲就是 清单文件具有一定的灵活性, 比如版本闲置可以设置为范围; 锁定文件没有灵活性.
+2. How does dep decide what version of a dependency to use?(dep是如何确定依赖版本的)
+    - [参考: dep-faq](https://github.com/golang/dep/blob/master/docs/FAQ.md)
+    - dep 使用 Gopkg.toml 中的 `[[constraint]]` 节点确定版本; 在 constraint 节点下, 只能从 `branch/version/revision` 中选一个表示版本约束条件.
+    - 为什么只能有一个呢? 是因为三个值是互相冲突的, 之所以有这个问题是对三个条件不够理解, 请往下看.
+        - 当限制为branch时, 依赖为该分支下最新的代码.
+        - 当限制为version时, 根据闲置条件确定适合版本.(优先高版本/正式版本)
+        - 当限制为revision时, 选择指定修订版本.
+    - `git概念-branch/version/revision` 介绍
+        - branch: 分支.
+        - version: tags, 关联 `git tags ..` 命令; 通常是重大更改后发布的新版本, release版本. [参考: 基础-打标签](https://git-scm.com/book/zh/v1/Git-基础-打标签)
+        - revision: 修订版本, 关联 `git commit ..`; 既你每次commit, 都会生成一个修订版本号. [参考: 工具-Revision](https://git-scm.com/book/zh/v1/Git-工具-修订版本（Revision）选择)
+    
+#### 命令介绍
+##### DEP-INIT
 1. `dep init`: 使用 dep 初始化项目, 并且将所有依赖下载到 vendor. 流程如下
     - 分析依赖关系
     - 将直接依赖包写入 Gopkg.toml 文件(直接依赖指main中显示import的包)
     - 将所有的第三方包的最新 `version/branch/revision 信息` 写入 Gopkg.lock
     - 创建`root/vendor`目录, 并且以Gopkg.lock为输入, 将其中的包(精确checkout/revision)下载到项目`root/vendor`下
 2. `dep init -gopath -v`: 优先从本地寻找依赖包
+    - `-v` 表示调试, 显示更详细的信息. 加`-v`显示更详细的debug信息, 这是Linux/Unix系统常用的标准之一.
+##### DEP-ENSURE
+1. `dep ensure -v`: 恢复项目依赖
+2. `dep ensure -update`
+
+#### 问题
+> 优先查阅 [https://github.com/golang/dep/blob/master/docs/FAQ.md](https://github.com/golang/dep/blob/master/docs/FAQ.md) 有没有收录所遇到的问题
+
+1. dep直接依赖版本和依赖项目的依赖版本冲突, 导致报错. 示例: 项目直接依赖 project-A/B, 同时项目A也依赖项目B. 该项目中指定B版本约束为 `branch:master`, 项目A中指定项目B版本约束为 `version:1.2.5`.
+    - 报错为: `Could not introduce project-A@1.3.1, as it has a dependency on project-B with constraint ^1.0.0, which has no overlap with existing constraint master from (root)`
+    - 报错就是因为 直接依赖的项目B的版本 和 引用依赖中的项目的B版本 没有交集, 导致找不到该依赖, 所以报错.
+    - [参考](https://github.com/golang/dep/blob/master/docs/FAQ.md#how-do-i-constrain-a-transitive-dependency-s-version)
 
 
 ## 引用

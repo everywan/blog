@@ -80,7 +80,7 @@
 - [总结](/collect/aweone/product/summary.md)
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
-- [收藏-链接](/collect/litera/COPY/Movie.md)
+- [收藏-链接](/collect/litera/COPY/Href.md)
 - 段子/瞎扯
     - [没文化就吃亏](/collect/litera/FUN/MustStudy.md)
     - [程序员才是天生段子手](/collect/litera/FUN/Programmer.md)

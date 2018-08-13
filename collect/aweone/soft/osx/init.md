@@ -121,7 +121,7 @@ EOF
     - workflow: 别名+脚本, 好用还好写
     - 直接google等搜索引擎搜索: chrome都没关过..切过去搜索没多大差别吧..
 
-- [Navicat Premium](http://xclient.info/s/navicat-premium.html?t=c0321e621d18b21e2ba8791a627b3f9bc45dd6a9): 数据库管理软件. (本来想支持正版的, 然后 价格 3999...)
+- [Navicat Premium](http://xclient.info/s/navicat-premium.html?t=c0321e621d18b21e2ba8791a627b3f9bc45dd6a9): 数据库管理软件. (想支持正版的, 但是价格 3999...)
     - 下载完打开时, 会报错, 执行以下命令 `xattr -cr /Applications/Navicat\ Premium.app/`, 然后就可以正常打开了.
 
 #### 虚拟机配置

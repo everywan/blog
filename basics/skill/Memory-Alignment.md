@@ -113,9 +113,9 @@ struct Test1 {
 ```
 char 占用1字节, int 占用4字节, short占用2字节, Test1却占用12字节. 原因如下:
 - 分配器按照顺序分配内存, 内存对齐参数=4
-    - char分配1字节; char在A0, A1-A3空闲
-    - int分配4字节, 因为offset=0只有 A1-A3空闲, 小于内存对齐参数, 所以int分配到offset=1,
-    - short分配2字节, offset=1没有空闲, short占用 [A0-A1],[A2-A3]空闲.
+    - char分配1字节; char占用A0, A1-A3空闲
+    - int分配4字节, 因为offset=0只有 A1-A3空闲, 小于内存对齐参数, 所以int分配到offset=1, 占用A0-A3,
+    - short分配2字节, offset=1没有空闲, short占用A0-A1; A2-A3空闲.
 - 所以, Test1 占用12个字节. 
 
 ```C
@@ -125,11 +125,11 @@ struct Test2 {
 	short s;
 };
 ```
-char 占用1字节, int 占用4字节, short占用2字节, Test1却占用12字节. 原因如下:
+char 占用1字节, int 占用4字节, short占用2字节, Test2却占用8字节. 原因如下:
 - 分配器按照顺序分配内存, 内存对齐参数=4
-    - int分配4字节, 因为offset=0有四个空闲byte, 且不小于内存对齐参数=4; 所以int分配到offset=0的 [A0-A3]
+    - int分配4字节, 因为offset=0有四个空闲byte, 且不小于内存对齐参数=4; 所以int分配到offset=0, 占用A0-A3
     - char分配1字节; char在offset=1的A0, A1-A3空闲
-    - short分配2字节, offset=1有三个空闲, short的内存对齐参数=2; 所以short起始地址为A2(起始地址要能被2整除), 占用 [A2-A3].
+    - short分配2字节, offset=1有三个空闲, short的内存对齐参数=2; 所以short起始地址为A2(起始地址要能被2整除), 占用 A2-A3.
 - 所以, Test2 占用8个字节.
 
 ### 遗留问题
