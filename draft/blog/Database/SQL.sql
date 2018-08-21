@@ -20,13 +20,19 @@ SELECT t.TABLE_NAME,t.TABLE_COMMENT FROM information_schema.TABLES t WHERE t.`TA
 UPDATE COLUMNS t  SET t.column_comment  = '证件编号'  WHERE t.TABLE_SCHEMA='zebra' AND t.table_name='kh_user_info'  AND t.COLUMN_NAME='idCardNum'; 
 
 -- 修改密码
+mysqladmin -u -p password newpwd        // 只能修改root@localhost
+set password for 'xxx'@'%'=password('passwd');
 grant all on xxx.* to 'root'@'%' identified by 'password' with grant option; 
+
+-- 查询所有用户
+select User,Host from mysql.user;
 
 -- 创建用户, host: 指定该用户在哪个主机上可以登陆. % 表示任意远程主机
 CREATE USER 'username'@'host' IDENTIFIED BY 'passwd';
 
 -- 授权, privileges: 用户的操作权限,如 all,select; 如SELECT,INSERT,UPDATE. all标示所有权限
-GRANT privileges ON databasename.tablename TO 'username'@'host'
+GRANT all ON databasename.tablename TO 'username'@'host';
+flush privileges;
 
 -- 创建表
 create table if not exists order(
