@@ -1,6 +1,33 @@
 ## vue技术栈学习
 
-vue是国人尤雨溪开发的web框架, 类似的框架还有 React, AngularJS 等. 对比什么的我就不写了, 毕竟是个菜鸡前端, [大家看官方对比吧](https://cn.vuejs.org/v2/guide/comparison.html#React). 我就给大家整个段子看看得了.
+<!-- TOC -->
+
+- [vue技术栈学习](#vue技术栈学习)
+    - [vue基础](#vue基础)
+    - [目录结构](#目录结构)
+    - [webpack](#webpack)
+    - [vue-loader](#vue-loader)
+        - [vue-cli](#vue-cli)
+    - [vue-router](#vue-router)
+    - [axios](#axios)
+        - [使用](#使用)
+        - [promise](#promise)
+        - [qr库](#qr库)
+    - [Vuex(全局存储)](#vuex全局存储)
+
+<!-- /TOC -->
+
+vue是国人尤雨溪开发的web框架. 基于 Vue.js及其技术栈, 我们可以更方便的构建复杂的单页/多页应用:
+- 工具
+  - 方便的脚手架工具 vue-cli
+  - 成熟的模块管理器 webpack + vue loader
+  - 成熟的路由管理器 vue-route
+  - 成熟的http库 axios
+  - ...
+- 响应式UI, UI与数据绑定 等思想与设计.
+总之, 学习vue需要学习其一套技术栈, 而且vue挺好用的(如果只是写着玩玩就没必要了, 复杂的香满园还是很有用的)
+
+类似的框架还有 React, AngularJS 等. 对比什么的我就不写了, 毕竟是个菜鸡前端, [大家看官方对比吧](https://cn.vuejs.org/v2/guide/comparison.html#React). 我就给大家整个段子看看得了.
 
 ![img0](attach/img0.png)
 ![img1](attach/img1.png)
@@ -20,7 +47,7 @@ vue是国人尤雨溪开发的web框架, 类似的框架还有 React, AngularJS 
 
 如果只是构建简单的应用, 使用这些基础功能就ok了. 但是如果想构建复杂应用, 接下来还需要了解: webpack, vue-loader.
 
-### 翔贸易结构
+### 目录结构
 一般复杂的vue项目的结构按如下规则设置: ![](attach/project_structure.png)
 - [参考: vue-cli-项目结构](https://loulanyijian.github.io/vue-cli-doc-Chinese/structure.html)
 
