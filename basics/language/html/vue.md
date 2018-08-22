@@ -221,4 +221,86 @@ axios.post('/user', qs.stringify({'name':'mike'}));
 ```
 
 ### Vuex(全局存储)
+- [官方文档](https://vuex.vuejs.org/zh/)
+
+vuex是什么: 
+- vuex 是一个专为 Vue.js 应用程序开发的状态管理模式. 它采用集中式存储管理应用的所有组件的状态, 并以相应的规则保证状态以一种可预测的方式发生变化
+- vuex 是为了解决多个组件共享状态的问题, 尤其是在单页应用中共享状态
+
+vuex使用单一状态树: 使用一个对象保存全部的应用层级状态(唯一数据源), 每个应用仅包含一个Store实例.
+- Store状态存储是响应式的, 如果store状态发生变化, 那么相应的组件也会刷新.(有时间可以了解下, 看这个操作如何高效的实现的)
+- Store状态只能通过显示的提交操作更改状态.
+
+vuex有以下字段
+- getters: 获取某个值, 可以被缓存直到计算属性发生变化.
+- mutations: 唯一的提交方法.
+    - `store.commit('increment')`, 参数形式 `store.commit('increment', 10)`. 可以参考编译语言的, 类似.
+- actions: Action 通过提交 mutation更改state, 而不是直接变更状态. actions可以是异步的.
+    - `store.dispatch('increment')`
+    - 支持 `action.then()`, `return dispatch('actionA').then(() => {commit('someOtherMutation')})}`
+    - 支持 async / await 关键字
+- 注意
+    - vuex支持将store切分到不同模块, 每个模块定义自己的各方法
+    - mutation 同步提交更改state, action 异步调用 mutation 更改state
+    - 当路由切换后, store里的数据会刷新.
+
+示例
+```JavaScript
+const store = new Vuex.Store({
+  state: {
+    count: 1
+    todos: [
+      { id: 1, text: '...', done: true },
+      { id: 2, text: '...', done: false }
+    ]
+  },
+  getters: {
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done)
+    }
+  },
+  mutations:{
+    // increment (state,args) {
+    increment (state) {
+      state.count++
+    }
+  },
+  actions:{
+    actionB ({ dispatch, commit }) {
+        return dispatch('actionA').then(() => {
+                commit('someOtherMutation')
+            })
+        }
+    }
+})
+```
+
+mapState/mapMutations 用法
+```js
+import { mapState, mapMutations } from "vuex";
+export default {
+  methods:{
+    // 映射userinfo的所有Mutations, 调用方式 this.userinfo.setName()
+    ...mapMutations(["userinfo"]),
+    // 映射userinfo的指定Mutations, 调用方式 this.setName
+    ...mapMutations("userinfo", ["setName"]),
+  },
+  computed: {
+    // 映射userinfo, 取值方式从 this.$store.state.userinfo 映射为 this.userinfo
+    // 方式一
+    ...mapState(["userinfo"]),
+    // 方式二
+    userinfo: {
+      get: function() {
+        return this.$store.state.userinfo;
+      },
+      set: function() {}
+    },
+    // 映射userinfo.name, 取值方式从 this.$store.state.userinfo.name 映射为 this.name
+    ...mapState("userinfo", [
+      "name"
+    ]),
+  }
+}
+```
 
