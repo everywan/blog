@@ -18,6 +18,8 @@
     - [工具](/basics/language/golang/tools)
         - [单元测试](/basics/language/golang/tools/utilTest.md)
         - [CLI-APP](/basics/language/golang/tools/cobra.md)
+    - 源码学习
+        - [内存分配](/basics/language/golang/source/memory_allocation.md)
 - Python
     - 基础知识
         - [基础知识点](/basics/language/python/sec1_basis.md)
@@ -27,8 +29,6 @@
     - [协程](/basics/language/python/coroutines.md)
     - [单元测试](/basics/language/python/sec4_unitTest.md)
 - [Markdown](/basics/language/markdown/markdown.md)
-- [前端](/basics/language/html/)
-    - [Vue.js栈](/basics/language/html/vue.md)
 - [其他](/basics/language/markdown/markdown.md)
     - [Java](/basics/language/java/)
     - [Bash](/basics/language/bash/)
@@ -39,6 +39,17 @@
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
 - [内存对齐](/basics/skill/Memory-Alignment.md)
+### 前端开发
+- [FE基础](/basics/front_end/fe.md)
+- [第三方组件](/basics/front_end/ref.md)
+- HTML
+    - [基础](/basics/front_end/html/html.md)
+- JavaScript
+    - [基础](/basics/front_end/js/js.md)
+- CSS
+    - [基础](/basics/front_end/css/css.md)
+- Vue.js栈
+    - [基础介绍](/basics/front_end/vue/vue.md)
 ## 应用
 ### 数据库
 - [数据库简介](/application/database/readme.md)
@@ -97,3 +108,4 @@
     - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
     - [如何挑选鞋子](/collect/litera/RESEARCH/HowChooseShow.md)
 ### 思考
+- [学习方法](/collect/think/how_to_learn.md)
