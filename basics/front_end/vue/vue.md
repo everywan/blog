@@ -5,7 +5,6 @@
 - [vue技术栈学习](#vue技术栈学习)
     - [vue基础](#vue基础)
     - [目录结构](#目录结构)
-    - [webpack](#webpack)
     - [vue-loader](#vue-loader)
         - [vue-cli](#vue-cli)
     - [vue-router](#vue-router)
@@ -60,18 +59,8 @@ vue/webpack 项目启动流程如下: 首先读取 `build/webpack.base.conf.js` 
 
 由webpack根据 build/ 下配置构建项目, 生成到 dist/ 目录下
 
-### webpack
-- [官方文档](https://www.webpackjs.com/concepts/)
-
-webpack介绍参照官方文档第一句话: 
-> 本质上, webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler). 当 webpack 处理应用程序时, 它会递归地构建一个依赖关系图(dependency graph), 其中包含应用程序需要的每个模块, 然后将所有这些模块打包成一个或多个 bundle.
-
-我理解的webpack就是, 帮我搞定项目的依赖, 打包依赖并且构建最终 线上部署的前端项目. 同时我也可以通过各种配置定制构建规则.
-
-如果在项目构建方面有要求或者有问题的话, 就在webpack里寻找方案.
-
-使用
-- 任何在 static/ 中的内容会被直接复制到 dist/static 下, 而不经过webpack处理(如图示)
+webpack 参考 [webpack](/basics/front_end/fe/webpack.md)
+- 如果在项目构建方面有要求或者有问题的话, 可以在webpack里寻找方案.
 
 ### vue-loader
 - [官方文档](https://vue-loader.vuejs.org/zh/)

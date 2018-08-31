@@ -1,4 +1,4 @@
-# HTML第三方组件
+# 第三方组件
 ## JS
 ### MarkDown-JS渲染插件
 1. github-api: github 使用GFM(Github-Favorite-Markdown)格式的markdown.

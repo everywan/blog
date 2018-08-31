@@ -7,20 +7,6 @@
     - [canvas-画布](#canvas-画布)
 - [奇怪的现象](#奇怪的现象)
     - [闭合标签](#闭合标签)
-- [JS](#js)
-    - [jquery](#jquery)
-    - [Ajax](#ajax)
-        - [AJAX 读取本地文件](#ajax-读取本地文件)
-    - [H5无刷新修改url:pushstate](#h5无刷新修改urlpushstate)
-    - [定时器](#定时器)
-- [CSS](#css)
-    - [盒子模型](#盒子模型)
-    - [文档流/normal flow](#文档流normal-flow)
-        - [脱离文档流](#脱离文档流)
-            - [浮动](#浮动)
-            - [绝对定位](#绝对定位)
-    - [优先级](#优先级)
-    - [display](#display)
 
 <!-- /TOC -->
 ## 节点类别

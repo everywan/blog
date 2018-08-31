@@ -1,7 +1,6 @@
 # 学习笔记
 
 **不积跬步, 无以至千里. 不积小流, 无以成江河.**
-- [待办列表](/todo.md)
 
 **目录索引**
 <!-- TOC -->
@@ -10,14 +9,14 @@
     - [基础](#基础)
         - [编程语言](#编程语言)
         - [数据结构](#数据结构)
-        - [技能](#技能)
+        - [开发技能](#开发技能)
         - [前端开发](#前端开发)
     - [应用](#应用)
         - [数据库](#数据库)
         - [分布式系统](#分布式系统)
         - [计算机网络](#计算机网络)
         - [操作系统](#操作系统)
-        - [规范](#规范)
+        - [开发规范](#开发规范)
     - [收藏夹列表](#收藏夹列表)
         - [软件](#软件)
         - [硬件](#硬件)
@@ -25,6 +24,7 @@
         - [思考](#思考)
 
 <!-- /TOC -->
+- [待办列表](/todo.md)
 ## 基础
 ### 编程语言
 - Golang
@@ -59,19 +59,20 @@
 ### 数据结构
 - [数组](/basics/dataStructure/Array.md)
 - [字典](/basics/dataStructure/Map.md)
-### 技能
+### 开发技能
 - [多线程/多进程](/basics/skill/thread_process.md)
 - [编码](/basics/skill/encode/Encode_0.md)
 - [内存对齐](/basics/skill/Memory-Alignment.md)
 ### 前端开发
-- [FE基础](/basics/front_end/fe.md)
-- [第三方组件](/basics/front_end/ref.md)
-- HTML
-    - [基础](/basics/front_end/html/html.md)
-- JavaScript
-    - [基础](/basics/front_end/js/js.md)
-- CSS
-    - [基础](/basics/front_end/css/css.md)
+- 基础总结: 纯 HTML/JS/CSS 基础
+    - [HTML基础](/basics/front_end/html/html.md)
+    - [JS基础](/basics/front_end/js/js.md)
+    - [CSS基础](/basics/front_end/css/css.md)
+- 前端修养: 应该知道的一些核心性质的知识和常用库了解
+    - [FE基础](/basics/front_end/fe/fe.md)
+    - [前段工程: 使用框架优化前端项目的开发/构建/部署](/basics/front_end/fe/build&deploy.md)
+    - [webpack](/basics/front_end/fe/webpack.md)
+    - [第三方组件](/basics/front_end/fe/ref.md)
 - Vue.js栈
     - [基础介绍](/basics/front_end/vue/vue.md)
 ## 应用
@@ -94,7 +95,7 @@
     - [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
-### 规范
+### 开发规范
 - 架构设计
     - [构建高可用系统](/application/standard/framework/hasystem.md)
     - [命名规范](/application/standard/framework/variable-name.md)
