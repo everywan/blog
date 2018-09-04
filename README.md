@@ -70,9 +70,11 @@
     - [CSS基础](/basics/front_end/css/css.md)
 - 前端修养: 应该知道的一些核心性质的知识和常用库了解
     - [FE基础](/basics/front_end/fe/fe.md)
-    - [前段工程: 使用框架优化前端项目的开发/构建/部署](/basics/front_end/fe/build&deploy.md)
-    - [webpack](/basics/front_end/fe/webpack.md)
     - [第三方组件](/basics/front_end/fe/ref.md)
+- 前段工程: 使用框架优化前端项目的开发/构建/部署
+    - [简介](/basics/front_end/fe/dev&build&deploy.md)
+    - [webpack](/basics/front_end/fe/webpack.md)
+    - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
     - [基础介绍](/basics/front_end/vue/vue.md)
 ## 应用
@@ -97,7 +99,7 @@
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 开发规范
 - 架构设计
-    - [构建高可用系统](/application/standard/framework/hasystem.md)
+    - [高可用系统](/application/standard/framework/hasystem.md)
     - [命名规范](/application/standard/framework/variable-name.md)
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)

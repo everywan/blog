@@ -1,5 +1,17 @@
 ## JavaScript
-基础:
+<!-- TOC -->
+
+- [JavaScript](#javascript)
+    - [基础](#基础)
+        - [JS变量类型/默认值/值判断](#js变量类型默认值值判断)
+    - [jquery](#jquery)
+    - [Ajax](#ajax)
+        - [AJAX 读取本地文件](#ajax-读取本地文件)
+    - [H5无刷新修改url:pushstate](#h5无刷新修改urlpushstate)
+    - [定时器](#定时器)
+
+<!-- /TOC -->
+### 基础
 1. 当变量没有被开辟空间/赋值时, `if(aa)` 的值是false. 没必要再使用 `typeof` 或者判空.
 2. 三目运算符 `var a =bool?true:false;`
 3. 深复制：`var vega_temp = JSON.parse( JSON.stringify(testVega) )`
@@ -7,6 +19,23 @@
     - 举例: A: `alert(/www/.test("WWW"))` , B: `new RegExp("W3School").test("www")`
 5. 变量内字符串使用 `\n` 换行
 2. windows对象: 可以将局部函数的对象挂载到windows上以实现全局共享(当然也可以定义在一个js里然后引用)
+
+#### JS变量类型/默认值/值判断
+1. JS数据类型: string, 数字(int/float), bool, array, 对象, Null, undefined.
+2. undefined/null区别
+    - undefined: 表示变量没有声明.
+    - null: 表示变量没有定义.
+    - [参考: 声明/定义](/basics/language/basic.md)
+    - [参考: 探索JavaScript中Null和Undefined的深渊](http://yanhaijing.com/javascript/2014/01/05/exploring-the-abyss-of-null-and-undefined-in-javascript/)
+3. 默认值
+    - `new String;`: ""
+    - `new Number;`: 0
+    - `new Boolean;`: false
+    - `new Array;`: []
+    - `new Object;`: {}
+4. if语句: 在if语句中, `undefined / null` 以及各类型默认值 都会转换为false.
+5. `isNaN(x)` 用于检查x是否是数字. 如果是合法的数字则返回 false, 否则返回 true(如 `isNaN("aa")==true`).
+5. `== / ===`: `==`会进行类型转换, `===`同时比较值和类型
 
 ### jquery
 - [w3cshool](http://www.w3school.com.cn/jquery/jquery_syntax.asp)
