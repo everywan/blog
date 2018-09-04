@@ -6,7 +6,7 @@
 
 - [TODO](#todo)
 - [FE基础](#fe基础)
-        - [源码转换](#源码转换)
+    - [源码转换](#源码转换)
     - [Source Map](#source-map)
 - [浏览器](#浏览器)
     - [HTML渲染流程](#html渲染流程)
@@ -19,7 +19,7 @@
 <!-- /TOC -->
 
 ## FE基础
-#### 源码转换
+### 源码转换
 - 相关[Source map](#Source-map)
 JS变得越来越复杂, 大部分源码(尤其是各种函数库和框架)都需要经过转换, 才能投入生产环境.
 
@@ -58,6 +58,9 @@ Source Map 的生成/结构介绍参考[Source Map 详解](http://www.ruanyifeng
 基础: 
 1. 一般情况下, query 是指 `url?query`拼接的内容. data/form 是 请求体(body) 里的内容
 2. 一般由浏览器发送请求, 浏览器解释 HTML/JS/CSS, 服务端只负责响应请求.(部分爬虫可能需要)
+
+名词解释
+1. orgin 指示 request 来自于哪个站点. 该字段仅指示服务器域名, 不包含任何路径信息.
 
 ### Request/Response
 #### Content-Type

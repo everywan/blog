@@ -70,6 +70,8 @@
     - [CSS基础](/basics/front_end/css/css.md)
 - 前端修养: 应该知道的一些核心性质的知识和常用库了解
     - [FE基础](/basics/front_end/fe/fe.md)
+    - [Session/Cookie](/basics/front_end/fe/Session-Cookie.md)
+    - [同源策略](/basics/front_end/fe/cors.md)
     - [第三方组件](/basics/front_end/fe/ref.md)
 - 前段工程: 使用框架优化前端项目的开发/构建/部署
     - [简介](/basics/front_end/fe/dev&build&deploy.md)
@@ -101,13 +103,11 @@
 - 架构设计
     - [高可用系统](/application/standard/framework/hasystem.md)
     - [命名规范](/application/standard/framework/variable-name.md)
+    - [服务的开关,降级和熔断](/application/standard/framework/demotion.md)
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
-- Web开发
-    - [Session/Cookie](/application/standard/web-app/Session-Cookie.md)
-    - [服务的开关,降级和熔断](/application/standard/service/demotion.md)
 ## 收藏夹列表
 ### 软件
 - OS X

@@ -5,7 +5,8 @@
     - [基础](#基础)
         - [JS变量类型/默认值/值判断](#js变量类型默认值值判断)
     - [jquery](#jquery)
-    - [Ajax](#ajax)
+    - [HTTP库-Ajax](#http库-ajax)
+        - [AJAX使用](#ajax使用)
         - [AJAX 读取本地文件](#ajax-读取本地文件)
     - [H5无刷新修改url:pushstate](#h5无刷新修改urlpushstate)
     - [定时器](#定时器)
@@ -46,23 +47,27 @@
 3. CSS选择器：使用css对HTML页面中的元素实现一对一, 一对多或者多对一的控制
 4. 一些默认方法：$(selector).hide/slider(滑动)/animate(动画)/fade(淡入淡出)/MouseOver/Attr(属性)
 
-### Ajax
+### HTTP库-Ajax
 - [w3cshool](http://www.w3school.com.cn/ajax/index.asp)
 - 建议使用 axios 等进一步封装的HTTP库
 
+1. 异常状态:
+    - ajax请求返回 `状态码0 / error` 表示浏览器没有发出ajax请求, 或者说ajax请求被浏览器取消了.
+
+#### AJAX使用
 1. 创建 XMLHttpRequest 对象
     - XMLHttpRequest 对象用于和服务器交换数据
-````
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-````
+    ````
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    ````
 2. `XMLHttpRequest.open(method,url,[async])`
     - method：请求的类型；GET 或 POST
     - url：文件在服务器上的位置
