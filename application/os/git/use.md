@@ -10,7 +10,7 @@
         - [回退到某一版本](#回退到某一版本)
         - [分支切换](#分支切换)
     - [搭建Git服务器](#搭建git服务器)
-        - [搭建](#搭建)
+    - [git-flow](#git-flow)
     - [忽略某些文件的变化](#忽略某些文件的变化)
     - [注意](#注意)
 - [SVN](#svn)
@@ -67,7 +67,6 @@
 ### 搭建Git服务器
 > 快速&&集成搭建可以了解下 Gitlab CI
 
-#### 搭建
 1. 安装git,openssh-server. 并且保证 sshd服务时开启: `systemctl restart sshd` or `/usr/sbin/sshd &`
 1. (可选) 安全起见,创建一个 git 的用户组和用户
     ```Bash
@@ -80,6 +79,25 @@
 2. 建立git项目: `git init --bare sample.git`
 3. clone 项目到本地: `git clone git@remoteIP:$gitRepo/sample.git`
     - 格式: `user@remoteIP:path`
+
+### git-flow
+1. gitflow: 基于 git 的工作流程工具, 使用多分支完成版本的开发/合并(develop), 以及 hotfix 的发布
+    - gitflow 是 git 命令的一系列组合
+1. git flow init: 初始化项目, 其实还是 git 项目, 不过在分支上配置了 gitflow 的流程
+    - master: 主线分支/正式环境/线上环境分支
+    - develop: 测试分支/测试环境/本地环境
+    - hotfix: 对线上环境的 bug 修复
+    - feature: 功能分支, 在向线上添加一个功能时, 在 `feature fun-name` 完成功能的开发, 然后合并到 develop, 测试通过后发布到 master
+2. `git flow feature start fun-name`: 开始一个功能 fun-name 的开发, 自动创建一个
+3. `git flow feature finish fun-name`: 结束 fun-name 功能的开发, 合并到 develop 分支
+4. `git flow release start 1.1.5`: 生成一个新的 release
+    - 一般此时, 代码已经经过完整的测试, 包含版本更新和修复
+5. `git flow release finish 1.1.5`: 发布 release
+    - git pull 获取最新更新
+    - release 合并到 develop/master
+    - 添加更新标记等, 更新到 master
+6. `git flow hotfix start missing-link`: 修复正式版本中的问题(基于 master 分支)
+7. `git flow hotfix finish missing-link`: 完成修复, 提交到master
 
 ### 忽略某些文件的变化
 - .gitignore文件可以使用github提供的模板, 有很多种类. [github地址](https://github.com/github/gitignore)
