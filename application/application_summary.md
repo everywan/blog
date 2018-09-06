@@ -38,3 +38,5 @@
     - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
+- 设计模式与设计哲学
+    - [设计哲学](/application/standard/design_pattern/design_philosophy.md)
