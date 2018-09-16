@@ -33,6 +33,6 @@
     - [海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
     - [如何挑选被子](/collect/litera/RESEARCH/HowChooseCover.md)
     - [如何挑选鞋子](/collect/litera/RESEARCH/HowChooseShow.md)
-    - [如何挑选电视](/collect/litera/RESEARCH/HowChooseTV.md)
+    - [如何构建家庭影院](/collect/litera/RESEARCH/HowBuildHBO.md): 包含如何挑选电视, 以及部分音响挑选
 ### 思考
 - [学习方法](/collect/think/how_to_learn.md)
