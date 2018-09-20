@@ -67,7 +67,10 @@
     - sql                   // sql脚本
 ````
 
-1. 推荐第三方组件
+1. 命名规范
+    - 文件/go源码使用下划线链接. 如 `go_test.go` 而不是 `goTest.go`
+    - 包名可以不和 项目名/文件名 一致. 包名中不能有 下划线/连字符
+2. 推荐第三方组件
     - [Cobra: 构建CLI-APP(命令行程序)](https://github.com/spf13/viper)
     - [GORM: 对象关系映射, 解决数据库访问的问题](https://github.com/jinzhu/gorm)
     - [GRPC: 远程调用](https://github.com/grpc/grpc)
