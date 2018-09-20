@@ -93,6 +93,7 @@ ACID特性主要解决以下问题:
 - 基于行的版本控制
     - 当启用了基于行版本控制的隔离级别时, 数据库引擎维护每一行的版本.
     - 应用程序可以指定事务使用行版本查看事务或查询开始时存在的数据, 而不是使用锁保护所有读取(降低因读取操作而使其他事务阻塞的机率)
+- 预写事务日志: 确保在将关联的日志记录写入磁盘后再将数据修改写入磁盘.
 
 保证AC特性的表层实现(mysql/InnoDB):
 - [参考: autocommit/Commit/Rollback](https://dev.mysql.com/doc/refman/8.0/en/innodb-autocommit-commit-rollback.html)

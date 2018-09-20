@@ -5,7 +5,6 @@
 - [并发编程-go](#并发编程-go)
         - [goroutine (待完成)](#goroutine-待完成)
             - [goroutine超时](#goroutine超时)
-            - [goroutine超时](#goroutine超时-1)
         - [异常处理](#异常处理)
         - [chan (待完成)](#chan-待完成)
             - [练习](#练习)
@@ -19,6 +18,16 @@
 chan/select
 sync.Mutex/WaitGroup/Once
 
+Once: 只执行一次的的对象
+
+```Go
+var once Once
+// func (o *Once) Do(f func())
+once.Do(func() {})
+// once需要传入值(使用闭包)
+var filename string
+once.Do(func(){config.init(filename)})
+```
 
 ### goroutine (待完成)
 > 留坑
@@ -65,7 +74,6 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
 	}
 }
 ```
-#### goroutine超时
 参考 [defer函数生成](#练习二:defer函数生成)
 
 ### 异常处理
