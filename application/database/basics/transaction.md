@@ -86,7 +86,7 @@ ACID特性主要解决以下问题:
 
 ### 如何保证AC特性
 保证AC特性的原则性策略(SQL_SERVER):
-- [参考: sqlserver锁定和行版本控制](https://docs.microsoft.com/zh-cn/previous-versions/sql/sql-server-2008-r2/ms187101(v=sql.105))
+- [参考: sqlserver锁定和行版本控制](https://docs.microsoft.com/zh-cn/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide?view=sql-server-2017)
 - 锁: 每个事务对其所依赖的资源(如 页/表/行 等)请求不同类型的锁.
     - 锁用来阻止其他事务对本事务依赖资源的读写(避免其他事务读取到错误的数据)
     - 当事务不再依赖指定资源时, 释放锁
