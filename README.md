@@ -59,7 +59,7 @@
     - [webpack](/basics/front_end/fe/webpack.md)
     - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
-    - [基础介绍](/basics/front_end/vue/vue.md)
+    - [基础介绍](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
 
 ## 应用
 ### 数据库

@@ -206,6 +206,10 @@ axios.patch(url[, data[, config]])
     - 修改为 `Content-Type:application/x-www-form-urlencoded` 后, 后端可以在 from 中取值
         - 修改 Content-Type
         - 使用 qr库 转换对象为符合 x-www-form-urlencoded 格式的参数
+3. 在 Axios-post 请求中, 如果使用 `axios.post("/recharge/payorder", {phone:"12"})` 格式则跨域时触发 options 预检请求, 从而引发404错误. 触发情况如下:
+    - 当请求为 POST/PUT/DELETE 等可能修改数据的请求时, 如果 Content-Type 不是 `application/x-www-form-urlencoded`,`multipart/form-data`,`text/plain` 则会触发 options 请求.
+    - JQuery 默认请求类型为 `application/x-www-form-urlencoded`, 所以 jQuery 默认可以请求. 而 Axios 默认请求为 `application/json`, 所以触发预检请求.
+    - 解决方案: A: 使用URLSearchParams: `var params = new URLSearchParams();params.append('param1', 'value1');`. B: 修改 Content-Type.
 
 前面我们说到, _Axios 是一个基于 promise 的 HTTP 库_, 接下来我们稍微讲下 promise.
 #### promise
