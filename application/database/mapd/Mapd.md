@@ -19,11 +19,9 @@
 # Mapd
 
 ## 前言
----
 - [CPU&&GPU 简介](/basics/hardware/alu/cpu-gpu.md)
 
 ## Mapd 简介
----
 1. Mapd 分为两部分, 分别是 Mapd Core(数据库) 和 MapD Immerse(渲染引擎).
     - Mapd Core: 基于内存/显存, 列式存储, 且根据GPU特性设计, 运行在GPU/CPU上的的关系型数据库
         - [列式存储](/Program/Database/summary.md#行列数据库区别)
@@ -37,11 +35,9 @@
     - Mapd 目前只支持 Navida
 
 ## Mapd安装
----
 [Mapd安装教程](InstallMapd.md)
 
 ## Mapd使用
----
 1. Mapd 管理方式
     - Madpql_shell: `$MAPD_PATH/bin/mapdql --db mapd -u mapd -p HyperInteractive`
     - web: `http://127.0.0.1:9092`
@@ -103,7 +99,7 @@ order by count(mmsi) desc
 
 1. Vega: Mapd使用 JSON Vega规范描述数据源和数据的可视化属性
     - 使用`connector.js`， `renderVega()` API发送 Vega文档 到后端，然后mapd返回一个PNG图像
-    - [Vega html 示例](mapd_vega/mapd.html). 由于官网更新比较频繁, 这里贴出官方笛子[官方 Vega](https://www.mapd.com/docs/latest/mapd-core-guide/vegaAtaGlance/)
+    - [Vega html 示例](https://github.com/everywan/mapd_vega_demo/mapd.html). 由于官网更新比较频繁, 这里贴出官方地址[官方 Vega](https://www.mapd.com/docs/latest/mapd-core-guide/vegaAtaGlance/)
     - 渲染/前端 输出性能信息 `connector.logging(true)`
 2. 可以在 浏览器界面直接生成图表
 
@@ -114,7 +110,6 @@ order by count(mmsi) desc
     - mapd默认禁止执行一些比较费时间的查询. 比如默认禁止 `group by` float类型, 关闭看门狗后就可以了. 
 
 ## 现有问题
----
 > 由于目前mapd还是比较新的技术,迭代很频繁.大家有空可以去github/官方文档看下最新的更新记录,这是我遇到的一些问题
 
 1. join 当表2总数大于1000条后,连表查询失败
@@ -140,13 +135,11 @@ order by count(mmsi) desc
     - 新版貌似已经解决
 
 ## 参考
----
 - [Mapd官方文档](https://www.mapd.com/docs/latest/mapd-core-guide/)  
 - [Mapd官方社区](https://community.mapd.com/)   
 - [Mapd_github](https://github.com/mapd/mapd-core)
 
 ## 总结
----
 1. 遇到问题/bug, 不要瞎猜. 多去看**日志**, 多去**思考**, 用好**搜索引擎**
     - 这是一个合格程序员必须养成的习惯. 不论困难与否
 2. 翻墙, 不然非常影响工作效率

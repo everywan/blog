@@ -82,16 +82,16 @@
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 开发规范
-- 架构设计
-    - [高可用系统](/application/standard/framework/hasystem.md)
-    - [命名规范](/application/standard/framework/variable-name.md)
-    - [服务的开关,降级和熔断](/application/standard/framework/demotion.md)
+- 设计模式
+    - [高可用系统](/application/standard/design_pattern/ha_system.md)
+    - [设计哲学](/application/standard/design_pattern/design_philosophy.md)
+    - [高可用系统](/application/standard/design_pattern/hasystem.md)
+    - [命名规范](/application/standard/design_pattern/variable-name.md)
+    - [服务的开关,降级和熔断](/application/standard/design_pattern/demotion.md)
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)
     - [HTTP请求方法](/application/standard/rest/HTTP_request_methods.md)
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
-- 设计模式与设计哲学
-    - [设计哲学](/application/standard/design_pattern/design_philosophy.md)
 
 ## 收藏夹列表
 ### 软件
