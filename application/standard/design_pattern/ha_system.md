@@ -17,9 +17,11 @@
 环境
 - 开发/测试/灰度/线上
 
-消息队列
+消息中间件
 - kafka
 - rocketmq
+- 参考: http://www.infoq.com/cn/articles/kafka-vs-rabbitmq
+- 除非有明确的高吞吐量要求, 否则一般选取 支持amqp的消息中间件, 如rocketmq/rabbitmq.
 
 存储
 - mysql
@@ -29,6 +31,10 @@
 - influxdb/mapd 等小众特殊数据库
     - 列数据库等
 - hive 等大数据
+- 除非mysql的性能不满足要求, 或者明确业务数据适合其他数据库, 否则一般选取mysql.
+    - redis: 缓存数据库
+    - infludb: 时序数据库
+    - mapd: GPU数据库(并发超高, 实时大数据查询极快)
 
 远程调用
 - rpc协议
@@ -60,4 +66,3 @@ web框架
 1. 服务熔断
 2. 服务降级
 3. 高内聚, 低耦合
-
