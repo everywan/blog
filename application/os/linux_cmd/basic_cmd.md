@@ -34,7 +34,7 @@
 ## 基础知识
 1. shell命令可以添加 `-v` 参数从而在运行时输出日志. 最多加三个,越多日志信息越详细. 如 `ls -vvv`
 2. `ctrl+z`: 暂停进程并且将进程放入后台, `jobs`: 显示当前暂停的进程, `bg`: 使进程在后台执行, `fg`: 使进程在前台执行
-3. ln 默认或-s 指定软连接, -n硬链接
+3. ln 默认或 -n 指定硬连接, -s软链接
 4. 设置时间: `date -s "yead-mon-day h:m:s"`
     - `date %H_%M -d 'string'`: 以指定格式输出给定的时间字符串
     - 获取服务器时间: `ntpdate us.pool.ntp.org`
@@ -135,7 +135,7 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
 - `d`表示不包含子目录: `grep "^d"`
 
 ### 添加用户或组
-- 添加无shelle权限的用户
+- 添加无shell权限的用户
     ```Bash
     # 添加一个用户给 Privoxy
     echo 'privoxy:*:7777:7777:privoxy proxy:/no/home:/no/shell' >> /etc/passwd
@@ -171,6 +171,8 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
     - 更多参考: https://linuxstory.org/mysterious-ten-operator-in-linux/
 2. 剪切板_xsel: 复制粘贴扩展. 复制输出到剪切板: `cat ..|xsel -b -i(--input)`, 清除剪切板:`xsel -c`
     - 参考: https://github.com/kfish/xsel, 可采用中键,`ctrl c/v` 方式
+3. expect 交互脚本命令
+4. time 查看命令执行时间
 
 ### 文件传输
 > IBM文档参考: https://www.ibm.com/developerworks/cn/linux/l-cn-filetransfer/

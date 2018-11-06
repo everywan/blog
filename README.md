@@ -35,7 +35,6 @@
 - [Markdown](/basics/language/markdown/markdown.md)
 - [其他](/basics/language/markdown/markdown.md)
     - [Java](/basics/language/java/)
-    - [Bash](/basics/language/bash/)
 ### 数据结构
 - [数组](/basics/dataStructure/Array.md)
 - [字典](/basics/dataStructure/Map.md)
@@ -78,7 +77,12 @@
     - [Git官方手册](https://git-scm.com/book/zh/v2)
     - [git 使用](/application/os/git/use.md)
 - Linux
+    - [常用命令](/application/os/linux_cmd/basic_cmd.md)
+    - [Bash](/application/os/linux_cmd/bash.md)
     - [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
+    - [查找Find](/application/os/linux_cmd/find.md)
+    - [编译&安装](/application/os/linux_cmd/make_install.md)
+    - [挂载Mount](/application/os/linux_cmd/mount.md)
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 开发规范
