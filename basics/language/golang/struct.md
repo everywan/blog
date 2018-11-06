@@ -33,7 +33,7 @@
         fmt.Println(influx1)
     }
 
-    func (i influxdbHelper) init() error {
+    func (i *influxdbHelper) init() error {
         fmt.Printf("%p\n", &i)
         i.host = "aaaa"
         fmt.Println(i)

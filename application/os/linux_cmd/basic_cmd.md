@@ -173,6 +173,9 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
     - 参考: https://github.com/kfish/xsel, 可采用中键,`ctrl c/v` 方式
 3. expect 交互脚本命令
 4. time 查看命令执行时间
+5. [netstat/ss](https://my.oschina.net/lionel45/blog/109779)
+    - 统计socket信息.
+    - netstat 属于 net-tools工具集, ss 属于 iproute工具集. iproute 用于替代 net-tools 工具(net-tools 2001年便不再开始维护).
 
 ### 文件传输
 > IBM文档参考: https://www.ibm.com/developerworks/cn/linux/l-cn-filetransfer/

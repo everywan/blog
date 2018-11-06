@@ -42,9 +42,6 @@ once.Do(func(){config.init(filename)})
 > 参考文章: [为脚本执行设置超时时间](http://ulricqin.com/post/set-script-timeout-use-golang/)
 
 ```Go
-func SendToObject(msg []byte, conn net.Conn) {
-	WriteMsgWithHandleTimeout(7*time.Second, msg, conn)
-}
 func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn) {
 	// 超时通道
 	doneCh := make(chan error, 1)
@@ -129,6 +126,7 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
         return ch
     }
     ```
+    - _不能正常运行, 因为无缓冲的chan被阻塞_
 2. _对于无缓冲区的chan, 只有写入的元素直到被读取后才能继续写入, 否则就一直阻塞. 对于有缓冲的chan,只有当缓冲满了, 才会阻塞_
 3. `ch := make(chan interface{}) 和 ch := make(chan interface{},1)` 区别
     - 无缓冲的chan是 `dataqsiz==0`, 发送者与接受者之间不经过缓冲, 直接拷贝数据. 而一旦 dataqsiz>0, 则所有的数据都经过缓冲区. 只有但缓冲区满了, 才会阻塞线程.
@@ -146,11 +144,11 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
 > [GO语言并发编程之互斥锁、读写锁详解](http://www.jianshu.com/p/00d510729ab5)   
 > [线程阻塞](https://www.douban.com/note/484590266/)
 1. 读写锁由 `sync.RWMutex` 信号量控制. 写锁定: `func (*RWMutex) Lock/Unlock`,  读锁定: `RLock/RUnlock`
-    - 对已被**写锁定**的读写锁进行**写锁定**, 会造成当前Goroutine的阻塞, 直到该读写锁被写解锁. 如果有多个Goroutine因此而被阻塞, 那么当对应的写解锁被进行之时只会使其中一个goroutine的运行被恢复
-    - 对已被**写锁定**的读写锁进行**读锁定**, 会造成当前Goroutine的阻塞, 直到该读写锁被写解锁. 如果有多个Goroutine因此而被阻塞, 那么所有因欲进行读锁定而被阻塞的Goroutine的运行都会被恢复
+    - 对已被 **写锁定** 的读写锁进行 **写锁定**, 会造成当前Goroutine的阻塞, 直到该读写锁被写解锁. 如果有多个Goroutine因此而被阻塞, 那么当对应的写解锁被进行之时只会使其中一个goroutine的运行被恢复
+    - 对已被 **写锁定** 的读写锁进行 **读锁定**, 会造成当前Goroutine的阻塞, 直到该读写锁被写解锁. 如果有多个Goroutine因此而被阻塞, 那么所有因欲进行读锁定而被阻塞的Goroutine的运行都会被恢复
     - 两个不同的读写锁不会相互干扰.
-    - 对已被**读锁定**的读写锁进行**写锁定**, 那么写锁定会在所有的读锁定全部解锁后才进行.如果有多个读锁定,只会让其中一个被恢复.
-    - 对已被**读锁定**的读写锁进行**读锁定**没有任何问题.
+    - 对已被 **读锁定** 的读写锁进行 **写锁定**, 那么写锁定会在所有的读锁定全部解锁后才进行.如果有多个读锁定,只会让其中一个被恢复.
+    - 对已被 **读锁定** 的读写锁进行 **读锁定** 没有任何问题.
 2. 线程阻塞由 `sync.WaitGroup` 信号量控制(同步等待组)
     - 作用: 阻塞主线程,等待所有的 goroutines 都完成
     - 类似于C++的智能指针, WaitGroup保存着所有的引用, 使用 wc.Add() 添加引用计数, 当goroutin完成时,调用wc.Done()减少一个引用计数, wc.Wait() 等待计数为0时停止阻塞
