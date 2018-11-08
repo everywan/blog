@@ -16,25 +16,14 @@
 
 <!-- /TOC -->
 
-vue是国人尤雨溪开发的web框架. 基于 Vue.js及其技术栈, 我们可以更方便的构建复杂的单页/多页应用:
-- 工具
-  - 方便的脚手架工具 vue-cli
-  - 成熟的模块管理器 webpack + vue loader
-  - 成熟的路由管理器 vue-route
-  - 成熟的http库 axios
-  - ...
-- 响应式UI, UI与数据绑定 等思想与设计.
-总之, 学习vue需要学习其一套技术栈, 而且vue挺好用的(如果只是写着玩玩就没必要了, 复杂的香满园还是很有用的)
+vue是国人尤雨溪开发的web框架. 基于 Vue.js及其技术栈, 我们可以更方便的构建复杂的单页/多页应用.
 
-类似的框架还有 React, AngularJS 等. 对比什么的我就不写了, 毕竟是个菜鸡前端, [大家看官方对比吧](https://cn.vuejs.org/v2/guide/comparison.html#React). 我就给大家整个段子看看得了.
+这里推荐一篇很好的文章: [Vue 2.0，渐进式前端解决方案](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247485737&amp;idx=1&amp;sn=14fe8a5c72aaa98c11bf6fc57ae1b6c0&source=41#wechat_redirect), 可以帮助了解为什么我们需要框架, vue与其他框架的区别, vue的发展方向, 以及vue技术架构的简单介绍. 不论是初学, 还是入门后, 都能有新的理解.
+- [备用链接](https://everywan-hk.oss-cn-hongkong.aliyuncs.com/book/html/vue_%E6%B8%90%E8%BF%9B%E5%BC%8F%E6%A1%86%E6%9E%B6.pdf)
 
-![img0](attach/img0.png)
-![img1](attach/img1.png)
-![img2](attach/img2.png)
-![img3](attach/img3.png)
-![img4](attach/img4.png)
+与其他框架如 React, AngularJS 等对比如下[vue官方对比介绍](https://cn.vuejs.org/v2/guide/comparison.html#React), 初学时简单了解下即可.
 
-学习vue之前你应该对 html+js+css 有一定的认知(css可以少些, 毕竟好看难看都能看...)
+PS: 学习vue之前你应该对 html+js+css 有一定的认知(css可以少些, 毕竟好看难看都能看...)
 
 ### vue基础
 - [官方文档](https://cn.vuejs.org/v2/guide/)

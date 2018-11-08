@@ -59,6 +59,7 @@
     - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
     - [基础介绍](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
+    - [Vue常用技巧](/basics/front_end/vue/skill.md)
 
 ## 应用
 ### 数据库
