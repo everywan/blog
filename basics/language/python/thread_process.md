@@ -7,8 +7,8 @@
 
 <!-- /TOC -->
 
-- [线程和进程](/Program/TechArticle/ThreadAndProcess.md)
-- [代码示例](/Lib/ThreadAndProcess.py)
+- [线程和进程](basics/skill/thread_process.md)
+- [代码示例](/draft/Lib/ThreadAndProcess.py)
 - 参考: [python并发编程二三事(二)](https://izsk.me/2017/02/11/python并发编程二三事(二)/)
 
 ## 多进程和多线程
