@@ -46,6 +46,7 @@
 - 基础总结: 纯 HTML/JS/CSS 基础
     - [HTML基础](/basics/front_end/html/html.md)
     - [JS基础](/basics/front_end/js/js.md)
+        - [ES](/basics/front_end/js/es.md)
     - [CSS基础](/basics/front_end/css/css.md)
         - [css单位](/basics/front_end/css/css_unit.md)
 - 前端修养: 应该知道的一些核心性质的知识和常用库了解
@@ -56,6 +57,7 @@
 - 前段工程: 使用框架优化前端项目的开发/构建/部署
     - [简介](/basics/front_end/fe/dev&build&deploy.md)
     - [webpack](/basics/front_end/fe/webpack.md)
+        - [从零构建webpack+vue项目](/basics/front_end/fe/crete-project.md)
     - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
     - [基础介绍](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
