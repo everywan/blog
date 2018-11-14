@@ -23,7 +23,7 @@
 - [了解GPU数据库Mapd](/application/database/mapd/Mapd.md)
 ### 分布式系统
 - [cap定律和base理论](/application/distributed_system/cap_base.md)
-    - [一致性](/application/distributed_system/consistency.md)
+    - [分布式系统常用的一致性算法](/application/distributed_system/consistency.md)
 ### 计算机网络
 - [聊一聊那些特殊IP](/application/network/special_ip.md)
 ### OS
