@@ -38,7 +38,9 @@
     - [HTTP状态码](/application/standard/rest/HTTP_status_code.md)
 
 ## 收藏夹
-- [科学上网](/collect/aweone/soft/shadowsocks.md)
+- [科学上网](/collect/soft/shadowsocks.md)
+- [OS X 推荐软件, 以及重装系统时自动安装必要软件脚本](/collect/soft/osx/init.md)
+- [ArchLinux 推荐软件, 以及重装系统时自动安装必要软件脚本](https://github.com/everywan/arch_i3)
 ### 摘抄本(不一定与编程有关)
 - [瞎扯: 什么是生物](/collect/litera/FUN/WhatsIt.md)
 - [菜鸟海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)

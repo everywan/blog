@@ -2,21 +2,7 @@
 1. `require()`: 
     - http://www.ruanyifeng.com/blog/2015/05/require.html
 
-<!-- TOC -->
-
-- [TODO](#todo)
-- [FE基础](#fe基础)
-    - [源码转换](#源码转换)
-    - [Source Map](#source-map)
-- [浏览器](#浏览器)
-    - [HTML渲染流程](#html渲染流程)
-- [HTTP协议](#http协议)
-    - [Request/Response](#requestresponse)
-        - [Content-Type](#content-type)
-- [框架/组件](#框架组件)
-    - [npm](#npm)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [TODO](#todo)auto- [FE基础](#fe基础)auto    - [源码转换](#源码转换)auto    - [Source Map](#source-map)auto- [浏览器](#浏览器)auto    - [HTML渲染流程](#html渲染流程)auto- [HTTP协议](#http协议)auto    - [Request/Response](#requestresponse)auto        - [Content-Type](#content-type)auto- [框架/组件](#框架组件)auto    - [npm](#npm)autoauto<!-- /TOC -->
 
 ## FE基础
 ### 源码转换
@@ -85,6 +71,14 @@ multipart/form-data
 ## 框架/组件
 ### npm
 > [npm简明教程](https://www.jianshu.com/p/e958a74a0fd7)
+
+[下载网址](https://nodejs.org/en/download/)
+
+切换淘宝源
+```bash
+npm config set registry https://registry.npm.taobao.org
+npm info underscore #如果上面配置正确这个命令会有字符串response
+```
 
 1. JS 的包管理器
 2. `npm install <module>`: 默认安装到 `#{npm_home}/node_modules`

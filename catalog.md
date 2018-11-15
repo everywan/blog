@@ -101,11 +101,8 @@
 ## 收藏夹列表
 ### 软件
 - OS X
-    - [初始化安装脚本](/collect/aweone/soft/osx/init.md)
-- Linux
-    - [初始化安装脚本](/collect/aweone/soft/linux/init_soft.sh)
-    - [CLI-定时弹窗提醒](/collect/aweone/soft/linux/timing.sh)
-- [科学上网](/collect/aweone/soft/shadowsocks.md)
+    - [初始化安装脚本](/collect/soft/osx/init.md)
+- [科学上网](/collect/soft/shadowsocks.md)
 ### 硬件
 - [总结](/collect/aweone/product/summary.md)
 ### 摘抄本
