@@ -29,8 +29,8 @@
 ### OS
 - [git 使用](/application/os/git/use.md)
 - [Docker的安装与入门](/application/os/lxc/docker/how_to_use.md)
-- [Linux常用命令](/application/os/linux_cmd/basic_cmd.md)
-- [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
+- [Linux常用命令](/application/os/linux/basic_cmd.md)
+- [Linux目录结构和功能](/application/os/linux/dirstructure.md)
 ### 开发规范
 - Rest
     - [什么是Restful](/application/standard/rest/restful.md)

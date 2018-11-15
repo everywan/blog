@@ -78,12 +78,12 @@
     - [Git官方手册](https://git-scm.com/book/zh/v2)
     - [git 使用](/application/os/git/use.md)
 - Linux
-    - [常用命令](/application/os/linux_cmd/basic_cmd.md)
-    - [Bash](/application/os/linux_cmd/bash.md)
-    - [Linux目录结构和功能](/application/os/linux_cmd/dirstructure.md)
-    - [查找Find](/application/os/linux_cmd/find.md)
-    - [编译&安装](/application/os/linux_cmd/make_install.md)
-    - [挂载Mount](/application/os/linux_cmd/mount.md)
+    - [常用命令](/application/os/linux/basic_cmd.md)
+    - [Bash](/application/os/linux/bash.md)
+    - [Linux目录结构和功能](/application/os/linux/dirstructure.md)
+    - [查找Find](/application/os/linux/find.md)
+    - [编译&安装](/application/os/linux/make_install.md)
+    - [挂载Mount](/application/os/linux/mount.md)
 - [docker](/application/os/lxc/docker/summary.md)
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 开发规范
