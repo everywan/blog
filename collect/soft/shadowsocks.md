@@ -1,6 +1,12 @@
 # Shadowsocks
 
-<!-- TOC -->autoauto- [Shadowsocks](#shadowsocks)auto    - [搭建 shadowsocks 服务端](#搭建-shadowsocks-服务端)auto    - [客户端连接 socket 代理服务](#客户端连接-socket-代理服务)auto        - [搭建HTTP代理服务](#搭建http代理服务)auto    - [知识点](#知识点)autoauto<!-- /TOC -->
+<!-- TOC -->
+- [Shadowsocks](#shadowsocks)
+   - [搭建 shadowsocks 服务端](#搭建-shadowsocks-服务端)
+   - [客户端连接 socket 代理服务](#客户端连接-socket-代理服务)
+   - [搭建HTTP代理服务](#搭建http代理服务)
+   - [知识点](#知识点)
+<!-- /TOC -->
 
 ## 搭建 shadowsocks 服务端
 1. shadowsocks 下载和安装
