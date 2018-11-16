@@ -17,7 +17,10 @@
 1. ios-safari对很多标签进行了处理, 当css样式在ios出现异常时, 检查是不是ios自己附加的样式导致的.
 1. margin调节外部间距, padding调节内部间距.
 2. 一般不设置元素高度, 而是自动计算.
-3. font-size 只设置字体大小, 系统会附加默认行高, 所以浏览器计算出的 height 不只是 font-size 的大小, 而是 `line-height + padding`. 
+3. font-size 只设置字体大小, 系统会附加默认行高, 所以浏览器计算出的 height 不只是 font-size 的大小, 而是 `line-height + padding`.
+4. 使用line-height居中, 使用padding, 或者使用 `display:flex`.
+5. 使用 z-index 控制层次. 注意 z-index 只能与父节点的 z-index 比较
+
 ### 盒子模型
 - [参考: 盒子模型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)
 - [参考: 知乎补充](https://zhuanlan.zhihu.com/p/24778275)

@@ -49,6 +49,7 @@
         - [css单位](/basics/front_end/css/css_unit.md)
 - 前端修养: 应该知道的一些核心性质的知识和常用库了解
     - [FE基础](/basics/front_end/fe/fe.md)
+    - [html从获取到展现](/basics/front_end/fe/html_render_flow.md)
     - [Session/Cookie](/basics/front_end/fe/Session-Cookie.md)
     - [同源策略](/basics/front_end/fe/cors.md)
     - [第三方组件](/basics/front_end/fe/ref.md)
@@ -58,8 +59,9 @@
         - [从零构建webpack+vue项目](/basics/front_end/fe/crete-project.md)
     - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
-    - [基础介绍](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
-    - [Vue常用技巧](/basics/front_end/vue/skill.md)
+    - [Vue全家桶简介](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
+    - [Vue开发的一些知识](/basics/front_end/vue/skill.md)
+    - [Vue子父组件通信](/basics/front_end/vue/passing_data.md)
 
 ## 应用
 ### 数据库
@@ -72,14 +74,16 @@
 - [cap定律和base理论](/application/distributed_system/cap_base.md)
     - [一致性](/application/distributed_system/consistency.md)
 ### 计算机网络
+- [基础概念](/application/network/sumary.md)
+- [nmap](/application/network/nmap.md)
 - [特殊IP](/application/network/special_ip.md)
 ### 操作系统
 - git: 文件寻址系统 与 版本控制系统
     - [Git官方手册](https://git-scm.com/book/zh/v2)
     - [git 使用](/application/os/git/use.md)
 - Linux
-    - [常用命令](/application/os/linux/basic_cmd.md)
-    - [Bash](/application/os/linux/bash.md)
+    - [Linux常用命令](/application/os/linux/basic_cmd.md)
+    - [Bash编程学习](/application/os/linux/bash.md)
     - [Linux目录结构和功能](/application/os/linux/dirstructure.md)
     - [查找Find](/application/os/linux/find.md)
     - [编译&安装](/application/os/linux/make_install.md)
@@ -88,9 +92,9 @@
     - [安装&入门](/application/os/lxc/docker/how_to_use.md)
 ### 开发规范
 - 设计模式
-    - [高可用系统](/application/standard/design_pattern/ha_system.md)
     - [设计哲学](/application/standard/design_pattern/design_philosophy.md)
-    - [高可用系统](/application/standard/design_pattern/hasystem.md)
+    - [编程规范](/application/standard/design_pattern/coding_guidelines.md)
+    - [高可用系统](/application/standard/design_pattern/ha_system.md)
     - [命名规范](/application/standard/design_pattern/variable-name.md)
     - [服务的开关,降级和熔断](/application/standard/design_pattern/demotion.md)
 - Rest
@@ -103,11 +107,11 @@
 - OS X
     - [初始化安装脚本](/collect/soft/osx/init.md)
 - [科学上网](/collect/soft/shadowsocks.md)
-### 硬件
-- [总结](/collect/aweone/product/summary.md)
+### 编程
+- [收藏](/collect/aweone/website.md)
 ### 摘抄本
 - [词句](/collect/litera/COPY/Word.md)
-- [收藏-链接](/collect/litera/COPY/Href.md)
+- [收藏-链接](/collect/litera/COPY/link.md)
 - 段子/瞎扯
     - [没文化就吃亏](/collect/litera/FUN/MustStudy.md)
     - [程序员才是天生段子手](/collect/litera/FUN/Programmer.md)

@@ -126,6 +126,7 @@ export default new Router({
 单页应用(SPA): 动态重写当前页面, 而非传统的重载整个页面.
 - 参考: https://juejin.im/post/5a0ea4ec6fb9a0450407725c
 - 单页应用 一般通过获取当前页面的url来判断当前页面位置. 一般而言 单页应用会比多页应用更节省资源, 但是开发难度更大(需要框架支持, 有一定的学习成本)
+- SPA应用部署时, 注意整个项目只有一个入口(index.html). 在nginx中, 如果找不到页面nginx会加载index.html, 然后通过vue-router正确匹配路由. 所以, 要注意使用的web服务器是否支持这个功能. 
 
 ### axios
 - [github](https://github.com/axios/axios)

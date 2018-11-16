@@ -1,3 +1,4 @@
+# Linux
 <!-- TOC -->
 
 - [Linux](#linux)
@@ -26,10 +27,7 @@
         - [ARM平台源](#arm平台源)
 
 <!-- /TOC -->
-
-# Linux
-> 多看**help**和**man**  
-> **[Bash编程](/Program/OtherProgram/summary_Bash.md)**
+> [Bash编程](./bash.md)
 
 ## 基础知识
 1. shell命令可以添加 `-v` 参数从而在运行时输出日志. 最多加三个,越多日志信息越详细. 如 `ls -vvv`

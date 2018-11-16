@@ -12,4 +12,5 @@
 2. 谋定而后动
     - 不要立即着手去写, 而是需求真的确定了, 并且想明白怎么开发了才动手.
 3. KISS:　Keep it short and simple
+4. DRY: Don't repeat yourself.
     
