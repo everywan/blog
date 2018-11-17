@@ -28,26 +28,6 @@
 
 对于整套代码, [源码在这里](https://github.com/everywan/example-front-end)
 
-最后目录结构推荐如下
-````
--project
-    - build                 // webpack 构建项目配置文件路径
-    - config                // 存储自定义配置文件, 共webpack构建时使用
-        - base.config.js
-        - dev.config.js
-        - prod.config.js
-    - dist                  // webpack 构建之后, 目标路径
-    - node_modules          // npm依赖项目, 自动生成
-    - static                // 存储不变的css/js
-    - src                   // 项目源代码
-        - assets            // 存储其他 js/css/img 等
-        - main.js           // 项目入口
-        - App.vue           // vue.js 入口
-        - store/route...    // 其他组件目录/文件(如 vue-router)
-    - index.html
-    - package.json
-````
-
 ### 创建前端项目
 最简单的前端项目只需要 一个工作目录+index.html 文件即可.
 - [创建项目并且使用npm初始化: commitURL](https://github.com/everywan/example-front-end/commit/8acbe938d544e867fd6085ba719960088c6cb76d)
