@@ -58,6 +58,7 @@
     - [简介](/basics/front_end/fe/dev&build&deploy.md)
     - [webpack](/basics/front_end/fe/webpack.md)
         - [从零构建webpack+vue项目](/basics/front_end/fe/crete-project.md)
+        - [常见的目录结构](/basics/front_end/fe/directory_structure.md)
     - [移动端debug工具](/basics/front_end/fe/debug.md)
 - Vue.js栈
     - [Vue全家桶简介](/basics/front_end/vue/vue.md): vue-loader/vue-router/axios/vuex全局存储
