@@ -281,6 +281,15 @@ module.exports = {
 - hot-only: Do not refresh page if HMR fails
 
 ### 多环境配置
+多环境配置主要实现以下功能
+1. 通知webpack等组件: 通过使用webpack的mode切换模式, 通知webpack启用相应优化
+2. 自定义逻辑: 可以根据不同的环境实现不同的逻辑. 常用逻辑如下
+    - 使用 DefinePlugin 在构建时替换源码中的字符串. (见后文)
+
+mode补充: 用于通知webpack使用相应模式的优化. 参考: [mode-webpack](https://www.webpackjs.com/concepts/mode/)
+- development: 启用 NamedChunksPlugin 和 NamedModulesPlugin
+- production: 启用 FlagDependencyUsagePlugin, FlagIncludedChunksPlugin, ModuleConcatenationPlugin, NoEmitOnErrorsPlugin, OccurrenceOrderPlugin, SideEffectsFlagPlugin 和 UglifyJsPlugin
+
 1. 运行命令前导入 NODE_ENV 变量: package.json/script 如下修改: `export NODE_ENV=production && ...`
 2. 修改 webpack.config.js 添加环境判断
     ```js
@@ -289,12 +298,73 @@ module.exports = {
         ...
     }
 
+    // 如果你想根据环境导入一些自定义组件
     if(process.env.NODE_ENV==='development'){
         module.exports.plugins.push(
             ...
         )
     }
     ```
+
+DefinePlugin: 使用 DefinePlugin 插件可以在构建时使用配置项替换源码中的字符串. 假设我们需要在 dev 环境下调整 Host 为 `dev.bus.com`, prod 环境下 Host 为 `bus.com`, 那么可以如下配置
+1. 创建 config 目录, 存放不同环境下的配置信息. (关于默认的conf, 命名为 base 还是 index 我不敢确定)
+    ````
+    - config
+        - base.conf.js
+        - dev.conf.js
+        - prod.conf.js
+    ````
+2. `config/base.conf.js` 中根据环境加载不同的配置
+    ```js
+    var _env = "dev"
+    if(process.env.NODE_ENV==='production'){
+        _env = "prod"
+    }
+    
+    const envConfigFile = "./" + _env + ".conf.js";
+    process.stdout.write('INFO: the env config file is '+ envConfigFile +'\n');
+    // 将require的配置文件原封不动export回出去
+    module.exports = require(envConfigFile);
+    ```
+3. `webpack.base.config.js` 中引入 DefinePlugin 插件, 并且设置
+    ```js
+    ...
+    const envConfig = require('../config/base.conf')
+    module.exports = {
+        ...
+        plugins: [
+            ...
+            new webpack.DefinePlugin({
+                // 源码中所有 process.env.XX 都会被替换为 '../config/dev.env' 这个 module export 出来的配置
+                'process.env': envConfig
+            })
+        ]
+    }
+    ```
+
+测试
+1. 在 dev.conf.js/prod.conf.js 分别配置 HOST_URL
+    ```js
+    // dev.conf.js示例, prod 类似
+    module.exports = {
+        // 关于键值定义方法见 https://webpack.docschina.org/plugins/define-plugin/
+        // 如果value是字符串, 那么该 value 会被当成代码段使用. '""' 即可将value作为字符串使用
+        HOST_URL: '"dev.bus.com"'
+    }
+    ```
+2. 在 Hello.vue 中添加 `console.log(process.env.HOST_URL)`
+    ```js
+    <script>
+        export default {
+            ...
+            mounted: function(){
+                console.log(process.env.HOST_URL)
+            }
+        }
+    </script>
+    ```
+3. 修改 package.json, script节点下添加: `"prod": "export NODE_ENV=production && npx webpack-dev-server --hot-only --config build/webpack.base.config.js",`, 即设置环境为production, 并运行 devServer
+4. 执行 `npm run prod`, 观察console打印出的值, 会发现随着环境变化.
 
 ### 分离代码
 
