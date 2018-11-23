@@ -44,4 +44,4 @@
 ### 摘抄本(不一定与编程有关)
 - [瞎扯: 什么是生物](/collect/litera/FUN/WhatsIt.md)
 - [菜鸟海淘攻略](/collect/litera/RESEARCH/HowGoSea.md)
-- [自行车运动入门](/collect/litera/RESEARCH/HowChooseBike.md): 公路车/山地车
+- [自行车运动入门](/collect/litera/RESEARCH/outdoor/cycle.md): 公路车/山地车
