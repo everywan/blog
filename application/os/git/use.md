@@ -109,6 +109,7 @@
 ### 注意
 1. 当使用 `https://github.com/..` 方式clone的项目, 无法使用 sshkey 免密认证.
     - 解决方法: 修改项目下 `.git/config`, 将 `remote` 节点下的 url 替换为 ssh 路径的, 既 `git@github.com/...` 这种格式的.
+    - 命令行: `git config --global url."git@github.com:".insteadOf "https://github.com/"`
 2. 当项目出现难以理解的问题时, 检查 `~/.gitconfig` 是否有错误的配置, 如设置了代理, 替换了路径等.
 
 ## SVN
