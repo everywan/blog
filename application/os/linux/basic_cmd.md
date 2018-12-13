@@ -1,32 +1,5 @@
 # Linux
-<!-- TOC -->
-
-- [Linux](#linux)
-    - [基础知识](#基础知识)
-        - [脚本执行的四种方式](#脚本执行的四种方式)
-        - [NOHUP](#nohup)
-        - [包管理器-APT](#包管理器-apt)
-        - [命令别名-alias](#命令别名-alias)
-        - [重定向](#重定向)
-        - [进程管理器](#进程管理器)
-        - [计数命令-WC](#计数命令-wc)
-        - [添加用户或组](#添加用户或组)
-        - [设置环境变量](#设置环境变量)
-        - [basename/dirname](#basenamedirname)
-    - [进阶知识](#进阶知识)
-        - [文件传输](#文件传输)
-        - [文本分析-AWK](#文本分析-awk)
-        - [文本处理-SED](#文本处理-sed)
-        - [网络请求-CURL/WGET](#网络请求-curlwget)
-        - [远程登录-SSH](#远程登录-ssh)
-        - [设置代理](#设置代理)
-        - [查看设备信息](#查看设备信息)
-        - [lsof](#lsof)
-        - [ulimit](#ulimit)
-    - [ETC](#etc)
-        - [ARM平台源](#arm平台源)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [Linux](#linux)auto    - [基础知识](#基础知识)auto        - [脚本执行的四种方式](#脚本执行的四种方式)auto        - [NOHUP](#nohup)auto        - [包管理器-APT](#包管理器-apt)auto        - [命令别名-alias](#命令别名-alias)auto        - [重定向](#重定向)auto        - [进程管理器](#进程管理器)auto        - [计数命令-WC](#计数命令-wc)auto        - [添加用户或组](#添加用户或组)auto        - [设置环境变量](#设置环境变量)auto        - [basename/dirname](#basenamedirname)auto    - [进阶知识](#进阶知识)auto        - [文件传输](#文件传输)auto        - [文本分析-AWK](#文本分析-awk)auto        - [文本处理-SED](#文本处理-sed)auto        - [网络请求-CURL/WGET](#网络请求-curlwget)auto        - [SSH](#ssh)auto        - [设置代理](#设置代理)auto        - [查看设备信息](#查看设备信息)auto        - [lsof](#lsof)auto        - [ulimit](#ulimit)auto    - [ETC](#etc)auto        - [ARM平台源](#arm平台源)autoauto<!-- /TOC -->
 > [Bash编程](./bash.md)
 
 ## 基础知识
@@ -251,7 +224,10 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
     - `-c`: 支持断点下载
     - `--header`: 下载所使用的请求头
 
-### 远程登录-SSH
+### SSH
+- [参考arch文档](https://wiki.archlinux.org/index.php/Secure_Shell_(简体中文))
+
+远程登录
 1. SSH免密登录流程
     - ssh客户端使用 ssh-keygen 生成公钥/秘钥. `ssh-keygen -t rsa -f ~/.ssh/file`. 不需要密码则一直回车即可
     - 复制 .pub 公钥文件到sshd服务端的 `~/.ssh/authorized_keys` 中
@@ -282,7 +258,33 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
 3. 如果遇到什么问题
     - 使用 `-vvv` 参数查看调试
     - 查看man文档, 研究下配置文件以及其注释说明
-    
+
+反向代理
+1. 建立A机器到B机器的反向代理:
+    - `ssh -fCNR [B机器IP或省略]:[B机器端口]:[A机器的IP]:[A机器端口] [登陆B机器的用户名@服务器IP]`
+2. 反向代理不会自动重连, 可以使用 autossh 工具建立反向代理(详细参考 arch 官方文档的做法)
+```Bash
+# arch 系统安装autossh. 注意保持 sshd 服务的开启
+sudo pacman -S autossh
+# 2223 监听端口 其他格式与 ssh 建立反向代理相同
+autossh -M 2223 -fCNR 2222:localhost:22 user@ip
+
+vim /etc/systemd/system/autossh.service
+# [Unit]
+# Description=AutoSSH service for port 2222
+# After=network.target
+
+# [Service]
+# Type=forking
+# Environment="AUTOSSH_GATETIME=0"
+# ExecStart=/usr/bin/autossh -M 0 -NL 2222:localhost:2222 -o TCPKeepAlive=yes foo@bar.com
+
+# [Install]
+# WantedBy=multi-user.target
+
+# 然后就可以使用 systemd 管理autossh了
+```
+
 ### 设置代理
 > 参考： [临时设置](http://www.cnblogs.com/babykick/archive/2011/03/25/1996004.html)
 1. 全局代理: 使用 http_proxy环境变量
