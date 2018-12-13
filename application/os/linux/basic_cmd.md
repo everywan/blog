@@ -263,6 +263,8 @@ apt-cache pkgnames      # 快速列出已安装的软件名称
 1. 建立A机器到B机器的反向代理:
     - `ssh -fCNR [B机器IP或省略]:[B机器端口]:[A机器的IP]:[A机器端口] [登陆B机器的用户名@服务器IP]`
 2. 反向代理不会自动重连, 可以使用 autossh 工具建立反向代理(详细参考 arch 官方文档的做法)
+    - 使用 systemd 管理autossh时, 首先请先设置免密登录, 然后将密钥拷贝到 `/root/.ssh` 下, 权限修改为 600. 否则在 systemd 启动autossh 时, 会因为没有权限连接而报错(`ssh error status 255`)
+    - 也可以使用export脚本自动输入密码, 但是明显不如上面那个方法好
 ```Bash
 # arch 系统安装autossh. 注意保持 sshd 服务的开启
 sudo pacman -S autossh
@@ -277,7 +279,7 @@ vim /etc/systemd/system/autossh.service
 # [Service]
 # Type=forking
 # Environment="AUTOSSH_GATETIME=0"
-# ExecStart=/usr/bin/autossh -M 0 -NL 2222:localhost:2222 -o TCPKeepAlive=yes foo@bar.com
+# ExecStart=/usr/bin/autossh -M 0 -NL 2222:localhost:2222 -o TCPKeepAlive=yes -i /root/.ssh/id_rsa foo@bar.com
 
 # [Install]
 # WantedBy=multi-user.target
