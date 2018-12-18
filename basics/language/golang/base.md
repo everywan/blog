@@ -1,15 +1,4 @@
-<!-- TOC -->
-
-- [Go基础知识](#go基础知识)
-    - [基础知识点](#基础知识点)
-        - [求值策略](#求值策略)
-        - [init函数](#init函数)
-        - [指针](#指针)
-            - [指针运算符](#指针运算符)
-            - [指针输出](#指针输出)
-    - [常用模块](#常用模块)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [Go基础知识](#go基础知识)auto    - [基础知识点](#基础知识点)auto        - [求值策略](#求值策略)auto        - [init函数](#init函数)auto        - [指针](#指针)auto            - [指针运算符](#指针运算符)auto            - [指针输出](#指针输出)auto    - [常用模块](#常用模块)autoauto<!-- /TOC -->
 # Go基础知识
 > [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)
 
@@ -22,9 +11,6 @@
     - 函数定义: `func name() type{}`, 返回值类型后置
 5. if/else/switch 语句在执行前都可以执行一个简单语句. 如: `if i:=f();i<100{}`
     - switch可以没有条件, 直接在分支中进行判断. 如: `switch {case hour<12: cmd}`
-6. 空白标识符(blank identifier)`_`: 标识返回值中不需要声明的变量(如不需要map的key时). It avoids having to declare all the variables for the returns values.
-    - 参考: https://stackoverflow.com/questions/27764421/what-is-in-a-golang-declaration
-    - 对于 `import _package`, 会执行包内的 `init()` 函数, 而不使用包导出的变量和其他方法
 7. 其他类型->字符串: `fmt.Sprintf("format",args)`
     - `%s` 字符串, `%v` 相应值的默认格式, `%+v` 输出结构体时添加相应字段名
     - `fmt.Println()` 实现了 `fmt.error, fmt.Stringer`等接口, fmt包在输出时匹配会尝试匹配其实现/方法
@@ -59,6 +45,18 @@
 
 ### 求值策略
 1. go语言中, 所有的方法参数都是值传递.
+
+### 空白标识符
+在go语言中, 空白标识符有以下用途
+1. 用在返回值: 标识返回值中不需要声明的变量, 避免声明返回值中不需要的变量. 好处在于: 编译器可以针对该情况进行优化,减少内存占用.
+    - 示例: `card,_ := newCard()`.
+2. 用在import: 导入包, 但是只执行包中的 `init()` 方法(即只初始化导入的包), 不引入包中的其他函数和变量. 常用情况如 mysql 包的导入
+    - 示例: `import _ "github.com/go-sql-driver/mysql"`
+3. 用于变量: 检查变量是否实现接口
+    - 示例: `var _ Card = &CardService{}`: 判断 CardService 是否实现了 Card 的所有接口
+4. 参考
+    - [What is “_,” (underscore comma) in a Go declaration?](https://stackoverflow.com/questions/27764421/what-is-in-a-golang-declaration)
+    - [Go 语言中下划线的用法分析总结](https://juejin.im/entry/5af25ecbf265da0b78687ce5)
 
 ### init函数
 > https://zhuanlan.zhihu.com/p/34211611
