@@ -75,6 +75,11 @@ grep: 使用正则表达式搜索标准输出/文件，并打印匹配的行
 2. `-L` : 打印不匹配表达式的文件清单
 3. `-v` : 反检索, 只显示不匹配的行
 
+### 示例
+1. `grep -rnlw --exclude-dir=vendor --exclude-dir=node_* --exclude=*.log 9000`
+    - 解释: 在当前文件夹下查找所有包含 9000 这个单词的文件, 同时跳过 `vendor` 目录, `node_*` 目录, `.log` 文件
+    - r 表示递归查找, 遍历所有子目录
+    - `exclude` 表示不包含, 同理, `include` 表示只查找包含该规则的文件
 
 ## locate
 > [参考链接](https://wiki.archlinux.org/index.php/Locale)
