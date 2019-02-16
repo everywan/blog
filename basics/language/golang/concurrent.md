@@ -179,3 +179,29 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
         return serilaNo
     }
     ```
+
+#### goroutine执行流程
+预先了解:
+1. `runtime.GOMAXPROCS(1)`: 设置最多只有一个协程执行.
+2. goroutine: 在主线程执行完毕后, 才会执行 goroutine 协程, goroutine 具体稍后再讲. 当 goroutine 的作用域为
+
+```Go
+func main() {
+    runtime.GOMAXPROCS(1)
+    wg := sync.WaitGroup{}
+    wg.Add(20)
+    for i := 0; i < 10; i++ {
+        go func() {
+            fmt.Println("i: ", i)
+            wg.Done()
+        }()
+    }
+    for i := 0; i < 10; i++ {
+        go func(i int) {
+            fmt.Println("i: ", i)
+            wg.Done()
+        }(i)
+    }
+    wg.Wait()
+}
+```
