@@ -1,25 +1,25 @@
 <!-- TOC -->
 
 - [Mapd](#mapd)
-    - [前言](#前言)
-    - [Mapd 简介](#mapd-简介)
-    - [Mapd安装](#mapd安装)
-    - [Mapd使用](#mapd使用)
-        - [CURD](#curd)
-        - [服务启动](#服务启动)
-        - [根据时间查询](#根据时间查询)
-        - [可视化](#可视化)
-        - [配置](#配置)
-    - [现有问题](#现有问题)
-    - [参考](#参考)
-    - [总结](#总结)
+  - [前言](#%E5%89%8D%E8%A8%80)
+  - [Mapd 简介](#mapd-%E7%AE%80%E4%BB%8B)
+  - [Mapd安装](#mapd%E5%AE%89%E8%A3%85)
+  - [Mapd使用](#mapd%E4%BD%BF%E7%94%A8)
+    - [CURD](#curd)
+    - [服务启动](#%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8)
+    - [根据时间查询](#%E6%A0%B9%E6%8D%AE%E6%97%B6%E9%97%B4%E6%9F%A5%E8%AF%A2)
+    - [可视化](#%E5%8F%AF%E8%A7%86%E5%8C%96)
+    - [配置](#%E9%85%8D%E7%BD%AE)
+  - [现有问题](#%E7%8E%B0%E6%9C%89%E9%97%AE%E9%A2%98)
+  - [参考](#%E5%8F%82%E8%80%83)
+  - [总结](#%E6%80%BB%E7%BB%93)
 
 <!-- /TOC -->
 
 # Mapd
 
 ## 前言
-- [CPU&&GPU 简介](/basics/hardware/alu/cpu-gpu.md)
+- [CPU&&GPU 简介](/computer_org/alu/cpu-gpu.md)
 
 ## Mapd 简介
 1. Mapd 分为两部分, 分别是 Mapd Core(数据库) 和 MapD Immerse(渲染引擎).

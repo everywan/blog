@@ -48,7 +48,7 @@ vue/webpack 项目启动流程如下: 首先读取 `build/webpack.base.conf.js` 
 
 由webpack根据 build/ 下配置构建项目, 生成到 dist/ 目录下
 
-webpack 参考 [webpack](/basics/front_end/fe/webpack.md)
+webpack 参考 [webpack](/front_end/fe/webpack.md)
 - 如果在项目构建方面有要求或者有问题的话, 可以在webpack里寻找方案.
 
 ### vue-loader

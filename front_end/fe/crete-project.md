@@ -148,7 +148,7 @@ webpack-dev-server 是一个简易的Web服务器. 基于 node.js 开发, 是web
 
 ### 安装vue.js
 vue.js 是目前常用的前端框架之一, 合适的框架可以极大的减轻我们开发的工作量.
-- [Vue简单介绍](/basics/front_end/vue/vue.md)
+- [Vue简单介绍](/front_end/vue/vue.md)
 - [添加基础vue: commitID](https://github.com/everywan/example-front-end/commit/40dd09d603a53dcc74c9b7c53a738e8e9b4e562c)
 
 1. 安装 Vue.j: `npm install vue --save`

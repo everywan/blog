@@ -3,7 +3,7 @@
 - 数据格式
 
 一般可以使用以下技术构建一个高性能易扩展的系统
-- 代码管理工具: 参考 [git flow](/application/os/git/use.md#git-flow)
+- 代码管理工具: 参考 [git flow](/os/git/use.md#git-flow)
 - 项目部署/集群管理工具: docker部署 + k8s集群化管理
 - 配置系统
     - 本地配置文件 yaml/ini/json 等 + 配置管理工具

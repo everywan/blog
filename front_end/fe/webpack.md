@@ -14,7 +14,7 @@ webpack是前端项目的构建框架之一, webpack可以 分析项目结构, �
 
 ### 目录结构
 目录结构参考 vue 项目的结构
-- [vue-webpack项目结构](/basics/front_end/vue/vue.md#目录结构)
+- [vue-webpack项目结构](/front_end/vue/vue.md#目录结构)
 - [参考: vue-cli-项目结构](https://loulanyijian.github.io/vue-cli-doc-Chinese/structure.html)
 
 ### 生成文件详解

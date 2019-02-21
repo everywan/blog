@@ -19,15 +19,15 @@ func do(v interface{}) {
 }
 ```
 
-[泛型编程](https://github.com/everywan/note/blob/master/basics/language/java/summary.md#%E6%B3%9B%E5%9E%8B): 泛型类/方法/接口, 既 T.
+[泛型编程](https://github.com/everywan/note/blob/master/language/java/summary.md#%E6%B3%9B%E5%9E%8B): 泛型类/方法/接口, 既 T.
 
 interface 实现泛型编程
 1. 参数为 interface 类型, 在函数内判断 interface 的类型, 然后调用相应的方法. (只能是内置类型,或者双方有约定的类型)
 2. 定义 interface 接口, 然后所有该方法依赖的方法都定义到接口里, 要求传入的参数必须实现该接口
 
 #### 接口
-[interface 简介](/basics/language/base/interface.md)
+[interface 简介](/language/base/interface.md)
 
-- **实现interface接口时, 必须保持方法接收者与接口定义的类型相同**. [详细参见: Go-结构体](/basics/language/golang/struct.md#接口继承)
+- **实现interface接口时, 必须保持方法接收者与接口定义的类型相同**. [详细参见: Go-结构体](/language/golang/struct.md#接口继承)
 - **接口类型无法被实例化, 但是接口可以使用接口声明一个空指针, 然后被绑定到实现该接口的类上**
 - go语言的接口是非侵入式的

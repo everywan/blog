@@ -13,7 +13,7 @@
 构建工具就是基于 工程化/自动化 的思想, 简化前端开发构建部署流程的软件工具, 解放程序员的生产力和保护程序员的头发.
 
 #### 常用框架
-- [webpack](/basics/front_end/fe/webpack.md)
+- [webpack](/front_end/fe/webpack.md)
 
 ### 部署
 - 灰度部署

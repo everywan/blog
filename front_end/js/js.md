@@ -26,7 +26,7 @@
 2. undefined/null区别
     - undefined: 表示变量没有声明.
     - null: 表示变量没有定义.
-    - [参考: 声明/定义](/basics/language/basic.md)
+    - [参考: 声明/定义](/language/basic.md)
     - [参考: 探索JavaScript中Null和Undefined的深渊](http://yanhaijing.com/javascript/2014/01/05/exploring-the-abyss-of-null-and-undefined-in-javascript/)
 3. 默认值
     - `new String;`: ""
