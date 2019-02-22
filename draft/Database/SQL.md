@@ -1,17 +1,17 @@
 <!-- TOC -->
 
-- [传统SQL数据库](#传统sql数据库)
-    - [基础知识](#基础知识)
-        - [Union/union all](#unionunion-all)
-        - [distinct](#distinct)
-        - [事务隔离级别](#事务隔离级别)
-        - [事务传播行为](#事务传播行为)
-        - [索引](#索引)
-        - [事件](#事件)
-            - [定时规则](#定时规则)
-    - [JDBC](#jdbc)
-    - [规范](#规范)
-    - [ETC](#etc)
+- [传统SQL数据库](#%E4%BC%A0%E7%BB%9Fsql%E6%95%B0%E6%8D%AE%E5%BA%93)
+  - [基础知识](#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)
+    - [Union/union all](#unionunion-all)
+    - [distinct](#distinct)
+    - [事务隔离级别](#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB)
+    - [事务传播行为](#%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA)
+    - [索引](#%E7%B4%A2%E5%BC%95)
+    - [事件](#%E4%BA%8B%E4%BB%B6)
+      - [定时规则](#%E5%AE%9A%E6%97%B6%E8%A7%84%E5%88%99)
+  - [JDBC](#jdbc)
+  - [规范](#%E8%A7%84%E8%8C%83)
+  - [ETC](#etc)
 
 <!-- /TOC -->
 
@@ -59,6 +59,8 @@
     - 从刚开始直接操作DB的时代, 到ODBC标准搞定关系数据库, 到OLE DB搞定关系型+非关系型数据库, 到ADO, 一步步封装
     - ![ODBC, OLEDB, ADO, ADO.Net的演化简史](/attach/ADO.png)
 7. `SET NOCOUNT ON`：不返回 ..行受到影响
+8. mysql隐式类型转换: int 与 varchar 比较时, 会自动将 varchar 隐式转换为int, 所以varchar前的 0 会被丢掉.
+隐式转换后不走索引, 要尽量避免
 
 ### Union/union all
 1. Union All：对两个结果集进行并集操作, 包括重复行, 不进行排序
