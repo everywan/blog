@@ -2,14 +2,14 @@
 
 <!-- TOC -->
 
-- [项目结构](#项目结构)
-    - [GO项目位置](#go项目位置)
-    - [项目架构](#项目架构)
-    - [引用](#引用)
-        - [控制层](#控制层)
-        - [MakefileDemo](#makefiledemo)
-        - [DockerfileDemo](#dockerfiledemo)
-        - [DockerShellDemo](#dockershelldemo)
+- [项目结构](#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84)
+  - [GO项目位置`](#go%E9%A1%B9%E7%9B%AE%E4%BD%8D%E7%BD%AE)
+  - [项目架构`](#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84)
+  - [引用](#%E5%BC%95%E7%94%A8)
+    - [控制层](#%E6%8E%A7%E5%88%B6%E5%B1%82)
+    - [MakefileDemo](#makefiledemo)
+    - [DockerfileDemo](#dockerfiledemo)
+    - [DockerShellDemo](#dockershelldemo)
 
 <!-- /TOC -->
 
@@ -38,29 +38,26 @@
 
 ### 项目架构
 ````
-// 通用基础结构
-- view                      // 视图层, 前后端分离时不需要
-- controllers               // [控制层](控制层), 一般情况下只负责 参数收集/验证, 以及返回结果的封装
-- business                  // 业务逻辑层, 实现具体的业务逻辑. 当业务不复杂时, 可以合并到 controller 层
-- services                  // 服务层, 对非原始数据的操作, 为 business 层提供服务. 比如用于插入数据前填充ID字段, 返回数据前隐藏Password字段.
-- dao                       // 数据访问层, 封装数据操作, 连接池, 保活等. 如 封装数据库读写数据的方法. 使用 gorm 或其他插件时, 可以合并到 service 层
-
-// 推荐结构 - GO: Go程序可以直接生成二进制文件, 使用可执行程序的方式修改项目结构
-- cmd                       // 构建 CLI-APP 程序.
-    - root.go
 - entry                     // 载入点, 因为外层项目是用来构建 CLI-APP 的, 所以载入点不能放置到外层, 外层程序的包名应该是该项目的名称.
-    - main.go
+- internal                  // 声明为 Go 内部包, 被外界引用时会报错. 编译器标准用来维护一些私有库和局部状态. 只需暴露外层 user.go 接口即可, 无需暴露内部实现.
+    // 通用基础结构
+    - view                      // 视图层, 前后端分离时不需要
+    - controllers               // [控制层](控制层), 一般情况下只负责 参数收集/验证, 以及返回结果的封装
+    - business                  // 业务逻辑层, 实现具体的业务逻辑. 当业务不复杂时, 可以合并到 controller 层
+    - services                  // 服务层, 对非原始数据的操作, 为 business 层提供服务. 比如用于插入数据前填充ID字段, 返回数据前隐藏Password字段.
+    - dao                       // 数据访问层, 封装数据操作, 连接池, 保活等. 如 封装数据库读写数据的方法. 使用 gorm 或其他插件时, 可以合并到 service 层
+    // 推荐结构 - GO: Go程序可以直接生成二进制文件, 使用可执行程序的方式修改项目结构
+    - cmd                       // 构建 CLI-APP 程序.
+        - root.go
+        - main.go
+    - util                      // 工具包. 与helper区别: util通常被理解为只有静态方法并且是无状态的, 既你不会创建这样一个类的实例. helper 可以是实用程序类, 也可以是有状态的或需要创建实例.
+    - middlewares               // 中间件
 - user.go                   // 类似Model层, 定义数据库表的字段, 以及接口方法
-- .demo.yml                 // 配置文件
+- proto                     // grpc 远程调用组件
+- .demo.yaml                 // 配置文件
 - docker.sh                 // Docker构建脚本
 - Dockerfile
 - Makefile                  // 生成可执行程序, 为Docker提供载入点
-
-// 可选层
-- util                      // 工具包. 与helper区别: util通常被理解为只有静态方法并且是无状态的, 既你不会创建这样一个类的实例.
-                            // helper 可以是实用程序类, 也可以是有状态的或需要创建实例.
-- middlewares               // 中间件
-- proto                     // grpc 远程调用组价
 - doc                       // 文档
 - script                    // 脚本
     - shell                 // Bash脚本
