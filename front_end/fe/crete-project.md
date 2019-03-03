@@ -270,7 +270,7 @@ mode补充: 用于通知webpack使用相应模式的优化. 参考: [mode-webpac
 - development: 启用 NamedChunksPlugin 和 NamedModulesPlugin
 - production: 启用 FlagDependencyUsagePlugin, FlagIncludedChunksPlugin, ModuleConcatenationPlugin, NoEmitOnErrorsPlugin, OccurrenceOrderPlugin, SideEffectsFlagPlugin 和 UglifyJsPlugin
 
-1. 运行命令前导入 NODE_ENV 变量: package.json/script 如下修改: `export NODE_ENV=production && ...`
+1. 运行命令前导入 `NODE_ENV` 变量: package.json/script 如下修改: `export NODE_ENV=production && ...`
 2. 修改 webpack.config.js 添加环境判断
     ```js
     module.exports = {

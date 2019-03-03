@@ -59,8 +59,9 @@
     - 从刚开始直接操作DB的时代, 到ODBC标准搞定关系数据库, 到OLE DB搞定关系型+非关系型数据库, 到ADO, 一步步封装
     - ![ODBC, OLEDB, ADO, ADO.Net的演化简史](/attach/ADO.png)
 7. `SET NOCOUNT ON`：不返回 ..行受到影响
-8. mysql隐式类型转换: int 与 varchar 比较时, 会自动将 varchar 隐式转换为int, 所以varchar前的 0 会被丢掉.
-隐式转换后不走索引, 要尽量避免
+8. mysql隐式类型转换: int 与 varchar 比较时, 会自动将 varchar 隐式转换为int, 所以varchar前的 0 会被丢掉. 隐式转换后不走索引, 要尽量避免
+9. 在 sql 脚本中, 查询结果为结果集(多余1条)时, 不能直接赋值给变量. 可以使用游标或使用表变量, 或者使用 while 循环依次查询(还不如游标). sql的变量只是基础类型中的哪几种类型, 不能承载结果集. sql查询要确立面向集合的思想. 游标等只能在存储过程中使用. 存储过程和存储函数都会被mysql存储并且编译.
+  - http://tool.oschina.net/apidocs/apidoc?api=mysql-5.1-zh
 
 ### Union/union all
 1. Union All：对两个结果集进行并集操作, 包括重复行, 不进行排序
