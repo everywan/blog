@@ -2,14 +2,14 @@
 Preload 的用法如下
 
 ```Go
-type AccountTest struct {
+type Account struct {
 	ID                int          `gorm:"column:id" json:"id"`
 	BusinessAccountID int          `gorm:"column:business_account_id" json:"business_account_id"`
 	Wuid              int          `gorm:"column:wuid" json:"wuid"`
 	Logs              []AccountLog `gorm:"foreignkey:AccountID;association_foreignkey:ID"`
 }
 
-func (AccountTest) TableName() string {
+func (Account) TableName() string {
 	return "accounts"
 }
 
@@ -30,12 +30,12 @@ foreignkey:AccountID 表示该结构体对应的外键, 即 AccountLog 结构体
 
 Preload:
 ```Go
-logs := []AccountTest{}
-err := db.Debug().Where("business_account_id = ? and wuid = ?", 1, 1).Preload("Logs").Find(&logs).Error
+accounts := []Account{}
+err := db.Debug().Where("business_account_id = ? and wuid = ?", 1, 1).Preload("Logs").Find(&accounts).Error
 // 执行的sql为
 SELECT * FROM `accounts`  WHERE (business_account_id = '1' and wuid = '1')
 SELECT * FROM `account_logs`  WHERE `account_logs`.`deleted_at` IS NULL AND ((`account_id` IN ('5','7')))   // 其中 5 7 为第一个sql查询结果中的ID值, 即association_foreignkey指定的值
-// 最后的结果为
+// 最后的结果为: gorm会将 accounts_logs 表中与 accounts 主键关联的值全部查询出来, 然后插入到 Account 结构体中
 [{ID: 5 BusinessAccountID: 1 Wuid: 1 Logs: [
         {Model: {ID: 79 CreatedAt: 2018-06-21 09: 54: 11 +0800 CST UpdatedAt: 2018-06-21 11: 34: 59 +0800 CST DeletedAt:<nil>
             } AccountID: 5 Wuid: 1

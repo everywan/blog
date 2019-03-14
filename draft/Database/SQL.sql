@@ -116,3 +116,8 @@ select tb1.*, tb2.* from tb2,tb1;
 -- 思路: 事先定义一个变量, 通过变量的递加以及虚拟表的联查生成序列号
 -- `(select @i:=0) as se` 用于给 @i 赋值
 select (@i:=@i+1) as 序号, todos.* from todos, (select @i:=0) as se;
+
+-- case 用法, desc/explain 查看执行计划: https://www.cnblogs.com/xuanzhi201111/p/4175635.html
+desc select * from business_accounts a, (select b.bid,b.withdraw_type from brands b left join merchants m on b.bid=m.bid
+  where m.meid=274) temp where a.meid = (case when temp.withdraw_type='merchant' then 274
+  else 0 end) and a.bid = temp.bid;

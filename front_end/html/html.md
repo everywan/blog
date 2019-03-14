@@ -7,6 +7,27 @@
     - [闭合标签](#%E9%97%AD%E5%90%88%E6%A0%87%E7%AD%BE)
 
 # HTML
+## 页面
+
+| 字段                      | 定义                                                                                                     |
+| :--:                      | :---:                                                                                                    |
+| scrollHeight/Width        | 滚动高度/宽度                                                                                            |
+| scrollLeft/Top            | 对象左边界与窗口可视内容中最左/顶端之间的距离                                                            |
+| offsetHeight/Width        | 对象相对于版面或者父元素坐标之间的高度/宽度                                                              |
+| offsetLeft/Top            | 对象相对于版面或父元素坐标的计算位置                                                                     |
+| event.touches[0]clientX/Y | 当前触摸点相对于当前可视区域left/top的距离                                                               |
+| event.target.x/y          | 对于触摸点,触摸点所在元素相对于当前可视区域left/top的距离                                                |
+| event.pageX/Y             | 鼠标/触点相对于文档的距离(基于文档的边缘, 叠加页面滚动. 假设页面向下滚动100px,页面高200px,则pageX=300px) |
+| event.clientX/Y           | 鼠标/触点相对于浏览器边缘的距离, 不随滚动变化, 会随着缩放变化                                            |
+| event.offsetX/Y           | 相对于容器的水平坐标                                                                                     |
+| dom.clientHeight/Width    | 节点占据的高度/宽度, 所有该节点可以被看到的内容的高度/宽度                                               |
+
+1. 对于 `position:absolute` 的元素:
+  1. 设置了absolute的元素如果存在有祖先元素设置了position属性为relative或者absolute, 则这时元素的定位对象为此已设置position属性的祖先元素.
+  2. 如果并没有设置了position属性的祖先元素, 则此时相对于body进行定位.
+
+注: 如遇到不清楚的 js位置表达方式, 查询mdn即可. 上述距离单位均为px.
+
 ## 节点类别
 ### template
 HTML `<template>` 元素是一种用于保存客户端内容的机制，该内容在页面加载时不被渲染，但可以在运行时使用 JavaScript 进行实例化。
