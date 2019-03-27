@@ -96,6 +96,10 @@
 
 另, 附上一句听来的话, 用来验证 controller 是否符合规范: controller 要返回的数据应当时稳定的, 不随时间变化而变化.
 
+其他规范
+1. 永远不要再最外层调用 internal 中的结构体. 即不要再 外层的user.go调用internal中的结构体/方法. 这样会破坏门面模式, 破坏接口的独立性
+2. models 层定义 Request/Response 结构体. Request 用于 controller 与 service 通信, Response 用于controller处理service返回的数据, 转换为合适的格式返回给前端. models 是为了补充外层结构体. models 定义只在该项目内部使用的结构体, 最外层定义了对外开放的结构体
+
 ### 引用
 #### MakefileDemo
 ```Shell

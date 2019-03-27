@@ -106,3 +106,14 @@ ACID特性主要解决以下问题:
     - `COMMIT / ROLLBACK` 语句结束当前事务和开始一个新的事务
     - 当没有显示提交事务的情况下结束会话, 则MySQL将回滚该事务
 
+### 事务保存点
+Mysql 事务控制处理 支持 SAVEPOINT 保存点, 可以回滚部分事务.
+
+```Sql
+SAVEPOINT `identifier`            -- 设置保存点, 标识符唯一, 重新设置已存在的保存点则会覆盖原纪录
+RELEASE SAVEPOINT `identifier`    -- 释放保存点, 舍弃标识符.
+ROLLBACK TO `identifier`          -- 回滚到保存点
+```
+
+参考: [savepoint原理](http://www.cnblogs.com/justfortaste/p/5054368.html)
+
