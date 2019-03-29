@@ -16,6 +16,8 @@
 
 # Mysql
 
+[mysql 5.1 中文文档](http://tool.oschina.net/uploads/apidocs/mysql-5.1-zh/)
+
 - [传统SQL数据库](/Database/SQL.md)
 - [常用SQL语句](/Database/SQL.sql)
 

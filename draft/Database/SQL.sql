@@ -121,3 +121,9 @@ select (@i:=@i+1) as 序号, todos.* from todos, (select @i:=0) as se;
 desc select * from business_accounts a, (select b.bid,b.withdraw_type from brands b left join merchants m on b.bid=m.bid
   where m.meid=274) temp where a.meid = (case when temp.withdraw_type='merchant' then 274
   else 0 end) and a.bid = temp.bid;
+
+-- 查询所有正在执行的SQL, 可用于解决死锁等问题
+show full processlist
+
+-- 查询 innodb 目前所有的锁
+select * from information_schema.INNODB_LOCKS;
