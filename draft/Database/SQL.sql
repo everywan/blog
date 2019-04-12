@@ -127,3 +127,13 @@ show full processlist
 
 -- 查询 innodb 目前所有的锁
 select * from information_schema.INNODB_LOCKS;
+
+-- 查询时添加共享锁
+select * from table lock in share mode
+
+-- 查询时添加排它锁
+select * from table for update
+-- for update 参数
+select * from table for update skip locked  -- 如果发现行被锁, 那么跳过处理. 只处理未加锁的行
+select * from table for update nowait       -- 如果发现行被锁, 直接抛出错误
+select * from table for update wait 3       -- 如果发现行被锁, 最多等待三秒. 超时后抛出 超时错误

@@ -60,13 +60,9 @@ go语言每种类型都有自己的默认值
 ```Go
 import (
     "fmt"       // 正常导入
-    // fmt.Println("hello world")
-
-    . "fmt"     // 忽略包前缀
-    // Println("hello world")
-    
+    . "fmt"     // 导入包, 并且在使用时可以忽略前缀.
+    _ "fmt"     // 仅调用包内的init函数, 但是并不调用(典型使用: 引入mysql包)
     f "fmt"     // 添加包别名
-    // f.Println("hello world")
 )
 ```
 
