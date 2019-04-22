@@ -100,7 +100,7 @@
 1. 永远不要再最外层调用 internal 中的结构体. 即不要再 外层的user.go调用internal中的结构体/方法. 这样会破坏门面模式, 破坏接口的独立性
 2. models 层定义 Request/Response 结构体. Request 用于 controller 与 service 通信, Response 用于controller处理service返回的数据, 转换为合适的格式返回给前端. models 是为了补充外层结构体. models 定义只在该项目内部使用的结构体, 最外层定义了对外开放的结构体
 3. 传入数据是否符合业务逻辑交由service层判断, controller只负责收集该数据, 以及非业务上的判断. 如业务创建时必须包含 id/name 字段, 此参数断言不放在controller中, 而放到service中. controller只负责参数收集/校验参数格式正确, 不应负责业务上对参数的校验, 业务上的校验交给service才能保证所有使用该业务逻辑的方法都有此校验.
-
+4. 既然前后端分离, 那么后端返回数据时应该尽量不考虑前端需求, 尽量原格式返回, 由前端自己转换, 后端应尽量持续范围稳定的数据结构.
 ### 引用
 #### MakefileDemo
 ```Shell
