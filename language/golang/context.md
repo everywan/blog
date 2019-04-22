@@ -23,7 +23,9 @@ context取出数据的方法: `value := context.Value("key")`, 可以看到是�
 那么问题来了, context 能否存储多个key呢? 又是如何实现的呢? 如我们执行如下代码
 ```Go
 ctx := context.WithValue(context.Background(), "test1", "test1")
+fmt.Printf("%p\n", ctx)
 ctx = context.WithValue(ctx, "test2", "test2")
+fmt.Printf("%p\n", ctx)
 ctx = context.WithValue(ctx, "test2", "test3")
 ```
 
@@ -53,3 +55,5 @@ func WithValue(parent Context, key, val interface{}) Context {
 ```
 
 由 valueCtx 的结构可以得出如下结论, 每次使用 WithValue 时, 就会生成一个新的 valueCtx, 然后将 key val 导入到新的valueCtx中. 由于Go语言的特性, valueCtx 可以直接调用Context内的值, 也就是可以直接获取上一个context的key-val, 就像该key-val直接属于context内一样. (注意, WithValue 返回的context不能调用 valueCtx 的字段和扩展方法, 因为 WithValue 返回的是 Context, 只能调用父类 Context 的方法)
+
+再多说一笔无关的, 输出地址时要用 `fmt.Printf("%p\n", ctx)` 而不是 `fmt.Println(&ctx)`, 后者输出的是指向ctx指针的指针的地址, 前者才是 ctx指针的地址
