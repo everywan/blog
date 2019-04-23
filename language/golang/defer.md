@@ -22,8 +22,10 @@ defer 延迟执行的函数的作用域为:
 要了解defer的执行流程, 首先要了解下在 Go 中 return 执行的流程
 
 在Go中 return 的执行流程
-1. 在 Go 中, return 返回值分为两种: 匿名返回值,具名返回值. 具名返回值在函数声明时被声明, 匿名返回值在return执行时声明. 需要注意的是, 匿名返回值是新声明的变量, 与函数内声明的变量不同.
-2. 所以, Go 中 return 执行顺序为: 返回值赋值 => 返回值返回.
+1. 在 Go 中, return 返回值分为两种: 匿名返回值,具名返回值.
+  - 具名返回值在函数声明时被声明
+  - 匿名返回值在return执行时声明. 匿名返回值与函数内声明的变量不同, 即使在函数内声明了变量并将该变量返回, 该变量也不是匿名返回值变量(原因未知, 后续可学习源码).
+2. 在 Go 中 return 执行顺序为: 返回值赋值 => 返回值返回.
 
 正常情况下, defer 函数在 return 执行时被执行, 流程为: 返回值赋值 => defer 函数执行 => 返回值.
 当程序发生异常时, 程序在 panic 抛出异常前执行, 所以可以使用defer捕获函数执行时的异常.
@@ -31,11 +33,12 @@ defer 延迟执行的函数的作用域为:
 所以, defer 会延迟函数的执行, 并且在任何情况下defer都会被执行. 
 对于多个defer， 会按照入栈顺序依次执行.
 
-思考一个问题: defer 是否可以更改函数返回值?
-1. defer 在对返回值赋值后执行. 当返回值为匿名返回值时, defer 访问的函数内的变量与返回值不是同一个变量, 所以无法更改返回值. 但是, 当返回值是具名返回值时, defer 可以访问到返回值, 也可以更改返回值
-   1. 示例参见 [defer与return](#defer与return) test2/test4 (具名/匿名返回值)
-2. 当返回值为指针时, 如果defer可以更改指针指向的内容(当所使用的变量在defer之前声明), 那么defer也算是在一定程度上更改了返回值. 这是一种比较hacker的方法.
-   1. 示例参见 [defer与return](#defer与return) test3
+思考一个问题: defer 是否可以更改函数返回值? 在 [defer与return](#defer与return) 中, 那些函数可以修改返回值?
+
+提示:
+1. 根据return/defer的执行流程, 虽然defer无法直接修改返回值(defer前返回值赋值已完成), 但是defer可以通过获取返回值地址, 然后修改地址内容的值来间接修改返回值.
+2. 对于匿名非指针返回值, 在函数内获取不到返回值地址. 原因未知.
+3. 对于指针型返回值, defer 可以直接访问到地址; 对于具名返回值, defer 可以在函数内获取返回值地址.
 
 示例参见
 1. [defer与panic](#defer与panic)
@@ -69,6 +72,12 @@ func main() {
     fmt.Println(*test3())
     fmt.Println(test4())
 }
+func test1() (a *int) {
+	a = new(int)
+	defer func() { *a = *a + 1 }()
+	*a = *a + 1
+	return a
+}
 func test2() (a int) {
     defer func() { a = a + 1 }()
     return a + 1
@@ -84,7 +93,15 @@ func test4() int {
     defer func() { a = a + 1 }()
     return a + 1
 }
+func test5() (a int) {
+    a = 0
+    defer func(a *int) { *a = *a + 1 }(&a)
+    a = a + 1
+    return a
+}
 ```
+
+只有 test1/test3/test5 可以修改返回值
 
 ### defer参数生成
 猜测如下函数输出
