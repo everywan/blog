@@ -18,7 +18,6 @@
     - 入门
         - [go创作历史-Go语言之父谈Go](/language/golang/start/why_go.md)
         - [安装&包管理器](/language/golang/start/start.md)
-        - [项目结构](/language/golang/start/temple.md)
     - 基础知识
         - [基础知识点](/language/golang/base.md)
         - [进阶知识点](/language/golang/advanced.md)

@@ -58,17 +58,17 @@ web项目可能还需要以下技术
 
 jwt/session:
 ````
-	session/jwt 不同点
-	session 在服务端保持用户状态(一般是认证状态), 获取认证信息, 各服务通过请求session服务/缓存判断用户状态.
-	jwt 是用户每次请求附带 jwt 字符串, 服务端根据jwt字符串获取用户状态与相关信息, 服务器不参与状态保存
-	session 可以保存多端同步的状态, 如阅读位置, 购物车. jwt多端则不行(因为jwt只保存在了一端上)
+session/jwt 不同点
+session 在服务端保持用户状态(一般是认证状态), 获取认证信息, 各服务通过请求session服务/缓存判断用户状态.
+jwt 是用户每次请求附带 jwt 字符串, 服务端根据jwt字符串获取用户状态与相关信息, 服务器不参与状态保存
+session 可以保存多端同步的状态, 如阅读位置, 购物车. jwt多端则不行(因为jwt只保存在了一端上)
 
-	为什么需要session/jwt: 减少私密信息在网络上传输的次数从而更安全, 保存用户信息以避免重复读取.
+为什么需要session/jwt: 减少私密信息在网络上传输的次数从而更安全, 保存用户信息以避免重复读取.
 
-	但是 jwt 是无状态的, 存在jwt在有效期内但是认证身份失效的情况(如用户被删除), 所以需要验证用户存在(不需要再次验证私密信息的准确性).
+但是 jwt 是无状态的, 存在jwt在有效期内但是认证身份失效的情况(如用户被删除), 所以需要验证用户存在(不需要再次验证私密信息的准确性).
 
-	jwt/jws 参考: https://www.jianshu.com/p/50ade6f2e4fd
-	注意, jwt/jws 中能放敏感信息, jwt/jws 只保证数据是服务端签发的且没有被修改, 不加密数据(jws只是将 HMACSHA256(base64enc(header)+base64enc(payload),secretKey) 的值赋值给sign, 并不将 header,payload 加密.(header/payload 只是base64转码)
+jwt/jws 参考: https://www.jianshu.com/p/50ade6f2e4fd
+注意, jwt/jws 中能放敏感信息, jwt/jws 只保证数据是服务端签发的且没有被修改, 不加密数据(jws只是将 HMACSHA256(base64enc(header)+base64enc(payload),secretKey) 的值赋值给sign, 并不将 header,payload 加密.(header/payload 只是base64转码)
 
-  需要考虑的一个问题就是, token存在cookie合适, 还是localstore合适.
+需要考虑的一个问题就是, token存在cookie合适, 还是localstore合适.
 ````
