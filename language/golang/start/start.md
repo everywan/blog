@@ -45,8 +45,58 @@
 5. go编译器支持链接 (`$GOPATH/src/`下package的源码 | 从pkg下寻找package的.a文件); 并且src源码优先
 
 ## 包管理器
-1. 参考了解: [Go包管理的前世今生](http://www.infoq.com/cn/articles/history-go-package-management). 
-2. 但是现在推荐使用 [dep](https://github.com/golang/dep), go官方的依赖工具.
+参考了解: [Go包管理的前世今生](http://www.infoq.com/cn/articles/history-go-package-management). 
+
+自 Go1.11 之后, Go 官方提供了 Go Module 机制, 不再使用第三方工具.
+
+[Go Modules Wiki](https://github.com/golang/go/wiki/Modules)
+
+升级到 Go1.11 版本后, 可以使用 `go help mod` 查看相关帮助文档.
+
+常用命令如下
+```Bash
+// 设置 go Module 为开启状态
+export GO111MODULE=on
+
+// 添加 go.mod, 用于标示项目由 mod 管理
+go mod init
+
+// 下载依赖到本地缓存. ($GOPATH/pkg/mod 目录下)
+go mod download
+
+// 将依赖打包到当前目录下的 vendor 目录(优先从本地缓存中取)
+go mod vendor
+
+// 添加缺少的依赖, 删除无用的依赖
+go mod tidy
+```
+
+项目添加依赖的方式有三种: 
+1. 使用 `go get` 拉取依赖时会自动将其添加到 go.mod 中.
+2. 直接修改 go.mod 文件
+3. 使用 `go mod test/build/edit` 时会自动添加项目中使用但 go.mod 没有的依赖
+
+当熟悉 go mod 后, 可能还会遇到一些依赖的问题, 可以使用如下方法排查
+
+----
+
+添加 `-v`: 在 Linux Cli 风格中, 添加 `-v` 可以显示debug信息. 对于部分命令, 最多支持 `-vvv` 三个v输出更详细的 debug 信息. go mod 不支持.
+
+示例: 拉取并更新包和所有依赖包, 并且打印日志: `go get -v -u github.com/everywan/x-go`. 
+
+----
+
+使用 `go list` 查看项目具体的依赖信息.
+
+示例: 以json格式查看当前项目所有的依赖 `go list -json -m all`
+
+----
+
+使用 `go mod graph` 查看项目依赖关系图
+
+示例: 查看项目中与 `github.com/golang/lint` 相关的依赖项: `go mod graph|grep github.com/golang/lint`
+
+输出格式为 `github.com/everywan/a-go github.com/everywan/b-go`, 指的是 项目A 中引用了 项目B.
 
 ### go get
 1. `go get`: 下载依赖包
@@ -57,6 +107,8 @@
     4. 切换到指定版本: `git checkout tags/v10.0.0`
 
 ### dep
+> 废弃, Go1.11 之后统一使用 go mod
+
 > [dep教程](https://tonybai.com/2017/06/08/first-glimpse-of-dep/)   
 > [dep官方文档](https://golang.github.io/dep/docs/introduction.html)
 
