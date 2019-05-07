@@ -73,6 +73,13 @@ func WriteMsgWithHandleTimeout(timeout time.Duration, msg []byte, conn net.Conn)
 ```
 参考 [defer函数生成](#练习二:defer函数生成)
 
+如何编写具有优先级的chan:
+
+我们知道, 如上函数, 在 select 中, 各 case 是随机执行的, 如何设置优先级?
+
+通过 default 在select中, 如果有default语句, 则不会阻塞. 如果case接收到数据, 就执行case中的语句, 如果case未收到信号, 则会执行defalut中的语句, 随后跳出select块. 从而实现优先级.
+
+
 ### 异常处理
 > 参考: http://www.cnblogs.com/ghj1976/archive/2013/02/11/2910114.html
 

@@ -76,7 +76,7 @@ import (
 2. 用在import: 导入包, 但是只执行包中的 `init()` 方法(即只初始化导入的包), 不引入包中的其他函数和变量. 常用情况如 mysql 包的导入
     - 示例: `import _ "github.com/go-sql-driver/mysql"`
 3. 用于变量: 检查变量是否实现接口
-    - 示例: `var _ Card = &CardService{}`: 判断 CardService 是否实现了 Card 的所有接口
+    - 示例: `var _ Card = &CardService{}`: 判断 CardService 是否实现了 Card 的所有接口. 本质上是定义变量然后赋值, 只不过此处使用 `_` 将变量省去了. 类似: `var i int; i=3` 缩写为 `var i int = 3`
 4. 参考
     - [What is “_,” (underscore comma) in a Go declaration?](https://stackoverflow.com/questions/27764421/what-is-in-a-golang-declaration)
     - [Go 语言中下划线的用法分析总结](https://juejin.im/entry/5af25ecbf265da0b78687ce5)
