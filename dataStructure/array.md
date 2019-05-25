@@ -4,14 +4,34 @@
 
 [slice源码](/dataStructure/source/slice.go)
 
-makeslice: 比较简单
+知识点如下
+1. `mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer`: 申请并分配内存. needzero 表示是否使用默认值初始化每个元素.
+2. 对于常用的数据, 可以在外层进行缓存, 在此处是 `maxSliceCap()` 的值.
+3. growslice 规则
+  ```Go
+  if cap > old.cap * 2 {
+    newcap = cap
+  } else {
+    if old.cap < 1024 {
+      newcap = old.cap * 2
+    } else {
+      newcap = old.cap * 5 / 4 
+    }
+  }
+  ```
+4. `sys.PtrSize == 4 << (^uintptr(0) >> 63)`, 根据系统架构(x86/x64)决定PtrSize(指针大小). x86 中可使用的地址线为32个, 寻址范围在 `0 ~ 1<<33-1` 之间. 所以 x86 内存最大支持 4Gb(存储中, 为了方便寻址, 最小单位是byte而不是bit, 详细可以参考计算机原理), 所以Ptrsize为4即可. x64 原理如上.
+5. grow
+
+makeslice
 ```Go
 func makeslice(et *_type, len, cap int) slice {
-  // 获取最大长度, maxSliceCap 中对常用的 Size 做了缓存, 详细见源码
+  // 获取可被分配的最大长度, maxSliceCap 中对常用的 Size 做了缓存, 详细见源码
 	maxElements := maxSliceCap(et.size)
+  // 断言数据结构size是否超过最大值.
 	if len < 0 || uintptr(len) > maxElements {
 		panicmakeslicelen()
 	}
+  // 判断总内存分配大小是否超过最大值.
 	if cap < len || uintptr(cap) > maxElements {
 		panicmakeslicecap()
 	}

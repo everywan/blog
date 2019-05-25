@@ -27,6 +27,17 @@
 1. 对 trace/debug/info 级别的日志输出, 必须使用条件输出形式或者使用占位符的方式. 因为直接使用字符串拼接时, 日志不会打印, 但是会执行字符串拼接操作, 浪费性能
 2. 类型定义尽量符合业务需求, 比如年龄使用 unsigned 而不用int.
 
+hostname: 在hostname中, 建议使用 连字符 而非 下划线 和 点.
+1. 在 [RFC952](https://tools.ietf.org/html/rfc952) 标准中, 不允许 hostname 包含下划线. 由此导致在 `java.net.URI` 等包中, 如果 hostname 中含有下划线, 就会抛出异常.
+  - ` A "name" (Net, Host, Gateway, or Domain name) is a text string up to 24 characters drawn from the alphabet (A-Z), digits (0-9), minus sign (-), and period (.).`
+2. 在 [RFC2181-sec11](https://tools.ietf.org/html/rfc2181#section-11) 中指出, DNS 不会对 hostname 做任何限制. 也就是说, DNS 允许下划线.
+  - `Those restrictions aside, any binary string whatever can be used as the label of any resource record.  Similarly, any binary string can serve as the value of any record that includes a domain name as some or all of its value`
+  - `In particular, DNS servers must not refuse to serve a zone because it contains labels that might not be acceptable to some DNS client programs`
+3. 个人理解: 在原来的标准中, 确实限制 hostname 中不能有下划线, 在后续标准中, 不在对此做限制(标准是体现在真实的网络中, 是否存在主机不支持此种格式(个人看法)). 举例如在 Java 中, `java.net.URI` 遵循 RFC952, 所以不能包含下划线. 但在 `java.net.URL` 中则无此限制. 至于为什么不统一, 应该是为了保证已存程序的稳定运行吧.
+4. 参考文章
+  - [Can (domain name) subdomains have an underscore “_” in it?](https://stackoverflow.com/questions/2180465/can-domain-name-subdomains-have-an-underscore-in-it)
+  - [JDK(java.net.URL) 中的 一个 "bug"](https://www.tanglei.name/blog/conflicts-between-java-net-url-and-java-net-uri-when-dealing-with-hostname-contains-underscore.html)
+
 ## 数据库
 数据库
 1. 单表行数超过 500 万行或者单表容量超过 2GB, 才推荐进行分库分表
