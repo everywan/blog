@@ -97,6 +97,63 @@ go tool pprof -pdf profile/cpu.prof > profile/cpu.pdf
 go tool pprof -svg profile/cpu.prof > profile/cpu.svg
 ```
 
+## 第三方工具
+常用的工具有
+1. [GoConvey](https://github.com/smartystreets/goconvey): 管理/运行测试用例, 支持断言/web界面. 主要是强化原生go-test功能.
+2. [GoStub](https://github.com/prashantv/gostub)
+3. [GoMock](https://github.com/golang/mock)
+4. [SqlMock](https://github.com/DATA-DOG/go-sqlmock): 模拟DB链接 
+
+### goconvey
+用法
+
+```Go
+import (
+  "testing"
+  . "github.com/smartystreets/goconvey/convey"
+)
+
+func TestSpec(t *testing.T) {
+  // Convey 签名: func Convey(items ...interface{})
+  // 参数介绍: 测试用例名称,*testing.T,handle()
+	Convey("Given some integer with a starting value", t, func() {
+		x := 1
+	 	So(x, ShouldEqual, 1)
+	})
+  // Convey 可以嵌套. 嵌套时内层Convey无需传入t.
+	Convey("Given some integer with a starting value", t, func() {
+		x := 1
+		Convey("The value should be greater by one", func() {
+			So(x, ShouldEqual, 2)
+		})
+	})
+}
+```
+
+一个Convey表示一个测试用例/域(scope), 嵌套Convey可表示测试用例之间的关系, 在某个Convey中触发了 `t.Fail()` 不影响其他Convey.
+
+一个测试用例(Convey)中有一个或多个So(So 决定执行哪种断言. 原文: _which assertions are made against the system under test_), 从而决定该测试用例是否通过.
+
+当有So失败时, 就会触发 `t.fail()`, 然后结束该Convey(即跳出). GoConvey 使用 [断言函数实现库](https://github.com/smartystreets/assertions) 实现断言.
+
+GoConvey 支持 SkipConvey/SkipSo, 可以跳过指定的测试用例, 且对于Skip的测试, 测试日志会添加 skipped 标记
+
+参考:
+1. [GoConvey使用](https://www.jianshu.com/p/e3b2b1194830)
+2. [GoConvey-Godoc](https://godoc.org/github.com/smartystreets/goconvey/convey)
+
+----
+
+原理
+
+
+### 参考
+2. https://www.jianshu.com/p/70a93a9ed186
+3. https://www.jianshu.com/p/598a11bbdafb
+4. https://ruby-china.org/topics/10977
+5. https://www.jianshu.com/p/2f675d5e334e
+
+
 ## 参考
 1. [testing godoc](https://studygolang.com/static/pkgdoc/pkg/testing.htm)
 2. [testing-源码](https://github.com/golang/go/tree/master/src/testing)

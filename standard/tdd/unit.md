@@ -7,9 +7,9 @@ Go 单元测试分两个方面学习: 单元测试和基础测试.
 
 ## 常用工具
 
-Convey:
+Convey: 至少负责管理/运行测试用例, 也可以添加 断言, web界面 等功能.
 
-Stub:
+Stub: 打桩. 桩, 或称桩代码, 是指用来代替关联代码或者未实现代码的代码. 桩代码可以是函数/变量.
 
 Mock: 
 
@@ -17,12 +17,6 @@ stub/mock 都是为了解决外部依赖, 一般而言, mock 和 stub 是指单�
 stub 重写方法从而伪造方法, 返回预设的值, 从而阻断对原方法的调用.
 mock 伪造对象从而伪造方法, 可以修改其中的逻辑.
 
-参考链接
-1. https://www.jianshu.com/p/e3b2b1194830
-2. https://www.jianshu.com/p/70a93a9ed186
-3. https://www.jianshu.com/p/598a11bbdafb
-4. https://ruby-china.org/topics/10977
-5. https://www.jianshu.com/p/2f675d5e334e
 
 单元测试并不是为了避免所有bug, 而是为了减少所测函数在逻辑上的bug. 如给定不同的输入是否返回预期的值.
 单元测试应完全或者尽量减少外部依赖对代码的影响.
