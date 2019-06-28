@@ -20,6 +20,8 @@
 
 # Go基础知识
 > [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)
+> [golang 官方新手教程](https://tour.go-zh.org/list)   
+> [golang 中文API文档](https://studygolang.com/pkgdoc) 
 
 ## 知识点
 ### 一句话概括
