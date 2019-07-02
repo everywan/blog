@@ -5,3 +5,4 @@
   - 原因: Go中所有的参数传递都是值传递. 即使参数为引用类型, 函数收到的值也是传入变量的值拷贝.
   - 例外: 对于 `sync.Mutex` 必须使用指针传递, 对于 slice,map 等结构不需要指针类型(有兴趣的可以了解下slice的底层结构, slice本身就是对某块内存地址的引用).
   - 参考: [Golang 中该使用指针类型还是值类型](https://blog.biezhi.me/2018/10/values-or-pointers-in-golang.html)
+2. services层将错误抛出, 而不是处理异常, 由 controllers 层处理错误, 如将错误打印.
