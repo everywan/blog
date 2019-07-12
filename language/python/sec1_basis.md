@@ -98,6 +98,8 @@
     # 指定iterable中 进行排序 的字段
     sorted(iterable, cmp=None, key=None, reverse=False)
     ```
+3. `map(function, iter)`: 使用function处理迭代器中的所有元素. 在 python2 中返回数组, 在python3中返回map对象, 需要使用 `list(map(...))` 展开
+3. `string.join([])`: 在数组中每两个元素之间插入一个字符串. 如 `" or ".join(["1","2"])=="1 or 2"`
 3. python函数内可以加空行, 只要保证缩进相同即可
 4. 三目运算符: 使用 if/else 实现: `a=b if b>2 else 4`
 5. 断言: `assert a==1`, 如果断言失败 默认抛出 `AssertionError` 异常.

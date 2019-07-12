@@ -1,16 +1,16 @@
 <!-- TOC -->
 
 - [协程](#协程)
-    - [协程_介绍](#协程_介绍)
-    - [迭代器函数_yield](#迭代器函数_yield)
-        - [yield_介绍](#yield_介绍)
-        - [示例_消费者模型](#示例_消费者模型)
-        - [示例_斐波那契数列](#示例_斐波那契数列)
-        - [示例_按块读取文件](#示例_按块读取文件)
+    - [协程-介绍](#协程-介绍)
+    - [迭代器函数-yield](#迭代器函数-yield)
+        - [yield-介绍](#yield-介绍)
+        - [示例-消费者模型](#示例-消费者模型)
+        - [示例-斐波那契数列](#示例-斐波那契数列)
+        - [示例-按块读取文件](#示例-按块读取文件)
     - [Gevent](#gevent)
         - [协程状态](#协程状态)
-        - [示例_curl下载](#示例_curl下载)
-        - [示例_继承greenlet](#示例_继承greenlet)
+        - [示例-curl下载](#示例-curl下载)
+        - [示例-继承greenlet](#示例-继承greenlet)
         - [事件](#事件)
         - [队列](#队列)
         - [WSGI](#wsgi)
@@ -18,7 +18,7 @@
 <!-- /TOC -->
 
 # 协程
-## 协程_介绍
+## 协程-介绍
 1. 协程, 又称微线程, 纤程. 英文名Coroutine.
     - 协程如 lambda表达式/匿名函数 一样, 是一种编程思想/技巧
 2. 什么是协程
@@ -33,13 +33,13 @@
         - 避免了线程创建/切换带来的消耗
         - 不需要多线程的锁机制
 
-## 迭代器函数_yield
-### yield_介绍
-> [参考_协程yield_廖雪峰](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)   
-> [参考_yield_IBM](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
+## 迭代器函数-yield
+### yield-介绍
+> [参考-协程yield-廖雪峰](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)   
+> [参考-yield-IBM](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
 
-1. 迭代器函数: *结合代码更容易理解* [示例](#示例_斐波那契数列)
-    - [迭代器表达式](/Program/Language/Python/Sec1_basis.md#进阶)
+1. 迭代器函数: *结合代码更容易理解* [示例](#示例-斐波那契数列)
+    - [迭代器表达式](/Program/Language/Python/Sec1-basis.md#进阶)
         - 示例: `('/user/{page}/'.format(page=page) for page in range(1, 4)`
         - 结果: 元素为`('/user/1/', '/user/2/', '/user/3/')`的迭代器表达式
     - **迭代器函数**: 函数中如果出现了yield关键字, 那么该函数是迭代器函数
@@ -57,7 +57,7 @@
     - 使用 `try/except` 捕获异常
 6. 不能使用 `yield return`: `yield args` 返回 args, 而 return 是关键字, 不能作为参数返回
 
-### 示例_消费者模型
+### 示例-消费者模型
 > 复制于 https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000
 1. 协程常用于 传统的生产者/消费者模型. 使用yield跳转到消费者执行消费,执行完毕后再切回生产者
 ```Python
@@ -79,23 +79,23 @@ def produce(c):
         print('[PRODUCER] Consumer return: %s' % r)
     c.close()
 
-if __name__=='__main__':
+if --name--=='--main--':
     c = consumer()
     produce(c)
 ```
-### 示例_斐波那契数列
-> 详细参考[示例_IBM](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
+### 示例-斐波那契数列
+> 详细参考[示例-IBM](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
 1. 需求: 不借助全局变量的情况下, 在需要时才获取数列的下一个值
 
 迭代器版本
 ```Python
 class Fab(object): 
 
-   def __init__(self, max): 
+   def --init--(self, max): 
        self.max = max 
        self.n, self.a, self.b = 0, 0, 1 
  
-   def __iter__(self): 
+   def --iter--(self): 
        return self 
  
    def next(self): 
@@ -123,14 +123,14 @@ def fab(max):
 for n in fab(5): 
     print n 
 ```
-### 示例_按块读取文件
+### 示例-按块读取文件
 1. 如果直接对文件对象调用 `read()/readline()` 方法, 会导致不可预测的内存占用. 通过固定长度的缓冲区来不断读取文件内容可以是程序更稳定
 ```Python
-def read_file(fpath): 
-   BLOCK_SIZE = 1024 
+def read-file(fpath): 
+   BLOCK-SIZE = 1024 
    with open(fpath, 'rb') as f: 
        while True: 
-           block = f.read(BLOCK_SIZE) 
+           block = f.read(BLOCK-SIZE) 
            if block: 
                yield block 
            else: 
@@ -138,7 +138,7 @@ def read_file(fpath):
 ```
 
 ## Gevent
-> 参考: [gevent_廖雪峰](https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001407503089986d175822da68d4d6685fbe849a0e0ca35000)   
+> 参考: [gevent-廖雪峰](https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001407503089986d175822da68d4d6685fbe849a0e0ca35000)   
 > 参考: [gevent程序员指南](http://hhkbp2.github.io/gevent-tutorial/)
 
 1. gevent: gevent通过greenlet为Python实现了比较完善的协程支持
@@ -150,8 +150,8 @@ def read_file(fpath):
 4. 协程停止: 当主函数收到 SIGQUIT 信号时, 没有成功yield的 Greenlet 可能会挂起程序的执行(这会导致[僵尸进程](https://zh.wikipedia.org/wiki/僵尸进程)的产生, 需要在Python解释器之外被kill)
     - 解决方法: 在主进程中监听信号
         - 监听代码: `gevent.signal(signal.SIGQUIT, gevent.shutdown)`
-        - [示例](#示例_curl下载)
-5. `monkey.patch_all()`: 用于修改标准socket库中的阻塞式系统调用,使其成为协作式运行, 即修改标准库里的部分函数,使其支持gevent协程方式运行.
+        - [示例](#示例-curl下载)
+5. `monkey.patch-all()`: 用于修改标准socket库中的阻塞式系统调用,使其成为协作式运行, 即修改标准库里的部分函数,使其支持gevent协程方式运行.
 
 ### 协程状态
 |状态|类型|介绍
@@ -171,20 +171,20 @@ state = woker1.successful()
 result = worker1.value
 ```
 
-### 示例_curl下载
+### 示例-curl下载
 ```Python
 # coding:utf-8
 import urllib2
 import gevent
 import signal
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey; monkey.patch-all()
 
 def worker(url):
     resp = urllib2.urlopen(url)
     print resp.url
     resp.close()
 
-if __name__=='__main__':
+if --name--=='--main--':
     # 监听信号, 当主进程停止时结束协程(部分版本没有shutdown函数)
     # gevent.signal(signal.SIGQUIT, gevent.shutdown)
     # 设置超时
@@ -199,19 +199,19 @@ if __name__=='__main__':
     except gevent.Timeout:
         print("timeout!!")
 ```
-### 示例_继承greenlet
+### 示例-继承greenlet
 ```Python
 import gevent
 from gevent import Greenlet
 
 class MyGreenlet(Greenlet):
 
-    def __init__(self, message, n):
-        Greenlet.__init__(self)
+    def --init--(self, message, n):
+        Greenlet.--init--(self)
         self.message = message
         self.n = n
 
-    def _run(self):
+    def -run(self):
         print(self.message)
         gevent.sleep(self.n)
 
@@ -268,13 +268,13 @@ from flask import Flask
 import gevent.pywsgi
 import gevent
 
-app = Flask(__name__)
+app = Flask(--name--)
 
 @app.route("/")
 def handle():
     return "<h1>Hellp Flask</h1>"
 
-gevent_server = gevent.pywsgi.WSGIServer(('',8000),app)
-gevent_server.serve_forever()
+gevent-server = gevent.pywsgi.WSGIServer(('',8000),app)
+gevent-server.serve-forever()
 
 ```
