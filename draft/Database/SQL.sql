@@ -137,3 +137,21 @@ select * from table for update
 select * from table for update skip locked  -- 如果发现行被锁, 那么跳过处理. 只处理未加锁的行
 select * from table for update nowait       -- 如果发现行被锁, 直接抛出错误
 select * from table for update wait 3       -- 如果发现行被锁, 最多等待三秒. 超时后抛出 超时错误
+
+-- 更新插入, 两种方式: replace into 和 on duplicate key update. 两者都根据唯一索引或主键进行判断,
+-- 当存在时, 则更新, 否则插入
+
+-- replace into: 当 id 存在时, 替换给出的字段, 否则新插入一条记录
+REPLACE INTO test(id,name) VALUES ('1','test');
+
+-- on duplicate key update: 当存在重复值时, 只更新 update 后给定的字段与值
+insert into test(id,name) VALUES('1','test') on duplicate key update name='dup_name'
+
+-- 例子: 有一张id自动增长的表, 当 insert 数据时, 如果根据条件查询出相应id, 则更新, 否则id设为null, 新增记录
+-- 思路为: 从表中查询, 当 count=0 时表示没有相关记录, 则返回 null, 否则返回相应id
+replace into test(id,name) VALUES (
+  (
+    select (case n.cnt when 0 then null else n.id) as id from test t
+    left join (select count(1) as cnt,id from test where name="test" group by id limit 1) n on 1
+  ),
+  'test2')
