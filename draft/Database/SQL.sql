@@ -20,7 +20,7 @@ SELECT t.TABLE_NAME,t.TABLE_COMMENT FROM information_schema.TABLES t WHERE t.`TA
 UPDATE COLUMNS t  SET t.column_comment  = '证件编号'  WHERE t.TABLE_SCHEMA='zebra' AND t.table_name='kh_user_info'  AND t.COLUMN_NAME='idCardNum'; 
 
 -- 修改密码
-mysqladmin -u -p password newpwd        // 只能修改root@localhost
+mysqladmin -u -p password newpwd        -- 只能修改root@localhost
 set password for 'xxx'@'%'=password('passwd');
 grant all on xxx.* to 'root'@'%' identified by 'password' with grant option; 
 
