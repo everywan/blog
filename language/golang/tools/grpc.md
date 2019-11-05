@@ -85,3 +85,58 @@ func main() {
 	log.Printf("Greeting: %s", r.Message)
 }
 ```
+
+## 插件
+### validator
+[go-proto-validators](https://github.com/mwitkow/go-proto-validators)
+
+A protoc plugin that generates Validate() error functions on Go proto structs based on field options inside .proto files.
+
+就一 readme, 没有文档, 字段需要自己去代码里看.
+
+字段信息: [validator.proto](https://github.com/mwitkow/go-proto-validators/blob/master/validator.proto)
+
+示例: [官方代码](https://github.com/mwitkow/go-proto-validators/tree/master/examples)
+```Proto
+import "github.com/mwitkow/go-proto-validators/validator.proto";
+message InnerMessage {
+  // some_integer can only be in range (1, 100).
+  int32 some_integer = 1 [(validator.field) = {int_gt: 0, int_lt: 100}];
+}
+```
+
+### annotations
+grpc 转 http 插件
+
+[annotations](https://github.com/googleapis/googleapis/blob/master/google/api/annotations.proto)
+
+使用方法.. 好了, 这个连readme都懒得写.. 大概搜索了下, 在如下两个位置
+1. [google cloud 文档管理: grpc transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding?hl=zh-cn)
+2. 还是代码即文档.. [annotations http.proto](https://github.com/googleapis/googleapis/blob/master/google/api/http.proto)
+
+示例
+```Proto
+import "google/api/annotations.proto";
+
+service Messaging {
+  rpc GetMessage(GetMessageRequest) returns (Message) {
+    option (google.api.http) = {
+      get: "/v1/{name}"
+    };
+  }
+}
+```
+
+对于 http 方法所需字段和 grpc 所需字段
+1. 优先从 url 中取出对应字段, 填充到 MessageRequest 中
+2. url 中找不到的字段
+  - 如果是 GET 方法, 则从 querystring 中取其他字段, 取不到则默认值
+  - 如果是 POST/PATCH 等方法, 则从 body 中取.
+3. 添加正则匹配: `get "/v1/{name=messgae/*}"`, 则请求路径变为 `/v1/message/{name}`
+4. 绑定多个路由: 
+  ````
+  get: "/v1/messages/{message_id}"
+  additional_bindings {
+    get: "/v1/users/{user_id}/messages/{message_id}"
+  }
+  ```
