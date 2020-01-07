@@ -16,6 +16,9 @@ pprof 用于收集Go程序运行时信息, 并提供可视化工具展示.
 pprof 基本实现如下:
 启动一个 goroutinue, 每过100ms(默认值)调用 `runtime.readProfile()` 获取cpu/堆栈信息, 记录到profile.
 
+虽然, pprof 无法满足所有的应用场景, 但其本身的功能/实现, 可以帮助我们实现自定义的功能.
+通过 pprof, 我们可以找到如何准确的找到 内存状态/堆栈 等信息. 相比与学 pprof, 我觉得这更为有用.
+
 ### 使用
 pprof 使用场景主要为以下三种
 1. 基准测试. 输出 cpu/mem 使用信息
@@ -97,7 +100,9 @@ func main() {
 
 	w := bufio.NewWriter(profile)
 	defer w.Flush()
-  // 输出
+  // WriteTo(io.Writer, debug)
+  // debug ==0: 只输出16进制的地址码, 然后借助 pprof 工具查看.
+  // debug ==1: 添加注释, 将hex地址翻译为函数, 便于不借助工具, 直接查看prof文件.
 	p1.WriteTo(w, 1)
 }
 ```
@@ -127,3 +132,18 @@ CPU Profile 因为需要持续的, 流式的输出信息, 所以使用 StartCPUP
 
 ### 实现
 获取 CPU/Mem 信息就与 系统调用 和 Go runtime 相关了, 等以后有机会补充吧.
+
+内存信息获取的方式
+```Go
+// $GOROOT/src/runtime/mstats.go
+// 参考 pprof 的 writeHeap 方法
+func ReadMemStats(m *MemStats) {
+	stopTheWorld("read mem stats")
+
+	systemstack(func() {
+		readmemstats_m(m)
+	})
+
+	startTheWorld()
+}
+```
