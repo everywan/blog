@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+PROJECT=xxx-go
+LOG_DIR=/opt/var/$PROJECT/logs
+
+mkdir -p $LOG_DIR
+if [ "$?" != 0 ]; then
+    echo "Failed to init directories"
+    exit 1
+fi
+
+exec "$@"

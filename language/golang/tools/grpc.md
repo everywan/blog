@@ -140,3 +140,70 @@ service Messaging {
     get: "/v1/users/{user_id}/messages/{message_id}"
   }
   ```
+
+## 编译示例
+```Makefile
+proto:
+	# If build proto failed, make sure you have protoc installed and:
+	# go get -u github.com/google/protobuf
+	# go get -u github.com/golang/protobuf/protoc-gen-go
+	# go install github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
+	# mkdir -p ${GOPATH}/src/github.com/googleapis && git clone git@github.com:googleapis/googleapis.git ${GOPATH}/src/github.com/googleapis/
+	# Building proto for Golang
+	@protoc \
+		--proto_path=${GOPATH}/src \
+		--proto_path=${GOPATH}/src/github.com/googleapis/googleapis \
+		--proto_path=. \
+		--include_imports \
+		--include_source_info \
+		--go_out=plugins=grpc:$(PWD)/pb \
+		--govalidators_out=$(PWD)/pb \
+		--descriptor_set_out=$(PWD)/envoy/example.descriptor \
+ 		example.proto
+	$(call color_out,$(CL_ORANGE),"Done")
+```
+
+## 使用
+项目结构:
+````
+xxx.proto
+- client      Client, 提供给其他项目使用. 创建一个 grpc Client
+- pb          存放生成的 pb 代码
+````
+
+---
+grpc server 启动示例
+
+grap server 一般还增加如下中间件
+```Go
+import (
+  grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+  grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
+  grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
+  grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
+)
+
+var logger *logrus.Entry
+gs := grpc.NewServer(
+	grpc.KeepaliveParams(keepalive.ServerParameters{
+		Time: 10 * time.Minute,
+	}),
+	grpc_middleware.WithUnaryServerChain(
+		grpc_ctxtags.UnaryServerInterceptor(
+			grpc_ctxtags.WithFieldExtractor(grpc_ctxtags.CodeGenRequestFieldExtractor),
+			grpc_ctxtags.WithFieldExtractor(func(fullMethod string, req interface{}) map[string]interface{} {
+				fields := map[string]interface{}{"request_id": xid.New().String()}
+				return fields
+			}),
+		),
+		grpc_logrus.UnaryServerInterceptor(logger.Entry),
+		grpc_logrus.PayloadUnaryServerInterceptor(logger.Entry, func(ctx context.Context, fullMethodName string, servingObject interface{}) bool { return true }),
+		grpc_validator.UnaryServerInterceptor(),
+	),
+)
+pb.RegisterXxxServiceServer(gs, xxxCtl)
+```
+
+## 测试
+evans grpc cli 测试工具
+

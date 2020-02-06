@@ -1,0 +1,15 @@
+logger:
+  mode: "debug"
+
+db:
+  driver: mysql
+  dsn: "root:@tcp(localhost:3306)/dev?timeout=3s&charset=utf8&parseTime=True&loc=Local"
+  keep_alive: 300
+  max_opens: 20
+  max_idles: 1
+
+cache:
+  addr: "127.0.0.1:6379"
+  password: ""
+  pool_size: 1
+
