@@ -1,6 +1,10 @@
 # 单元测试
 单元测试基础参考 [单元测试](/standard/tdd/unit.md), 深入了解可查看源码(在 `$GOROOT/src/testing/`)
 
+PS: 单元测试的使用示例参考 
+[toddler-go tests](https://github.com/xgxw/toddler-go/blob/master/internal/tests/README.md)
+适合比葫芦画瓢使用.
+
 Go 语言自动测试框架规则如下
 1. 测试代码以 `_test.go` 结尾
 2. 测试包名为 `_test.go` 文件所在位置, 即 `package 所在包`
