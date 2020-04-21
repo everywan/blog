@@ -39,7 +39,8 @@ Tex/LaTeX:: LaTeX是一种高质量的排版系统, LaTeX的宗旨是服务于
 
 [[doc_like_code]]
 == 文档标记语言的兴起
-https://asciidoctor.org/docs/what-is-asciidoc/#whos-using-asciidoc
+主要参考 link:https://asciidoctor.org/docs/what-is-asciidoc/#whos-using-asciidoc[who
+ is using asciidoc]
 
 文档标记语言是为了解决 文档书写困难, 写作困难的问题.
 
@@ -68,7 +69,7 @@ Doc Like Code 是文档标记语言兴起的原因之一.
 统一的语法价值更大. 使用asciidoc解决了之前在使用markdown
 时的一些痛点, 一是语法不统一导致自己网站解析不够好, 二是
 某些功能如toc,include等的缺失. 所以, 后续我会更多的使用
-asciidoc 提到 markdown.
+asciidoc 替代 markdown.
 
 使用场景比较简单/单一时, 考虑使用markdown::
 markdown是我最先学习的文档语言, 普适性也最强, 跟别人协作时
@@ -76,3 +77,6 @@ markdown是我最先学习的文档语言, 普适性也最强, 跟别人协作�
 
 默默说一句, 我自己之后应该会很少用markdown了吧.. 就像
 如果我弄好了dwm, 就会很少用i3wm一样..
+
+PS: asciidoc 替代 markdown 第8个小时: asciidoc 确实比markdown
+复杂了好多...

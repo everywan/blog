@@ -1,0 +1,91 @@
+= asciidoc
+wzs <zhensheng.five@gmail.com>
+:toc:
+
+设计哲学
+
+AsciiDoc 致力于让写作更简单. 
+
+与Markdown不同的是, AsciiDoc 追求均衡 读/写/扩展/功能, 提供
+即全面又简洁的书写的标记语言.
+
+.具体参考 
+. link:https://asciidoctor.org/docs/what-is-asciidoc[what 
+is asciidoc]
+. link:https://asciidoctor.org/docs/asciidoc-vs-markdown[asciidoc-vs-markdown]
+
+== 语法
+具体语法参考 link:https://asciidoctor.org/docs/asciidoc-writers-guide[asciidoc
+guide]
+
+如下介绍自己的总结.
+
+列表::
+  无序列表::
+    * 元素
+    * 元素
+  有序列表::
+    . Step1
+    . Step2
+  待办清单::
+    - [ ] 未完成
+    - [x] 已完成
+  嵌套列表::
+    *  Level-0
+    ** Level-1
+    *** Level-2
+  其他::
+    单独一行的 `//-` 用于避免前后两个列表的合并.
++
+单独一行的 `+` 用于将内容追加到父级列表项所附的段落.
+
+//-
+
+警告块::
+* NOTE
++
+NOTE: This is Note. 其他用法相同, 不再复述
+* TIP
+* IMPORTANT
+* CAUTION
+* WARNING
+  ** CAUTION/WARNING 区别
+    *** CAUTION advise the reader to act carefully
+    *** WARNING to inform the reader of danger, harm, or consequences that exist
+
+
+xref 内部引用
+link 外部引用
+
+脚注footnote:[jiaozhu]
+
+=== 高级功能
+列表::
+  逆序列表::
++
+[%reversed]
+. Step2
+. Step1
+//-
+  指定起始位置::
++
+[start=4]
+. Step4
+. Step5
+//-
+  复杂列表::
+    * 代码
++
+----
+# this is code
+----
+    * Go 代码
++
+[source, go]
+----
+func demo(){}
+----
+//-
+
+
+== 待解决

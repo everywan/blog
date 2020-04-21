@@ -43,7 +43,7 @@ GFM 基于CommonMark Spec, 是CommonMark的严格超集.
 具体参考 [gfm](https://github.github.com/gfm/), 如下是一些
 个人总结的用法.
 
-## Markdown语法
+## 语法
 1. 缩进:
     * 半方大的空白'\&ensp;' 或 '\&#8194;'
     * 全方大的空白'\&emsp;' 或 '\&#8195;'
