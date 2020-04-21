@@ -1,0 +1,78 @@
+= 标记语言
+wzs <zhensheng.five@gmail.com>
+:toc:
+
+标记语言包括 HTML, Markdown, AsciiDoc, LaTeX 等.
+
+具体参考
+link:https://en.wikipedia.org/wiki/Markup_language[标记语言 Wiki]
+
+本文介绍自己理解/总结的对比.
+
+== 对比
+详细对比参考
+link:https://en.wikipedia.org/wiki/Comparison_of_document-markup_languages[标记语言对比 Wiki]
+
+本文介绍自己理解/总结的对比.
+
+HTML:: 常用与网页排版, 具体不在这里讨论了, 放到前端部分去讨论.
+
+Markdown:: Markdown 的目标是实现 **易读易写**, 成为一种适用于
+  网络的标记语言.
++
+具体参考 link:markdown.md[markdown]
+
+AsciiDoc:: AsciiDoc 与 Markdown 一样致力于让写作更简单, 但是
+AsciiDoc并不过分追求易读易写, 而是均衡 读/写/扩展/功能, 提供
+即全面又简洁的书写的标记语言.
++
+具体参考 link:asciidoc.asciidoc[asciidoc]
+
+Tex/LaTeX:: LaTeX是一种高质量的排版系统, LaTeX的宗旨是服务于
+科研/技术文章的编写, LaTex擅长对于复杂数学公式的处理, LaTeX
+是沟通/出版科学文献事实上的标准.
+
+富文本编辑器/WYSIWYG:: WYSIWYG(What You See Is What You Get),
+如 Word 等. 本文不予讨论(我不感兴趣).
+
+其他标记语言:: 本文不予讨论(我不感兴趣).
+
+[[doc_like_code]]
+== 文档标记语言的兴起
+https://asciidoctor.org/docs/what-is-asciidoc/#whos-using-asciidoc
+
+文档标记语言是为了解决 文档书写困难, 写作困难的问题.
+
+一方面是随着软件行业的发展, 书写文档的需求越来越大. 
+一方面是人们自身写作需求也在扩大, 如技术文章, 博客. 
+而传统的富文本编辑器分散了人们的注意力(各种各样的功能),
+人们追求一种简单的书写方式.
+
+Doc Like Code 是文档标记语言兴起的原因之一.
+
+这就是诸如 LaTeX, AsciiDoc, Markdown 等轻量级标记语言
+的思想. 它们提供了纯文本语法, 并带有微妙而直观的标记,
+旨在供人类以原始格式阅读, 编写和编辑. 语法的自然感觉
+使您专注于内容, 最重要的是, 纯文本可以快速轻松地转换
+为HTML5等输出格式进行演示.
+
+== 个人用法习惯
+当只有latex符合需求时, 只能选择latex::
+当要写的内容对排版要求复杂, 公式展现较多, 如论文时,
+我会选择letxt, 因为letex能让你控制的细节更多. 但是写博客时
+一般不选择letex, 因为其源码可读性较差, 很难做到所见所得
+(虽然我现在还不会letex)
+
+一般情况下, 我选择功能/复杂度均衡的asciidoc::
+虽然asciidoc语法复杂了一些, 但是其带来的表达力的提升,
+统一的语法价值更大. 使用asciidoc解决了之前在使用markdown
+时的一些痛点, 一是语法不统一导致自己网站解析不够好, 二是
+某些功能如toc,include等的缺失. 所以, 后续我会更多的使用
+asciidoc 提到 markdown.
+
+使用场景比较简单/单一时, 考虑使用markdown::
+markdown是我最先学习的文档语言, 普适性也最强, 跟别人协作时
+应该会使用. 
+
+默默说一句, 我自己之后应该会很少用markdown了吧.. 就像
+如果我弄好了dwm, 就会很少用i3wm一样..
