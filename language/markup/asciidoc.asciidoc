@@ -2,6 +2,7 @@
 wzs <zhensheng.five@gmail.com>
 :toc:
 :sectnums:
+:experimental:
 
 设计哲学
 
@@ -265,8 +266,23 @@ This is aside text.
 this is admonition text.
 ====
 
+=== 宏定义
+asciidoc 支持宏定义. 使用 asciidoc 预定义的宏需要文档设置
+`experimental` 属性.
+
+.常用举例
+* 按钮宏 btn:[OK]
+* 按键宏 kbd:[F11]
+* 自定义宏
+[source,asciidoc]
+----
+:home: http://www.xiagaoxiawan.com
+
+首页{home}, 定义常用的变量
+----
+
 [[gfa]]
-=== GFA
+== GFA
 Github在线预览时, 与Markdown相同, 展现源码渲染后的文档.
 
 Github 使用 GFA footnote:[Github Flavored AsciiDoc] 标准, 与标准AsciiDoc类似.
@@ -299,5 +315,16 @@ endif::[]
   .. 警告块 功能
 
 == 存在的问题
-. 换行时, asciidoc 会自动添加一个空格. 如
-  这样, 如后换行会变成 `如 这样`. 在英语中这样是没问题的.
+换行导致空格::
+  * 换行时, asciidoc 会自动添加一个空格.
+  * 这个是因为html解析导致的. 原因举例如下: 如 `a\nb`,
+    转换为 html `<p>a\nb</p>`, 换行同样存在.
+    根据html规范, 换行显示为一个空格. 由于同样的原因,
+    markdown 也存在这个问题. 感兴趣的同学可以搜索下
+    `html Line breaks space`
+  * html 如此解析的原因是为了格式化源码. 毕竟写html时
+    存在为了格式好看而追加换行/多个空格的情况. 至于换行
+    变空格, 也是符合英文的阅读习惯.
+  * https://github.com/asciidoctor/asciidoctor/issues/3263[issue]
+    作者已经将这个提到日程了. 不知何时能完成. 有兴趣的同学也可以
+    自己写 InlineMacroProcessor.
