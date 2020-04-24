@@ -25,12 +25,8 @@ is asciidoc]
 == 语法
 如下介绍自己的总结, 采用源码即文档的方式.
 
-.完整的语法学习参考
-. link:https://asciidoctor.org/docs/asciidoc-writers-guide[asciidoc
+官方入门教程 link:https://asciidoctor.org/docs/asciidoc-writers-guide[asciidoc
 guide]
-. https://asciidoctor.org/docs/user-manual[asciidoc 完全手册]
-
-//-
 
 基础信息::
   * 文件后缀: 标准后缀 `.asciidoc`, 支持 `.ad`, `.adoc`
@@ -280,6 +276,15 @@ asciidoc 支持宏定义. 使用 asciidoc 预定义的宏需要文档设置
 
 首页{home}, 定义常用的变量
 ----
+
+== 高级语法
+欲了解 asciidoc 底层实现与原理, 参考
+https://asciidoctor.org/docs/user-manual[asciidoc 完全手册]
+
+.个人认为如下几方面很有意思
+. 官方解析器 原理与实现
+. 应用方面
+  .. 自定义解析器的实现
 
 [[gfa]]
 == GFA
