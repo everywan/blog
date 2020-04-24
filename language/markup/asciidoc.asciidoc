@@ -29,6 +29,8 @@ is asciidoc]
 guide]
 . https://asciidoctor.org/docs/user-manual[asciidoc 完全手册]
 
+//-
+
 基础信息::
   * 文件后缀: 标准后缀 `.asciidoc`, 支持 `.ad`, `.adoc`
   * 前言/导言: 文档标题和第一部分之间的内容称为前言. 具体表现为
@@ -295,3 +297,7 @@ endif::[]
   .. 脚注
   .. include 功能, 直接显示其他文件内容
   .. 警告块 功能
+
+== 存在的问题
+. 换行时, asciidoc 会自动添加一个空格. 如
+  这样, 如后换行会变成 `如 这样`. 在英语中这样是没问题的.
