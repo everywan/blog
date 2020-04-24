@@ -15,27 +15,35 @@ link:https://en.wikipedia.org/wiki/Comparison_of_document-markup_languages[标�
 
 本文介绍自己理解/总结的对比.
 
-HTML:: 常用与网页排版, 具体不在这里讨论了, 放到前端部分去讨论.
+HTML::
+  常用与网页排版, 具体不在这里讨论了, 放到前端部分去讨论.
 
-Markdown:: Markdown 的目标是实现 **易读易写**, 成为一种适用于
+Markdown::
+  Markdown 的目标是实现 *易读易写*, 成为一种适用于
   网络的标记语言.
 +
 具体参考 link:markdown.md[markdown]
 
-AsciiDoc:: AsciiDoc 与 Markdown 一样致力于让写作更简单, 但是
-AsciiDoc并不过分追求易读易写, 而是均衡 读/写/扩展/功能, 提供
-即全面又简洁的书写的标记语言.
+AsciiDoc:: 
+  AsciiDoc 的目标是实现 *易读易写*, 成为一种适用于印刷/网络的
+  标记语言. 语法上 AsciiDoc 提供了更多的功能, 相较于 Markdown
+  实现更为统一, 方言更少(几乎没有). 且 AsciiDoc 同样简洁.
+  当只使用与markdown类似的功能时, AsciiDoc 同样是非常简洁的. 从
+  这方面讲, 可以将 AsciiDoc 认为是 Markdown 的"方言".
 +
 具体参考 link:asciidoc.asciidoc[asciidoc]
 
-Tex/LaTeX:: LaTeX是一种高质量的排版系统, LaTeX的宗旨是服务于
-科研/技术文章的编写, LaTex擅长对于复杂数学公式的处理, LaTeX
-是沟通/出版科学文献事实上的标准.
+Tex/LaTeX::
+  LaTeX是一种高质量的排版系统, LaTeX的宗旨是服务于
+  科研/技术文章的编写, LaTex擅长对于复杂数学公式的处理, LaTeX
+  是沟通/出版科学文献事实上的标准.
 
-富文本编辑器/WYSIWYG:: WYSIWYG(What You See Is What You Get),
-如 Word 等. 本文不予讨论(我不感兴趣).
+富文本编辑器/WYSIWYG::
+  WYSIWYG footnote:[What You See Is What You Get], 如 Word 等.
+  本文不予讨论(我不感兴趣).
 
-其他标记语言:: 本文不予讨论(我不感兴趣).
+其他标记语言::
+  本文不予讨论(我不感兴趣).
 
 [[doc_like_code]]
 == 文档标记语言的兴起

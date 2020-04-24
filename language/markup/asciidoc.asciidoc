@@ -1,43 +1,127 @@
 = asciidoc
 wzs <zhensheng.five@gmail.com>
 :toc:
+:sectnums:
 
 设计哲学
 
-AsciiDoc 致力于让写作更简单. 
+AsciiDoc 的目标是实现 *易读易写*, 成为一种适用于印刷/网络的
+标记语言.
 
-与Markdown不同的是, AsciiDoc 追求均衡 读/写/扩展/功能, 提供
-即全面又简洁的书写的标记语言.
+语法上 AsciiDoc 提供了更多的功能, 相较于 Markdown 实现更为统一,
+方言更少(几乎没有). 且 AsciiDoc 同样简洁.
+
+当只使用与markdown类似的功能时, AsciiDoc 同样是非常简洁的. 从这
+方面讲, 可以将 AsciiDoc 认为是 Markdown 的"方言".
 
 .具体参考 
 . link:https://asciidoctor.org/docs/what-is-asciidoc[what 
 is asciidoc]
+. link:https://asciidoctor.org/docs/user-manual/#graduating-to-asciidoc[asciidoctor]
 . link:https://asciidoctor.org/docs/asciidoc-vs-markdown[asciidoc-vs-markdown]
 
+[[syntax]]
 == 语法
-具体语法参考 link:https://asciidoctor.org/docs/asciidoc-writers-guide[asciidoc
-guide]
+如下介绍自己的总结, 采用源码即文档的方式.
 
-如下介绍自己的总结.
+.完整的语法学习参考
+. link:https://asciidoctor.org/docs/asciidoc-writers-guide[asciidoc
+guide]
+. https://asciidoctor.org/docs/user-manual[asciidoc 完全手册]
+
+基础信息::
+  * 文件后缀: 标准后缀 `.asciidoc`, 支持 `.ad`, `.adoc`
+  * 前言/导言: 文档标题和第一部分之间的内容称为前言. 具体表现为
+    字体较大(不同解析器处理方式可能不同).
+  * asciidoc 支持元数据标记, 如 `[source,asciidoc]`
+
+文本格式化::
+  * _斜体_ __斜__体, 如你所见, pass:[_] 用于wrap单词, 
+    pass:[__] 用于wrap单词的一部分.
+  * *加粗* 加**粗**
+  * `等宽` 等``宽``
+  * #自定义# 自##定义##
+  * 上^角标^ 下~脚标~
+  * 单引号 My`'s '`单引号`', 双引号 "`My`"
+  * 使用pass是内容全部维持原样 pass:[_不会变成斜体_]
+
+//-
 
 列表::
-  无序列表::
-    * 元素
-    * 元素
-  有序列表::
+  基础知识(无序列表方式展现):::
+    * 本列表默认使用 标签列表, 即在标签尾添加 `::`, 嵌套时追加 `:`.
+    * 单独一行的 `//-` 用于避免前后两个列表的合并.
+    * 列表不需要控制缩进, 只需要控制 关键字 数量即可.
+      这里添加缩进格式是为了美观
+    * 为了避免打击初学热情, 复杂列表拆分出去了, 有兴趣的可以完后翻着看
+  有序列表:::
     . Step1
     . Step2
-  待办清单::
+  待办清单:::
     - [ ] 未完成
     - [x] 已完成
-  嵌套列表::
+  嵌套列表:::
     *  Level-0
-    ** Level-1
-    *** Level-2
-  其他::
-    单独一行的 `//-` 用于避免前后两个列表的合并.
+      ** Level-1
+        *** Level-2
+
 +
-单独一行的 `+` 用于将内容追加到父级列表项所附的段落.
+追加到Level-1, 与Level-1平级, 换一行表示不属于 Level-2.
+
+//-
+
+连接::
+  * 签名 `link:http://bing.com[link text,target attribute,role attribute]`
+    三个值都是可选的. role 表示CSS类, 一般用不到
+  * 示例 link:http://bing.com[地址bing,window=_blank], 可简化为 
+    link:http://bing.com[地址bing^], _blank 表示在新标签打开链接.
+  * 连接文件 link:./asciidoc.asciidoc#syntax[指向自身, 带锚点]
+
+图片链接::
+  * image:./assets/asciidoc.png[asciidoc,10,20]
+  * 复杂用法. link 表示支持图片跳转
++
+[#img-asciidoc]
+.AsciiDoc favicon
+[link=./assets/asciidoc.png]
+image:./assets/asciidoc.png[asciidoc,10,20]
+
+锚点::
+  * 跳转到ID <<gfa>>
+  * 支持根据标题内容检索跳转到章节, 如 <<word1 word2>>, 必须有多个单词,
+    以空格分割, 且被索引的章节包含所有单词. 具体自行查看
+
+//-
+
+标题::
+  * 章节标题
++
+----
+= title
+author, <email@e.com>
+v1.0, 2012-01-01
+:toc:       // 开启目录
+:sectnums:  // 章节自动编号
+:预定义值: 值内容
+
+具体内容 {值内容}. 值内容可以定义一些路径变量, 如资源路径.
+
+:sectnums!: // 取消章节编号
+== section
+----
+  * 块标题
++
+.块标题(支持列表)
+块内容
+
+//-
+
+换行::
+  `+` 用于换行, asciidoc中换行可以控制内容是聚合还是分开
++
+[%hardbreaks]
+``[%hardbreaks]`` 启动强制换行模式
+单独一行的 `+` 用于连接两个块, 将他们放在同一级下, 而不是从头开始.
 
 //-
 
@@ -53,39 +137,161 @@ NOTE: This is Note. 其他用法相同, 不再复述
     *** CAUTION advise the reader to act carefully
     *** WARNING to inform the reader of danger, harm, or consequences that exist
 
+//- 
 
-xref 内部引用
-link 外部引用
+导入文件::
+  asciidoc 支持导入文件, 将其他文件的内容在当前位置显示.
+  语法如下 `include::test.csv[]`
 
-脚注footnote:[jiaozhu]
+脚注::
+  asciidoc支持脚注, 且会自动排序. 脚注示例footnote:[这是脚注信息]
 
-=== 高级功能
-列表::
-  逆序列表::
+符号::
+  内置各种符号替换, 如 `->会替换为→ My's->My’s`, 用到时自己查阅.
+
+引用::
++
+[quote,"引用作者","引用的文章"]
+  引用内容
+
+//-
+
+块::
+  代码块:::
++
+[source,asciidoc]
+----
+//asciidoc code//
+----
+  注释块:::
+    * 单行注释, 必须在开头
+// 单行注释
+    * 多行注释
+////
+注释内容, 处理器不会解析
+////
+
+[[complex_list]]
+=== 复杂列表
+逆序列表::
 +
 [%reversed]
 . Step2
 . Step1
-//-
-  指定起始位置::
+
+指定起始位置的有序列表::
 +
 [start=4]
 . Step4
 . Step5
-//-
-  复杂列表::
-    * 代码
-+
-----
-# this is code
-----
-    * Go 代码
-+
-[source, go]
-----
-func demo(){}
-----
-//-
 
+追加内容到父级列表::
+* Level-0
++
+--
+  ** Level-1
+    *** Level-2
+--
++
+借助 块/+ 实现追加到块所在的父列表, 与Level-0同级
 
-== 待解决
+[[table]]
+=== 表格
+[cols=2*,options="header,footer,autowidth"]
+|===
+| key | desc
+
+| cols
+| 描述表格行数
+
+| header/footer
+| header/footer 添加样式(header字体加粗)
+
+| autowidth
+| 自动适应宽度. 没有autowidth时默认100%
+
+| 表格内列表
+a| 这里可以写列表了
+
+|===
+
+.语法
+. asciidoc 支持无头表格, `[]` 内的内容都是可以没有的. asciidoc
+  可以读取第一行 `|key1|key2..` 格式确定表格有几列
+. cols 有两种表示方法
+  .. `cols=3`, 表示有三列, 宽度自动设置.
+  .. `cols="2,3,4"`, `2,3,4` 表示有三列, 宽度比例为 2:3:4.
+. 表格内开启支持部分语法, 如列表, 代码块等
+  .. `cols="2,3,4a"`, cols 末尾加 a.
+  .. `a|content`, 在指定列前加 a. 具体看表格示例.
+
+==== dsv
+csv footnote:[Comma-Separated Values], 逗号分割值.
+dsv footnote:[delimiter-separated values], 定界符分割值.
+
+.csv表格
+[%header,format=csv]
+|===
+key1,key2,key3
+|===
+
+.从文件导入
+[%header,format=csv]
+|===
+include::test.csv[]
+|===
+
+.dsa表格
+:===
+key1:key2:key3
+:===
+
+[[complex_block]]
+=== 复杂块
+幻灯片::
+  使用 `****` wrap 起来, 或者使用如下方式(sidebar元数据)
++
+[sidebar]
+.SideBar Title
+--
+This is aside text.
+--
+警示块::
+    类似幻灯片, 但是有阴影
++
+====
+this is admonition text.
+====
+
+[[gfa]]
+=== GFA
+Github在线预览时, 与Markdown相同, 展现源码渲染后的文档.
+
+Github 使用 GFA footnote:[Github Flavored AsciiDoc] 标准, 与标准AsciiDoc类似.
+具体参考 link:https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74[gfa]
+
+GFA 实现了如下功能
+
+.Everything within the ifdef and endif will only be processed if you are on GitHub
+----
+\ifdef::env-github[] <1> (1)
+:imagesdir: https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
+endif::[]
+\ifndef::env-github[] <2>
+:imagesdir: ./
+endif::[]
+----
+<1> Use the `ifdef` to customize for online rendering (2)
+<2> Use the `ifndef` to customize for offline
+
+[[mfa]]
+== 我更喜欢AsciiDoc的原因
+. 语法统一, 解析器有统一的实现
+. 功能强大, 扩展更为丰富, 以后的成长空间更大.
+. 我喜欢的功能(部分)
+  .. toc 自动生成目录
+  .. 强大的列表, 尤其喜欢 标签列表, 复杂列表.
+  .. 引用呈现格式
+  .. 脚注
+  .. include 功能, 直接显示其他文件内容
+  .. 警告块 功能
