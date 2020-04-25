@@ -44,9 +44,6 @@ WARNING: go第三方库默认开启了嗅探功能, 导致创建非本地库实�
   报错. 如有需要请在配置项中关闭.
   具体参考 link:https://github.com/olivere/elastic/wiki/Sniffing[Sniffing]
 
-=== 注意事项
-- go Sniffing: 
-
 [[example]]
 === 示例
 其实 github-wiki 上更全更新

@@ -140,7 +140,7 @@ NOTE: This is Note. 其他用法相同, 不再复述
 
 导入文件::
   asciidoc 支持导入文件, 将其他文件的内容在当前位置显示.
-  语法如下 `include::test.csv[]`
+  语法如下 pass:[include::test.csv[]]
 
 脚注::
   asciidoc支持脚注, 且会自动排序. 脚注示例footnote:[这是脚注信息]
@@ -167,7 +167,7 @@ NOTE: This is Note. 其他用法相同, 不再复述
 // 单行注释
     * 多行注释
 ////
-注释内容, 处理器不会解析
+注释内容, 页面不会显示
 ////
 
 [[complex_list]]
@@ -237,7 +237,7 @@ key1,key2,key3
 .从文件导入
 [%header,format=csv]
 |===
-include::test.csv[]
+//include::test.csv[]
 |===
 
 .dsa表格
@@ -297,12 +297,12 @@ GFA 实现了如下功能
 
 .Everything within the ifdef and endif will only be processed if you are on GitHub
 ----
-\ifdef::env-github[] <1> (1)
+\ifdef::env-github[] <1>
 :imagesdir: https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
-endif::[]
+endif::
 \ifndef::env-github[] <2>
 :imagesdir: ./
-endif::[]
+endif::
 ----
 <1> Use the `ifdef` to customize for online rendering (2)
 <2> Use the `ifndef` to customize for offline

@@ -11,7 +11,7 @@ link:https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-typ
 
 . keyword: 不对字段进行解析, 整体作为一个值来索引. 比如 ID.
 . text: 对字段进行解析. 比如 content.
-. data: 由于 json 不存在 date 类型, 所以 es 中的date类型采用如下表示
+. date: 由于 json 不存在 date 类型, 所以 es 中的date类型采用如下表示
   .. 字符串格式, 如 `2015/01/01 12:10:30`
   .. 长整型, 表示 `milliseconds-since-the-epoch`
   .. 整型, 表示 `seconds-since-the-epoch`
