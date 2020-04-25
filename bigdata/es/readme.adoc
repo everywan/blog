@@ -48,7 +48,7 @@ link:https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html[
 .pass:[_index/_type/_id] 三者唯一确定一个文档
 . `_index` 表示索引
 . `_type` 在es7之后已经被移除.
-. `_id` 表示文档id. 也可以替换为 pass:[_search/_mapping] 等.
+. `_id` 表示文档id.
 
 文档通过 version 版本解决分布式中数据一致性的问题.
 
