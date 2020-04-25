@@ -1,0 +1,81 @@
+= ES
+:toc:
+:setnums:
+
+elasticsearch 是一个基于 Lucene索引 的搜索引擎.
+
+elasticsearch 的原理涉及到倒排索引等知识, 属于搜索引擎领域,
+有兴趣的同学可以自行去学习. 推荐一本书 pass:[<<信息检索导论>>].
+
+.es特点如下
+. 支持分布式部署.
+. 能够达到实时搜索, 稳定, 可靠, 快速(具体原理需要去学习 Lucene索引)
+. es 的请求风格遵循 rest 规范, 请求 方法/路径 决定业务操作.
+. es 读取 body 中的 json 串获取该次请求的数据.
+
+elasticsearch 常与 logstash,kibana 一起使用, 俗称 elk.
+* logstash 负责数据导入, 支持在导入前过滤数据, 支持从各种数据源
+  导入数据到es, 比如文件, kafka 等.
+  ** 新工具 filebeat 与 logstash 功能类似, 但性能更高, 可以考虑替换之.
+* elasticsearch 负责数据存储, 数据索引, 数据查询.
+* kibana 提供web页面管理数据, 支持es数据查询, 数据可视化输出.
+
+[[study]]
+== 学习计划
+本处只记录了自己遇到的相关知识, 具体从头学习请参考文档.
+
+WARNING: es 各版本差别很大, 选择自己使用的版本的文档.
+  推荐使用最新版.
+
+有时间推荐看官方文档.
+link:https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html[es doc]
+
+.学习顺序
+. link:./mapping.adoc[mapping]
+. link:./query[查询]
+. link:./go_es.adoc[在go中使用es]
+. link:./indices_template.adoc[索引模板]
+
+当你急于求成时, 参考 link:./example.adoc[使用示例]
+
+== 基础概念
+由于目前不打算深入学习es, 暂时将了解到的, 相对简单的概念
+在这里总结.
+
+文档::
+  在 es 中, 文档是指最顶层结构或者跟对象序列化成的JSON数据.
++
+.pass:[_index/_type/_id] 三者唯一确定一个文档
+. `_index` 表示索引
+. `_type` 在es7之后已经被移除.
+. `_id` 表示文档id. 也可以替换为 pass:[_search/_mapping] 等.
+
+文档通过 version 版本解决分布式中数据一致性的问题.
+
+=== 索引模式
+index parttern footnote:[索引模式] 是指具体索引匹配到的格式, 因为 
+es 支持匹配多个索引(如在多个索引中查询). 所以才有这么一个名词.
+
+如在索引模板中, 索引模式就是指所有匹配该模板 正则规则 的索引.
+
+[[shard]]
+=== 分片
+分片是最小级别的工作单元, 分片保存了索引中全部数据的一部分, 
+每个分片就是一个 Lucene 实例.
+
+数据存储在分片中, 并且在分片中被索引.
+但是我们的程序不会直接与切片通信, 而是直接与索引通信.
+
+分片类型::
+  . 分片分为 主分片(Primary shard) 和 复制分片(replica shard), 
+  . 索引的每个文档都属于一个主分片.
+  . 复制分片只是主分片的副本, 提供读请求.
+
+数据写入::
+  写操作必须在主分片上完成后, 才能复制到相关切片上.
++
+  es 是通过 `_id` (或自定义字段) 取 hash 确定数据存储在那个分片上. 
+  所以主分片的数量只能在创建索引时定义.
++
+  hash示例 `shard = hash(routing) % number_of_primary_shards`
+

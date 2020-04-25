@@ -1,0 +1,6 @@
+= 大数据
+
+与 link:github.com/everywan/bigdata[bigdata] 不同的是, bigdata 仓库主要
+讲流行的大数据计算框架, 分析工具和思维, 如 spark/pandas 等.
+
+而本仓库则是偏后端的, 如 es 等大数据工具.

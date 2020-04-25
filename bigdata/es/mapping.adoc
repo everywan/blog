@@ -1,0 +1,126 @@
+= mapping
+:toc:
+:setnums:
+
+官方文档 link:https://www.elastic.co/guide/en/elasticsearch/reference/7.6/mapping.html[mapping]
+
+[[field]]
+== 数据字段
+官方文档
+link:https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html[mapping types]
+
+. keyword: 不对字段进行解析, 整体作为一个值来索引. 比如 ID.
+. text: 对字段进行解析. 比如 content.
+. data: 由于 json 不存在 date 类型, 所以 es 中的date类型采用如下表示
+  .. 字符串格式, 如 `2015/01/01 12:10:30`
+  .. 长整型, 表示 `milliseconds-since-the-epoch`
+  .. 整型, 表示 `seconds-since-the-epoch`
+. array: es 中不存在array的概念, 每个字段都可以有一个或多个的值.
+  即字段本身就具有数组的属性, 无需再声明为数组类型.
+  具体参考 https://www.elastic.co/guide/en/elasticsearch/reference/current/array.html[es array]
+
+.字段常用属性
+. index: 表示字段是否添加索引. 默认为true, 表示添加索引.
+  .. 只有添加索引才能被检索, 否则不可用于检索项.
+. fields: 字段可以被多种方式排序/聚合.
+  .. 具体参考 link:https://www.elastic.co/guide/en/elasticsearch/reference/current/multi-fields.html[multi fields]
+
+[[field_example]]
+=== 示例
+[source,json]
+----
+"properties": {
+  "id": {
+    "type": "keyword",
+    "index": false
+  },
+  "content": {
+    "type": "text"
+  },
+  "timestamp": {
+    "type": "date",
+    "format": "yyyy-MM-dd HH:mm:ss|epoch_millis"
+  }
+}
+----
+
+[[metafiled]]
+== 元数据字段
+官方文档
+link:https://www.elastic.co/guide/en/elasticsearch/reference/7.6/mapping-fields.html[metafiled]
+
+[[remove_attr]]
+== 移除的属性
+WARNING: 如下是在 es7 中已经废弃了的属性
+
+[[all]]
+=== all字段
+`_all` 是一个特殊字段, 表示 所有其他字段值.
+
+当mapping允许 all 字段时, 表示在search时, 可以在所有字段中搜索
+`_all` 字段的值. 具体见示例
+
+[source,json]
+----
+PUT /index/_mapping/_doc
+{
+  "my_type": {
+    "_all": { "enabled": false }
+  }
+}
+GET /index/_doc/_search
+{
+  "match": {
+    "_all": "all 表示在所有字段搜索这段话"
+  }
+}
+----
+
+[[doc_type]]]
+=== 文档类型
+官方解释
+link:https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html[remove type]
+
+大概解释如下, 如想理解原理, 还是需要去看 Lucene 的原理.
+
+这里贴一篇文章, 我无法判断其正确性, 交由大家自行分析吧
+link:https://bayescafe.com/database/elasticsearch-using-index-or-type.html[index & type]
+
+不过其中有句话说挺对: type 是为了减少 index 的数量设计的,
+虽然不知道具体原理.
+
+es7之前::
+  在es7前中, 每个文档都存储在一个索引中, 而每个索引都有多个 `_type`.
+  可以将 index 类比 mysql 的数据库, type 类比 mysql 的数据表.
++
+  `_type` (称为映射类型)表示要建立索引的文档或实体的类型, 
+  每个类型都可以有自定义的字段. 如 `twitter` 索引可以有 `user` 类型和
+  `tweet` 类型, 两个类型含有的字段不同.
++  
+  `_type` 字段与文档 `_id` 组合生成 `_uid` 字段. 
+  因此相同id的文档, 可以存储到同一个索引的不同类型.
+
+es7之后::
+  之前讲到, type 类似与 mysql 的数据表, 但是这么设计是有偏差的.
+  在mysql中, 表与表是独立的, 但是在es中, type与type并不是. 
++
+  假设 twitter.user 有字段 `deleted`, 字段类型为 `date`, 
+  twitter.tweet 也有字段 `deleted`, 但是类型为 `bool`.
+  使用如下查询
+[source,json]
+----
+GET twitter/user,tweet/_search
+{"query": {"match": { "user_name": "kimchy" }}}
+----
++
+  在 Lucene 中, 不同type但名称相同的字段被视为相同的 Lucene 
+  field, 当对这两个字段统一操作时, 就可能导致错误.
++
+  更重要的是, 在同一个索引中, 如果不同文档的相同字段很少, 
+  会导致数据稀疏, 从而干扰了Lucene压缩文档.
++
+  基于以上原因, 在es7中删除了type, 为了保持兼容(url路径),
+  添加默认的文档类型 `_doc`.
++
+  现在, es 推荐每个文档类型创建一个索引. 
+  并且在之后会逐渐淡化type的存在.

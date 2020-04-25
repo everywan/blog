@@ -1,0 +1,131 @@
+= 常用例子
+:toc:
+:setnums:
+
+字段定义参考
+. link:./concepts.adoc#filed_example[field example]
+. link:https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html[mapping types]
+
+[[create]]
+== 创建/更新
+
+[[create_index]]
+=== 创建index
+添加索引: `put /index`.
+
+body 可选, 按需添加如下参数
+
+[source,json]
+----
+{
+  "settings": {
+    "number_of_shards" :   1, // 主分片数，默认值是 5, 索引在创建后不可更改
+    "number_of_replicas" : 0  // 主分片的副本数, 默认值是 1. 对于活动的索引库, 这个配置可以随时修改 
+  }
+}
+----
+
+[[update_index]]
+=== 修改index
+更改副本数: `PUT /test_index/_settings`
+
+[source,json]
+----
+{
+  "number_of_replicas": 1
+}
+----
+
+[[create_mapping]]
+=== 创建mapping
+添加mapping: `post /index/_doc/_mapping`
+
+[source,json]
+----
+{
+  "data_struct": {
+    "_all": {
+	    "enabled": false
+	  },
+    "properties": {
+      "name": {
+        "type": "text"
+      }
+	  }
+  }
+}
+----
+
+[[indices_template]]
+=== 索引模板
+创建索引模板 `POST /_template/wechat_message`
+
+[source,json]
+----
+{
+    "index_patterns": [
+        "logs-*"
+    ],
+    "order": 1,
+    "settings": {
+        "number_of_shards": 1
+    },
+    "mappings": {
+        "properties": {
+            "field": {
+                "type": "keyword"
+            },
+            "value": {
+                "type": "keyword",
+                "index": false
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "content": {
+                "type": "text"
+            }
+        }
+    },
+    "aliases": {
+        "last_3_months": {}
+    }
+}
+----
+
+[[query]]
+== 查询
+查询指定ID `GET /{index}/{type}/{id}`
+
+按条件查询 `GET /{index}/{type}/_search`
+
+.注意事项
+. es7 之后已经开始逐渐取消 type 了, 而使用默认的 `_doc` 替代.
+  所以查询路径中的 type 默认使用 `_doc` 代替.
+
+[[query_bool]]
+=== bool 联合查询
+must: 文档必须完全匹配条件
+should: should下面会带一个以上的条件，至少满足一个条件，这个文档就符合should
+must_not: 文档必须不匹配条件
+
+[source,json]
+----
+{
+	"query": {
+		"bool": {
+			"must": {
+				"match": {
+					"city": "100"
+				}
+			},
+			"should": {
+				"match": {
+					"name": "1"
+				}
+			}
+		}
+	}
+}
+----

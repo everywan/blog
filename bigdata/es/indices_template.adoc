@@ -1,0 +1,43 @@
+= 索引模板
+
+任何新创建的索引, 如果与索引模板匹配的,
+则会按照索引木板指定的方式创建
+
+索引模板
+link:https://www.elastic.co/guide/en/elasticsearch/reference/7.6/indices-templates.html[indices templates]
+
+创建索引模板 `POST /_template/wechat_message`
+
+[source,json]
+----
+{
+    "index_patterns": [
+        "logs-*"
+    ],
+    "order": 1,
+    "settings": {
+        "number_of_shards": 1
+    },
+    "mappings": {
+        "properties": {
+            "field": {
+                "type": "keyword"
+            },
+            "value": {
+                "type": "keyword",
+                "index": false
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "content": {
+                "type": "text"
+            }
+        }
+    },
+    "aliases": {
+        "last_3_months": {}
+    }
+}
+----

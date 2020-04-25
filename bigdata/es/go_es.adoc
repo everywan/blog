@@ -1,0 +1,95 @@
+= es-go
+
+与其他sdk不同, 在go中使用es时, 要先去了解es的语法和使用规则.
+主要还是 es query时, json 语法规则太复杂了.
+
+.在go中使用 es client 分为两步
+. 关于 elastic 的请去elastic官网查找学习, 自己拼出正确的查询字符串.
+. 使用 go 将其转化为代码.
+
+如下是关于如何将查询转换为 go 代码.
+
+go 的 es 库目前分为 官方库和第三方库. 由于官方库开发时间较短,
+功能不够齐全, 所以目前暂时使用第三方库.
+
+.官方库目前不足(2020-04-25)
+. 结构体定义不全, 如 SearchResult, BulkRequest 等.
+. 功能不够好用, 需要自己写 json. 而第三方库可以通过链式调用完成
+
+.地址
+- 官方库 link:https://github.com/elastic/go-elasticsearch[go-elasticsearch]
+- 第三方库 link:https://github.com/olivere/elastic[olivere/elastic]
+
+== 使用方法
+.官方文档
+. [github-wiki](https://github.com/olivere/elastic/wiki)
+. [godoc](https://godoc.org/github.com/olivere/elastic)
+. [github](https://github.com/olivere/elastic)
+
+.使用流程如下
+. 创建 esClient
+. 创建Query
+  .. 根据不同的需求, 创建Service()
+  .. 根据不同需求, 构建Query
+. 执行查询, 获取结果.
+. 处理错误
+  .. 判断查询函数是否返回出错
+  .. 判断 res.Errors. 存在错误则需要遍历 Response.Items.
+    具体参考示例
+
+WARNING: 注意你使用的库的版本. es不同版本的差别很大.
+  如 es7 后不建议多type, 默认使用 `_doc`
+
+WARNING: go第三方库默认开启了嗅探功能, 导致创建非本地库实例时
+  报错. 如有需要请在配置项中关闭.
+  具体参考 link:https://github.com/olivere/elastic/wiki/Sniffing[Sniffing]
+
+=== 注意事项
+- go Sniffing: 
+
+[[example]]
+=== 示例
+其实 github-wiki 上更全更新
+
+批量插入数据::
++
+[source,go]
+----
+requests := esClient.Bulk()
+for _, data := range datas {
+	request := elastic.NewBulkIndexRequest().
+		Index(NearByIndex).
+		Id(data.ID).
+		Doc(data)
+	requests.Add(request)
+}
+res, err := requests.Do(context.Background())
+if err != nil {
+	return err
+}
+if res.Errors {
+	for _, item := range res.Items {
+		if v, ok := item["index"]; ok {
+			if v.Status > 201 {
+				handler.logger.WithField("bulk_response", v).
+					Errorf("导入es错误. error detail: %+v", v.Error)
+			}
+		}
+	}
+}
+----
+
+查询::
++
+[source,go]
+----
+queryGeo := elastic.NewGeoDistanceQuery("nearby").
+  Point(lat, lon).Distance("3km").
+	DistanceType("plane")
+searchResult, err := esClient.Search().
+	Query(queryGeo).
+	Index(NearByIndex).
+	Type(NearByIndex).
+	Do(context.Background())
+----
+
