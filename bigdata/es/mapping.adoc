@@ -76,7 +76,7 @@ GET /index/_doc/_search
 }
 ----
 
-[[doc_type]]]
+[[doc_type]]
 === 文档类型
 官方解释
 link:https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html[remove type]
@@ -91,36 +91,30 @@ link:https://bayescafe.com/database/elasticsearch-using-index-or-type.html[index
 
 es7之前::
   在es7前中, 每个文档都存储在一个索引中, 而每个索引都有多个 `_type`.
-  可以将 index 类比 mysql 的数据库, type 类比 mysql 的数据表.
-+
+  可以将 index 类比 mysql 的数据库, type 类比 mysql 的数据表. +
   `_type` (称为映射类型)表示要建立索引的文档或实体的类型, 
   每个类型都可以有自定义的字段. 如 `twitter` 索引可以有 `user` 类型和
-  `tweet` 类型, 两个类型含有的字段不同.
-+  
+  `tweet` 类型, 两个类型含有的字段不同. +
   `_type` 字段与文档 `_id` 组合生成 `_uid` 字段. 
   因此相同id的文档, 可以存储到同一个索引的不同类型.
 
 es7之后::
   之前讲到, type 类似与 mysql 的数据表, 但是这么设计是有偏差的.
-  在mysql中, 表与表是独立的, 但是在es中, type与type并不是. 
-+
+  在mysql中, 表与表是独立的, 但是在es中, type与type并不是. +
   假设 twitter.user 有字段 `deleted`, 字段类型为 `date`, 
   twitter.tweet 也有字段 `deleted`, 但是类型为 `bool`.
   使用如下查询
++
 [source,json]
 ----
 GET twitter/user,tweet/_search
 {"query": {"match": { "user_name": "kimchy" }}}
 ----
-+
   在 Lucene 中, 不同type但名称相同的字段被视为相同的 Lucene 
-  field, 当对这两个字段统一操作时, 就可能导致错误.
-+
+  field, 当对这两个字段统一操作时, 就可能导致错误. +
   更重要的是, 在同一个索引中, 如果不同文档的相同字段很少, 
-  会导致数据稀疏, 从而干扰了Lucene压缩文档.
-+
+  会导致数据稀疏, 从而干扰了Lucene压缩文档. +
   基于以上原因, 在es7中删除了type, 为了保持兼容(url路径),
-  添加默认的文档类型 `_doc`.
-+
+  添加默认的文档类型 `_doc`. +
   现在, es 推荐每个文档类型创建一个索引. 
   并且在之后会逐渐淡化type的存在.

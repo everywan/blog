@@ -13,7 +13,7 @@ elasticsearch 的原理涉及到倒排索引等知识, 属于搜索引擎领域,
 . es 的请求风格遵循 rest 规范, 请求 方法/路径 决定业务操作.
 . es 读取 body 中的 json 串获取该次请求的数据.
 
-elasticsearch 常与 logstash,kibana 一起使用, 俗称 elk.
+.elasticsearch 常与 logstash,kibana 一起使用, 俗称 elk.
 * logstash 负责数据导入, 支持在导入前过滤数据, 支持从各种数据源
   导入数据到es, 比如文件, kafka 等.
   ** 新工具 filebeat 与 logstash 功能类似, 但性能更高, 可以考虑替换之.
@@ -72,10 +72,8 @@ es 支持匹配多个索引(如在多个索引中查询). 所以才有这么一�
   . 复制分片只是主分片的副本, 提供读请求.
 
 数据写入::
-  写操作必须在主分片上完成后, 才能复制到相关切片上.
-+
+  写操作必须在主分片上完成后, 才能复制到相关切片上. +
   es 是通过 `_id` (或自定义字段) 取 hash 确定数据存储在那个分片上. 
-  所以主分片的数量只能在创建索引时定义.
-+
+  所以主分片的数量只能在创建索引时定义. +
   hash示例 `shard = hash(routing) % number_of_primary_shards`
 

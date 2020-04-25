@@ -22,9 +22,9 @@ go 的 es 库目前分为 官方库和第三方库. 由于官方库开发时间�
 
 == 使用方法
 .官方文档
-. [github-wiki](https://github.com/olivere/elastic/wiki)
-. [godoc](https://godoc.org/github.com/olivere/elastic)
-. [github](https://github.com/olivere/elastic)
+. link:https://github.com/olivere/elastic/wiki[github-wiki]
+. https://godoc.org/github.com/olivere/elastic[godoc]
+. https://github.com/olivere/elastic[github]
 
 .使用流程如下
 . 创建 esClient
@@ -57,25 +57,25 @@ WARNING: go第三方库默认开启了嗅探功能, 导致创建非本地库实�
 ----
 requests := esClient.Bulk()
 for _, data := range datas {
-	request := elastic.NewBulkIndexRequest().
-		Index(NearByIndex).
-		Id(data.ID).
-		Doc(data)
-	requests.Add(request)
+  request := elastic.NewBulkIndexRequest().
+    Index(NearByIndex).
+    Id(data.ID).
+    Doc(data)
+  requests.Add(request)
 }
 res, err := requests.Do(context.Background())
 if err != nil {
-	return err
+  return err
 }
 if res.Errors {
-	for _, item := range res.Items {
-		if v, ok := item["index"]; ok {
-			if v.Status > 201 {
-				handler.logger.WithField("bulk_response", v).
-					Errorf("导入es错误. error detail: %+v", v.Error)
-			}
-		}
-	}
+  for _, item := range res.Items {
+    if v, ok := item["index"]; ok {
+      if v.Status > 201 {
+        handler.logger.WithField("bulk_response", v).
+          Errorf("导入es错误. error detail: %+v", v.Error)
+      }
+    }
+  }
 }
 ----
 

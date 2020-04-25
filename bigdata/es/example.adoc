@@ -113,19 +113,19 @@ must_not: 文档必须不匹配条件
 [source,json]
 ----
 {
-	"query": {
-		"bool": {
-			"must": {
-				"match": {
-					"city": "100"
-				}
-			},
-			"should": {
-				"match": {
-					"name": "1"
-				}
-			}
-		}
-	}
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "city": "100"
+        }
+      },
+      "should": {
+        "match": {
+          "name": "1"
+        }
+      }
+    }
+  }
 }
 ----
