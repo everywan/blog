@@ -1,0 +1,216 @@
+= gorm
+wzs, <<zhensheng.five@gmail.com>>
+v1, 2020-04-27
+:toc:
+:sectnums:
+
+gorm(Go Object Relational Mapping, Go 对象关系映射).
+
+[quote,"百度百科"]
+ORM 是一种面向对象的思想, 通过描述对象和数据库之间映射的元数据,
+将程序中的对象自动持久化到关系数据库中.
+功能类似分层中的 dao层(持久层).
+
+== gorm源码
+.gorm 主要分为三部分
+. DB, gorm对数据库的抽象. 负责与用户交互, 以及与数据库交互.
+. Scope, 构建查询条件(Conditions), 执行SQL, 调起回调函数.
+. CallBack, 负责CURD具体的执行逻辑. 具体的Conditions处理, db交互
+  通过 Scope 执行的.
+
+gorm 对外界开放的是 DB 对象, 调用者可以通过 DB 添加 Conditions, 执行查询,
+注册/删除回调函数.
+
+接下来主要从两个方面了解源码: 概念, 流程.
+
+[[concept]]
+=== 概念
+关于 Conditions, 可以理解为 DB 保存 Conditions, Scope 处理 Conditions.
+
+[[db]]
+==== DB
+概念::
+  DB contains information for current db connection. +
+  DB 是 gorm 对db概念的抽象.
+主要功能::
+  . 保存/维持于数据库的链接, 与数据库实际交互操作. 具体实例是 `db SQLCommon`
+  . 保存执行SQL时的 Conditions, 如 `Where("id",1)`, 则 Search.whereConditions 添加值 `id, 1`
+  . 其他功能. 如日志, 数据库执行结果封装, 时间戳生成函数重载等.
+源码参考::
+  link:https://raw.githubusercontent.com/jinzhu/gorm/master/main.go[gorm.db]
++
+[source,go]
+----
+type DB struct {
+  // Conditions
+	values            sync.Map
+	blockGlobalUpdate bool
+	search            *search
+
+	db                SQLCommon
+
+	callbacks     *Callback
+	Error        error
+	RowsAffected int64        // 执行结果
+	Value        interface{}  // 查询结果填充值
+  ...
+}
+// db clone, 复制db, 非常重要. gorm 实现链式调用/数据传递的关键点.
+func (s *DB) clone() *DB {...}
+func (s *DB) Where(query interface{}, args ...interface{}) *DB {
+	return s.clone().search.Where(query, args...).db
+}
+func (s *DB) Updates(values interface{}, ignoreProtectedAttrs ...bool) *DB {
+	return s.NewScope(s.Value).
+		Set("gorm:ignore_protected_attrs", len(ignoreProtectedAttrs) > 0).
+		InstanceSet("gorm:update_interface", values).
+		callCallbacks(s.parent.callbacks.updates).db
+}
+----
+
+[[scope]]
+==== Scope
+概念::
+  Scope contain current operation's information when you perform any operation on the database. +
+  Scope 负责操作信息的转化.
+主要功能::
+  . Conditions 条件的解析
+  . 执行回调函数
+  . 回调函数调用 Scope 获取/构建 Conditions, 执行SQL.
+源码参考::
+  link:https://raw.githubusercontent.com/jinzhu/gorm/master/scope.go[gorm.scope]
++
+[source,go]
+----
+type Scope struct {
+	Search          *search
+	Value           interface{}
+	SQL             string
+	SQLVars         []interface{}
+	fields          *[]*Field
+	selectAttrs     *[]string
+  ...
+}
+// 执行 Callback
+func (scope *Scope) callCallbacks(funcs []*func(s *Scope)) *Scope {...}
+// Conditions 解析
+func (scope *Scope) buildCondition(clause map[string]interface{}, include bool) (str string) {...}
+func (scope *Scope) CombinedConditionSql() string {...}
+// 设置回调属性
+func (scope *Scope) InstanceSet(name string, value interface{}) *Scope {...}
+func (scope *Scope) Exec() *Scope {...}
+----
+
+[[callback]]
+==== CallBack
+概念::
+  回调函数. CallBack 主要负责操作逻辑, 具体的Conditions处理, db交互
+  是通过 Scope 执行的.
+主要功能::
+  . 注册/删除 Create/Update/Query/Delete/Row 操作的回调函数
+  . processors 用于重置默认的 CURD 回调函数.
+源码参考::
+  link:https://raw.githubusercontent.com/jinzhu/gorm/master/callback.go[gorm.callback]
+[source,go]
+----
+type Callback struct {
+	logger     logger
+	creates    []*func(scope *Scope)
+	processors []*CallbackProcessor
+	// updates/deletes/queries/rowQueries
+  ...
+}
+type CallbackProcessor struct {
+	parent    *Callback // 记录Callback对象, 这个很重要
+  ...
+}
+// 通过 parent 记录Callback对象
+func (c *Callback) Create() *CallbackProcessor {
+	return &CallbackProcessor{logger: c.logger, kind: "create", parent: c}
+}
+func (cp *CallbackProcessor) Register(callbackName string, callback func(scope *Scope)) {...}
+// callback_update.go 注册 Update 回调函数.
+func init() {
+	DefaultCallback.Update().Register("gorm:assign_updating_attributes", assignUpdatingAttributesCallback)
+}
+----
+
+[[flow]]
+=== 流程
+以Update流程为例
+
+. `gorm.Open()` 创建一个db连接, 返回 DB 对象
+. `db.Where()`, 存储 Conditions 条件, 如 Where/Select/Offset 等数据库条件,
+  以及 Unscoped 等 GORM 自定义字段信息.
+. `db.Updates()`, 创建 Scope, 由Scope执行更新逻辑, 流程如下
+  .. `scope.Set()` 设置回调属性, 决定哪些回调函数执行, 哪些不执行.
+  .. `scope.callCallBacks()` 执行回调函数, 然后跳转到相应的callback函数执行.
+. 附: 回调函数执行流程. 注意, scope call 的是一系列回调函数, 而非一个.
+  .. CallBack 用 Scope, 获取需要更新那些字段.
+  .. CallBack 调用 Scope解析 Conditions, 获取更新的限定条件.
+  .. CallBack 构建SQL
+  .. CallBack 通过 Scope 调用 DB, 执行SQL
+
+Query/Create/Delete 同理, 不在叙述.
+
+==== 创建实例
+不再叙述
+
+==== Conditions
+`db.Where()`, 存储 Conditions 条件.
+
+where 将条件存储到 search.whereConditions, 然后返回db.
+(返回db是为了实现链式调用).
+
+.Where代码如下.
+[source,go]
+----
+func (s *DB) Where(query interface{}, args ...interface{}) *DB {
+	return s.clone().search.Where(query, args...).db
+}
+----
+
+==== 执行查询
+`db.Updates()`, 调起更新操作.
+
+可以看到, `db.Update()` 首先创建了 Scope, 因为只有通过 Scope 才能设置
+回调属性. 然后通过 `scope.Set/InstanceSet()` 设置回调属性. 最后调用
+`scope.callCallBacks()` 调起回调函数.
+
+需要注意的是, `callCallBacks()` 传入了参数 `s.parent.callbacks.updates`,
+db通过 parent 参数保存了链式调用以来所有注册的回调函数.
+
+.Update代码如下.
+[source,go]
+----
+func (s *DB) Updates(values interface{}, ignoreProtectedAttrs ...bool) *DB {
+	return s.NewScope(s.Value).
+		Set("gorm:ignore_protected_attrs", len(ignoreProtectedAttrs) > 0).
+		InstanceSet("gorm:update_interface", values).
+		callCallbacks(s.parent.callbacks.updates).db
+}
+----
+
+== 习题
+如下代码在执行时会有什么问题? 为什么?
+答案见注释(需看本文件源码)
+
+[source,Go]
+----
+user := &models.User{
+	UnionId: unionid,
+	OpenId:  openid,
+}
+err := uSvc.db.Model(user).Where(user).Update("wx_id", wxId).Error
+----
+
+// 答案: updated_at 字段会出现在 where 限制中. 原因是在执行 update 回调时,
+// updateTimeStampForUpdateCallback 会更新 Model.UpdatedAt 字段
+// updateCallback 根据 Conditions 构建限制条件时, 则会检测 Model, 
+// 发现 UpdatedAt 有值, 然后将其添加到 Where 条件中.
+
+== 引用
+.源码参考
+  .. link:https://raw.githubusercontent.com/jinzhu/gorm/master/main.go[gorm.db]
+  .. link:https://raw.githubusercontent.com/jinzhu/gorm/master/scope.go[gorm.scope]
+  .. link:https://raw.githubusercontent.com/jinzhu/gorm/master/callback_query.go[gorm.query_callback]
