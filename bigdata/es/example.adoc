@@ -1,6 +1,6 @@
 = 常用例子
 :toc:
-:setnums:
+:sectnums:
 
 字段定义参考
 . link:./concepts.adoc#filed_example[field example]

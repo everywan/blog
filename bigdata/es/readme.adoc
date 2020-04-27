@@ -1,6 +1,6 @@
 = ES
 :toc:
-:setnums:
+:sectnums:
 
 elasticsearch 是一个基于 Lucene索引 的搜索引擎.
 

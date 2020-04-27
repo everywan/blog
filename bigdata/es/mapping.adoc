@@ -1,6 +1,6 @@
 = mapping
 :toc:
-:setnums:
+:sectnums:
 
 官方文档 link:https://www.elastic.co/guide/en/elasticsearch/reference/7.6/mapping.html[mapping]
 
