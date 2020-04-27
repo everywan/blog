@@ -100,9 +100,23 @@ body 可选, 按需添加如下参数
 
 按条件查询 `GET /{index}/{type}/_search`
 
+查询路径相同, 如下不再写明.
+
 .注意事项
 . es7 之后已经开始逐渐取消 type 了, 而使用默认的 `_doc` 替代.
   所以查询路径中的 type 默认使用 `_doc` 代替.
+
+== 精确查询
+[source,json]
+----
+{
+  "query":{
+    "match":{
+      "key": "value"
+    }
+  }
+}
+----
 
 [[query_bool]]
 === bool 联合查询
@@ -127,5 +141,35 @@ must_not: 文档必须不匹配条件
       }
     }
   }
+}
+----
+
+[[query_geo]]
+=== geo 查询示例
+[source,json]
+----
+{
+	"query": {
+		"geo_distance": {
+			"distance": "2km",
+			"location": {
+				"lat": 40.715,
+				"lon": -73.988
+			}
+		}
+	},
+	"sort": [
+		{
+			"_geo_distance": {
+				"location": {
+					"lat": 40.715,
+					"lon": -73.998
+				},
+				"order": "asc",
+				"unit": "km",
+				"distance_type": "plane"
+			}
+		}
+	]
 }
 ----
