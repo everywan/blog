@@ -1,0 +1,26 @@
+= mockgen
+
+参考地址
+link:https://github.com/golang/mock[mockgen github]
+
+== 待整理
+mockgen有两种生成mock文件的方式: Source Mode, Reflect Mode
+
+当代码如下时, 使用反射模式生成示例
+
+[source,go]
+----
+// test.go
+type A inerface{
+  Method()
+}
+type B inerface{
+  A
+}
+// Source Mode, 此时会报错, 需要使用 -aux_files, 但是我没弄清楚.
+// mockgen -package=mocks -destination internal/tests/mocks/test.go -source=test.go
+// 使用反射模式. 注意, 默认输出到Std, 如要指定文件, 要将 -package等 放在前面
+// mockgen -package=mocks -destination internal/tests/mocks/block.go \
+//		github.com/everywan/test B
+----
+
