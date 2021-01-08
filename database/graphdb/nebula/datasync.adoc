@@ -1,0 +1,137 @@
+= 数据迁移
+:toc:
+:toclevels: 5
+:sectnums:
+
+数据迁移有两种方式, 一种是使用官方提供的导入工具 exchange, 但是官方工具库很老了, 更新时间也比较早, 需要踩坑. 一种是直接写脚本, 自己调用sdk导入.
+
+== exchange
+exchange 是一款 spark 应用, 可以直接从各种常见的数据源将数据导入 nebula, 支持流式导入.
+
+.exchange 工作流程
+1. Extract: 从数据源获取数据. 通过配置文件读取数据, 没什么可说的.
+2. Transform: 数据处理. exchange 只支持对 id 字段的处理, 支持 hash, 其他都是原样传入.
+3. Load: 通过配置文件配置的 nebula 信息, 直接写入.
+
+由于 nebula 重复 insert 时, 不会报错, 后续的 insert 会变成 update, 所以不用担心数据源中有重复数据的问题.
+
+.exchange 使用流程
+1. 在图数据库创建 space/tag/edge 结构.
+2. 编写 conf 文件.
+3. 提交 spark 任务.
+4. 验证数据.
+
+.参考
+. link:https://docs.nebula-graph.com.cn/nebula-exchange/about-exchange/ex-ug-what-is-exchange/[什么是 Nebula Graph Exchange]
+
+=== exchange配置文件
+exchange 官方文档中, 并没有很好的介绍从 hive 导入数据的方式. 但是可以参考官方代码仓库里的示例.
+
+link:https://github.com/vesoft-inc/nebula-java/blob/v1.0/tools/exchange/src/main/resources/application.conf[exchange hive config example]
+
+=== 提交spark任务
+略过. 参考其他文章.
+
+=== 数据检验
+数据校验可从如下三个方面观察
+
+1. 查看 qps.
+2. 查看执行日志.
+3. 校验数据总数是否正确.
+
+==== qps
+nebula 支持通过 http 方式获取 graph server 的基本指标.
+
+link:https://docs.nebula-graph.com.cn/manual-CN/3.build-develop-and-administration/7.monitor/4.graph-metrics/[Graph Metrics 官方文档]
+
+在任意一台安装 nebula graphd server 的机器上执行如下命令获取相应参数, 获取相应值. 注意, 这个只是获取当前节点的统计值, 而非整个集群的统计值.
+
+. 获取所有统计值: `curl -G "http://127.0.0.1:13000/get_stats"`
+. 最近 60s 边插入总数: `curl -G "http://127.0.0.1:13000/get_stats?stats=graph_insert_edge_count.qps.60"`
+
+.中文版文档存在的问题
+. 指标名称是蛇形命名的, 但是官方文档还没有改. 推荐直接从 get_stats 返回的值中选取指标名称.
+. 部分数据统计的不对. 测试时, 我用 60s/3600s 统计的值有明显差异, 原因未知, 但是60s的统计值还算准确.
+
+当然, 也可以使用 grafana 监控, 但是需要一些额外工作. 参考 link:https://github.com/vesoft-inc/nebula-stats-exporter/blob/master/deploy/bare-metal/README.md[非 k8s 环境下部署监控使用文档]
+
+==== 执行日志
+插入错误时, exchange 会将发生错误的记录写入 `/tmp/nebula_etl_errors`. 而其他执行时日志, 以 info 格式输出.
+
+一般插入量较大时, info 日志较多, 所以一般只打开 warn 以上级别的日志.
+
+.info 日志内容
+. 执行的sql
+. 每一个 tag/edge 执行结束会输出插入成功数/失败数. 统计值前缀: `BatchSuccess/BatchFail`.
+  .. 使用时发现这个值不正确, 原因后续再查.
+
+==== dump工具
+nebula 1.0 通过 dump 工具检验 space 有多少数据, 2.0 后可以直接使用 count 函数统计.
+
+注意, dump 工具只统计单个分区上数据的值, 统计全部数据需要在每个分区上都执行一边.
+
+一般而言, `单个分区统计值*分区数` 约等于总值
+
+[source,bash]
+----
+cd /usr/local/nebula/bin
+# 查看 tag user 个数
+./db_dump --space=antispam_prod --mode=stat --db_path=/data2/nebula/nebula/ --meta_server=127.0.0.1:45500 --tags=user --limit=0
+----
+
+.参考
+. link:https://docs.nebula-graph.com.cn/manual-CN/3.build-develop-and-administration/5.storage-service-administration/data-export/dump-tool/[dump tool]
+. link:https://github.com/vesoft-inc/nebula/issues/1106[Discuss: v2.0 Support count function for Tag/Edge]
+
+吐槽: dump 工具在数据迁移主流程都看不到, 藏在一个小角落, 要不是偶然看见, 都不知道有这工具...
+
+==== 其他
+使用 LOOKUP 统计
+
+[source,sql]
+----
+-- CREATE TAG INDEX IF NOT EXISTS user_id_index on user(uid);
+-- nebula 创建索引时, 不会对旧数据进行索引, 需要重建索引(如果插入前创建索引的话, 会大幅度减慢插入流程, 所以放到最后做)
+-- REBUILD TAG INDEX user_id_index OFFLINE;
+-- 查看索引构建状态. SUCCEEDED 为成功
+-- SHOW TAG INDEX STATUS;
+-- LOOKUP ON user where user.uid>0 yield user.uid | yield count(*)
+-- DROP TAG INDEX user_id_index
+----
+
+执行时发现, 如果 lookup 的行太多, 则会导致失败(报错: `[ERROR (-8)]: Lookup vertices failed`).
+
+=== 注意事项
+1. nebula 中, 点id 值是全 space 唯一的. 不同 tag 的 id 需要添加前缀, 不然存在被覆盖的风险. 如当插入 `user tag(id=100)` 后, 再插入 `answer tag(id=100)`, 最后的结果中并不会有 `asnwer.id==100` 这个 tag.
+  .. nebula 数据库为了加快查找速度(图数据库一般都是从点开始找, 而非遍历), 所以有全局点id唯一这种特性(同一个space下).
+
+== 自己写脚本
+流程同 exchange, 读取->转换->写入, 要很好的支持并发.
+
+自己写脚本的好处是可以更好的自定义化, 如一次遍历可以插入该行记录所有的边.
+
+== 其他
+exchange 源码简单明了, 有具体的问题查看源码即可.
+
+=== 插入时间统计(简易版)
+|===
+|节点名称 | 插入数据量  | 插入时间 | QPS
+| tag 点 | 1亿   | 1h  | 未统计
+| edge 边 | 3亿   | 30min | 每分钟/分区 87036条
+|===
+
+.机器配置
+. nebula: 三个节点, 每个节点三个分区, 具体配置未知.
+. spark 集群配置: 具体配置未知
+
+TODO: 插入速度测试后续有时间完善.
+
+=== pr
+在使用exchange的过程中, 发现了exchange的两个bug, 已经提交更新并被合并.
+
+1. 官方文档错误. hive support 默认是 false, 但是文档写的 true
+  .. link:https://github.com/vesoft-inc/nebula-docs-cn/pull/140[pr]
+2. nebula-java 依赖 guava.v13, 版本太老, 升级 exchange 依赖的 nebula-client 库中的 guava 版本.
+  .. link:https://github.com/vesoft-inc/nebula-java/pull/241[pr], 主要是替换函数(getHostText->getHost).
+  .. 注: 官方 2.0 版本通过 maven-shade-plugin 功能解决了这个问题. link:https://github.com/vesoft-inc/nebula-java/pull/195[add shade-plugin].
+
