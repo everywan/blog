@@ -78,10 +78,13 @@ func defer_call() {
 猜测那些函数的defer可以更改返回值
 ```Go
 func main() {
-    fmt.Println(test2())
-    fmt.Println(*test3())
-    fmt.Println(test4())
+	fmt.Println(*test1())
+	fmt.Println(test2())
+	fmt.Println(*test3())
+	fmt.Println(test4())
 }
+
+// 考察具名返回值
 func test1() (a *int) {
 	a = new(int)
 	defer func() { *a = *a + 1 }()
@@ -89,29 +92,26 @@ func test1() (a *int) {
 	return a
 }
 func test2() (a int) {
-    defer func() { a = a + 1 }()
-    return a + 1
+	defer func() { a = a + 1 }()
+	return a + 1
 }
+
+// 考察匿名返回值
 func test3() *int {
-    a := 0
-    defer func() { a = a + 1 }()
-    a = a + 1
-    return &a
+	a := 0
+	defer func() { a = a + 1 }()
+	a = a + 1
+	return &a
 }
 func test4() int {
-    a := 0
-    defer func() { a = a + 1 }()
-    return a + 1
+	a := 0
+	defer func() { a = a + 1 }()
+	return a + 1
 }
-func test5() (a int) {
-    a = 0
-    defer func(a *int) { *a = *a + 1 }(&a)
-    a = a + 1
-    return a
-}
+
 ```
 
-只有 test1/test2/test3/test5 可以修改返回值
+只有 test1/test2/test3 可以修改返回值
 
 ### defer参数生成
 猜测如下函数输出
