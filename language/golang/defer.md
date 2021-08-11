@@ -71,16 +71,16 @@ func test4() int {  // 这是 17 行
 
 
 "".test2 STEXT size=153 args=0x8 locals=0x68
-	0x0000 00000 (main.go:9)	TEXT	"".test2(SB), ABIInternal, $104-8
+  0x0000 00000 (main.go:9)	TEXT	"".test2(SB), ABIInternal, $104-8
   ...
-	0x0021 00033 (main.go:9)	MOVQ	$0, "".a+112(SP)
+  0x0021 00033 (main.go:9)	MOVQ	$0, "".a+112(SP)
   ...
   0x005c 00092 (main.go:13)	MOVQ	"".a+112(SP), AX
 
 "".test4 STEXT size=157 args=0x8 locals=0x68
-	0x0000 00000 (main.go:17)	TEXT	"".test4(SB), ABIInternal, $104-8
+  0x0000 00000 (main.go:17)	TEXT	"".test4(SB), ABIInternal, $104-8
   ...
-	0x0021 00033 (main.go:17)	MOVQ	$0, "".~r0+112(SP)
+  0x0021 00033 (main.go:17)	MOVQ	$0, "".~r0+112(SP)
   0x002a 00042 (main.go:18)	MOVQ	$0, "".a+8(SP)
 ```
 
