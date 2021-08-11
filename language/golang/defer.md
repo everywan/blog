@@ -44,6 +44,54 @@ defer 延迟执行的函数的作用域为:
 1. [defer与panic](#defer与panic)
 2. [defer与return](#defer与return)
 
+### 闲聊
+关于 defer 和 return, 大概看了如下程序的汇编代码, 没太看懂(汇编知识早还给老师了), 根据自己了解大概讲下这个返回值顺序的原因吧.
+```Go
+package main
+
+func main() {
+	test2()
+	test4()
+}
+
+//go:noinline
+func test2() (a int) { // 这是 9 行
+	defer func() {
+		a = a + 1
+	}()
+	return a + 1
+}
+
+//go:noinline
+func test4() int {  // 这是 17 行
+	a := 0
+	defer func() { a = a + 1 }()
+	return a + 1
+}
+
+
+"".test2 STEXT size=153 args=0x8 locals=0x68
+	0x0000 00000 (main.go:9)	TEXT	"".test2(SB), ABIInternal, $104-8
+  ...
+	0x0021 00033 (main.go:9)	MOVQ	$0, "".a+112(SP)
+  ...
+  0x005c 00092 (main.go:13)	MOVQ	"".a+112(SP), AX
+
+"".test4 STEXT size=157 args=0x8 locals=0x68
+	0x0000 00000 (main.go:17)	TEXT	"".test4(SB), ABIInternal, $104-8
+  ...
+	0x0021 00033 (main.go:17)	MOVQ	$0, "".~r0+112(SP)
+  0x002a 00042 (main.go:18)	MOVQ	$0, "".a+8(SP)
+```
+
+可以看到, test2 返回参数赋值为 `"".a`, test4 返回参数为 `"".r0`, 而 test4 内赋值, 计算用的是 `"".a`, 所以返回的值和函数内的 a 是肯定不一样的, 不一个变量了.
+
+参考
+1. [Go 汇编程序的快速指南](https://golang.org/doc/asm)
+2. [汇编是深入理解 Go 的基础](https://segmentfault.com/a/1190000039753236)  这句话说的真好, 越学go越发现, 很多东西不看汇编完全无法深入了解.
+3. [另一个分析的例子](https://zhuanlan.zhihu.com/p/388639182)   自己的另一次关于汇编的总结, 先放这里, 后续统一学习整理
+
+
 ## 求值策略
 规则1: 在Go语言中, 求值策略=严格求值+传值调用. 参考 [求值策略](/skill/Evaluation.md)
 - 严格求值: 函数实参在函数调用前就求值, 与之相对的是 Js 使用非严格求值(即惰性求值)
