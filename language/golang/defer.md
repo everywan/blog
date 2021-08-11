@@ -111,7 +111,7 @@ func test5() (a int) {
 }
 ```
 
-只有 test1/test3/test5 可以修改返回值
+只有 test1/test2/test3/test5 可以修改返回值
 
 ### defer参数生成
 猜测如下函数输出
